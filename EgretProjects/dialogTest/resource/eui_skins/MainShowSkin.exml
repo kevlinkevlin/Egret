@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MainShowSkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="bg_jpg" x="0" y="0"/>
+	<e:Scroller width="480" height="738" y="25" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0">
+		<e:List id="dialogList"/>
+	</e:Scroller>
+	<e:Rect width="348" height="49" x="80" y="869" ellipseWidth="10" ellipseHeight="10" fillColor="0xe2cece" anchorOffsetX="0" anchorOffsetY="0"/>
+	<e:EditableText id="editText" width="293" height="37" x="107.5" y="875" anchorOffsetX="0" anchorOffsetY="0" prompt="请输入显示内容" promptColor="0xe56262" bold="true" textAlign="center" verticalAlign="middle"/>
+	<e:Label id="lblSend" text="点击发送" x="456" y="878.5" bold="true" textColor="0xff0000"/>
+	<e:Label id="lblSendBase" text="点击发送备份内容" x="395" y="939.5" bold="true" textColor="0xFF0000"/>
+</e:Skin>

@@ -1,0 +1,10 @@
+{
+  "global": {
+    "globalAutoLayerMarkEnable": false
+  },
+  "165a37154a3": {
+    "path": "..\\resource\\image\\Mario.ts",
+    "class": "Mario",
+    "parentPath": ""
+  }
+}

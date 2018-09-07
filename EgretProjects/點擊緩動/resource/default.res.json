@@ -1,0 +1,91 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,cartoon-egret_00_png,1_PNG,2_PNG,3_PNG,4_PNG,5_PNG,6_PNG,7_PNG,8_PNG,棋子_tex_png,棋子_ske_json,棋子_tex_json,test2_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "cartoon-egret_00.png",
+			"type": "image",
+			"name": "cartoon-egret_00_png"
+		},
+		{
+			"url": "project/1.PNG",
+			"type": "bin",
+			"name": "1_PNG"
+		},
+		{
+			"url": "project/2.PNG",
+			"type": "bin",
+			"name": "2_PNG"
+		},
+		{
+			"url": "project/3.PNG",
+			"type": "bin",
+			"name": "3_PNG"
+		},
+		{
+			"url": "project/4.PNG",
+			"type": "bin",
+			"name": "4_PNG"
+		},
+		{
+			"url": "project/5.PNG",
+			"type": "bin",
+			"name": "5_PNG"
+		},
+		{
+			"url": "project/6.PNG",
+			"type": "bin",
+			"name": "6_PNG"
+		},
+		{
+			"url": "project/7.PNG",
+			"type": "bin",
+			"name": "7_PNG"
+		},
+		{
+			"url": "project/8.PNG",
+			"type": "bin",
+			"name": "8_PNG"
+		},
+		{
+			"url": "project/棋子_tex.png",
+			"type": "image",
+			"name": "棋子_tex_png"
+		},
+		{
+			"url": "project/棋子_ske.json",
+			"type": "json",
+			"name": "棋子_ske_json"
+		},
+		{
+			"url": "project/棋子_tex.json",
+			"type": "json",
+			"name": "棋子_tex_json"
+		},
+		{
+			"url": "project/test2.json",
+			"type": "sheet",
+			"name": "test2_json",
+			"subkeys": "1,2,3,4,5,6,7,8"
+		}
+	]
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="dialog" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+	<e:Rect strokeAlpha="1" fillAlpha="0.2" left="0" right="0" top="136" bottom="-3" anchorOffsetY="0" height="150"/>
+	<e:Button label="Button" x="335.2" y="272.64" anchorOffsetX="31.2" anchorOffsetY="16.64" width="78" height="32"/>
+	<e:EditableText width="100" height="100" text="Label" x="42" y="172"/>
+</e:Skin>

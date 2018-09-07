@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="button" width="400" height="300" xmlns:e="http://ns.egret.com/eui" states="up,down"  width.up="200" height.up="200" height.down="200" width.down="200">
+	<e:Image source="Mario_png" includeIn="down" height="120" horizontalCenter="0" width="80" verticalCenter="0"/>
+	<e:Image source="Mario_png" includeIn="up" width="100" height="150" anchorOffsetX="200" anchorOffsetY="300" verticalCenter="0" horizontalCenter="0"/>
+</e:Skin>

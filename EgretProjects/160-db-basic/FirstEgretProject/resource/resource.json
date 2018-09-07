@@ -1,0 +1,50 @@
+{
+	"groups": [
+		{
+			"keys": "gestures_png,skeleton_json,skeleton_tex_png,skeleton_tex_json,FirstProject_tex_json,FirstProject_tex_png,FirstProject_ske_json",
+			"name": "TestArmature"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/gestures.png",
+			"type": "image",
+			"name": "gestures_png"
+		},
+		{
+			"url": "assets/armature/skeleton_tex.png",
+			"type": "image",
+			"name": "skeleton_tex_png"
+		},
+		{
+			"url": "assets/armature/skeleton.json",
+			"type": "json",
+			"name": "skeleton_json"
+		},
+		{
+			"url": "assets/armature/skeleton_tex.json",
+			"type": "json",
+			"name": "skeleton_tex_json"
+		},
+		{
+			"url": "assets/FirstProject_ske.dbbin",
+			"type": "bin",
+			"name": "FirstProject_ske_dbbin"
+		},
+		{
+			"url": "assets/FirstProject_tex.png",
+			"type": "image",
+			"name": "FirstProject_tex_png"
+		},
+		{
+			"url": "assets/FirstProject_tex.json",
+			"type": "json",
+			"name": "FirstProject_tex_json"
+		},
+		{
+			"url": "assets/FirstProject_ske.json",
+			"type": "json",
+			"name": "FirstProject_ske_json"
+		}
+	]
+}

@@ -1,0 +1,41 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,point_png,emoji_json,shile_jpg",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egret_icon_png",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "point_png",
+			"type": "image",
+			"url": "dialog/point.png"
+		},
+		{
+			"name": "emoji_json",
+			"type": "sheet",
+			"url": "dialog/emoji.json",
+			"subkeys": "&_43,&_44,&_45,&_46,&_47,&_48,first,&_10,&_11,&_12,&_13,&_14,&_15,&_16,&_17,&_18,&_19,&_20,&_21,&_22,&_23,&_24,&_25,&_26,&_27,&_28,&_29,&_30,&_31,&_32,&_33,&_34,&_35,&_36,&_37,&_38,&_39,&_40,&_41,&_42"
+		},
+		{
+			"name": "shile_jpg",
+			"type": "image",
+			"url": "dialog/shile.jpg"
+		}
+	]
+}

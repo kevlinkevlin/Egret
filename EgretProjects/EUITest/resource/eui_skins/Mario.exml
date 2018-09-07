@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MarioSkin" width="600" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<w:Config id="165a37154a3" ></w:Config>
+	<e:Image source="back_jpg" left="0" right="0" top="0" bottom="0"/>
+	<e:Image id="test" source="Mario_png" width="300" height="450" anchorOffsetX="150" anchorOffsetY="225" y="568" x="300"/>
+	<e:Group id="Group_btn" height="239.39" y="891" anchorOffsetY="0" left="0" right="0">
+		<e:ToggleButton id="Player" label="ToggleButton" left="0" right="330" top="0" bottom="0.38999999999998636" skinName="button" anchorOffsetX="0"/>
+		<e:ToggleButton label="ToggleButton" x="330" y="0.39" width="270" height="239" skinName="button"/>
+	</e:Group>
+	<e:EditableText width="232" height="208" text="123" x="184" y="683" anchorOffsetX="0" anchorOffsetY="0" size="80" textAlign="center" verticalAlign="middle"/>
+	<e:Button label="Button" x="250" y="318"/>
+</e:Skin>

@@ -1,0 +1,38 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/eui/eui.js",
+		"libs/modules/assetsmanager/assetsmanager.js",
+		"libs/modules/tween/tween.js",
+		"libs/modules/dragonBones/dragonBones.js",
+		"libs/modules/promise/promise.js"
+	],
+	"game": [
+		"bin-debug/Common/BaseEvent.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/Mario.js",
+		"bin-debug/Platform.js",
+		"bin-debug/ThemeAdapter.js",
+		"bin-debug/Common/AudioMgr.js",
+		"bin-debug/Common/BaseData.js",
+		"bin-debug/AssetAdapter.js",
+		"bin-debug/Common/BaseScene.js",
+		"bin-debug/Common/EQiPaiConfig.js",
+		"bin-debug/Common/EventList.js",
+		"bin-debug/Common/IScene.js",
+		"bin-debug/Common/NotifyEvent.js",
+		"bin-debug/Common/NotifyService.js",
+		"bin-debug/Common/Protocol.js",
+		"bin-debug/Common/SceneManager.js",
+		"bin-debug/Common/SceneMgr.js",
+		"bin-debug/Common/Storage.js",
+		"bin-debug/Common/TestDemo.js",
+		"bin-debug/Common/TsUtils.js",
+		"bin-debug/Common/Control/Dialog.js",
+		"bin-debug/Common/Control/EButton.js",
+		"bin-debug/Common/Control/ETimer.js",
+		"bin-debug/Common/Control/EToast.js",
+		"bin-debug/Main.js"
+	]
+}

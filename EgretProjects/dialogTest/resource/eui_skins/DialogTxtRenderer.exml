@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="DialogTxtRenderer" width="480" height="40" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Label id="lblShow" text="显示内容" x="30" verticalCenter="0" textColor="0x000000"/>
+</e:Skin>
