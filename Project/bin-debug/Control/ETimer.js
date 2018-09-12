@@ -54,3 +54,4 @@ var ETimer = (function (_super) {
     return ETimer;
 }(eui.Component));
 __reflect(ETimer.prototype, "ETimer", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=ETimer.js.map

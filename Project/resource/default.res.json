@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "dialog_bg_png,dialog_cancel_png,dialog_panel_png,dialog_zhunbei_png,Mario_png",
+			"keys": "dialog_bg_png,dialog_cancel_png,dialog_panel_png,dialog_zhunbei_png,Mario_png,船艙背景_jpg",
 			"name": "UI"
 		}
 	],
@@ -259,6 +259,11 @@
 			"url": "assets/Mario.png",
 			"type": "image",
 			"name": "Mario_png"
+		},
+		{
+			"url": "assets/船艙背景.jpg",
+			"type": "image",
+			"name": "船艙背景_jpg"
 		}
 	]
 }

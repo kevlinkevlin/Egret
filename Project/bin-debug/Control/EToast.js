@@ -40,3 +40,4 @@ var EToast = (function (_super) {
     return EToast;
 }(eui.Component));
 __reflect(EToast.prototype, "EToast", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=EToast.js.map

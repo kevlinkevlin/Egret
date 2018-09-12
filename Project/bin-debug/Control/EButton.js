@@ -43,3 +43,4 @@ var EButton = (function (_super) {
     return EButton;
 }(eui.Button));
 __reflect(EButton.prototype, "EButton", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=EButton.js.map

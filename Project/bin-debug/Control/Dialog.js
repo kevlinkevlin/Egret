@@ -49,3 +49,4 @@ var Dialog = (function (_super) {
     return Dialog;
 }(eui.Component));
 __reflect(Dialog.prototype, "Dialog", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=Dialog.js.map

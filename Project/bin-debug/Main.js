@@ -47,14 +47,18 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         var _this = _super.call(this) || this;
-        _this.result = new egret.Bitmap();
-        _this.result2 = new egret.Bitmap();
-        _this.result3 = new egret.Bitmap();
-        _this.speed = 5;
         /**
-         * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-         * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
+         * 创建游戏场景
+         * Create a game scene
          */
+        _this.bg = new egret.Bitmap();
+        _this.char = new egret.Bitmap();
+        _this.char2 = new egret.Bitmap();
+        _this.char3 = new egret.Bitmap();
+        _this.char4 = new egret.Bitmap();
+        _this.time = 5;
+        _this.stage1 = true;
+        _this.stage2 = false;
         _this.fixed = false;
         _this.timeOnEnterFrame = 0;
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
@@ -135,50 +139,116 @@ var Main = (function (_super) {
     };
     Main.prototype.createGameScene = function () {
         var _this = this;
-        var texture = RES.getRes("Mario_png");
-        this.result.texture = texture;
-        this.result.touchEnabled = true;
-        this.result.x = this.stage.stageWidth / 7;
-        this.result.y = this.stage.stageHeight / 2;
-        this.result.scaleX = 0.5;
-        this.result.scaleY = 0.5;
-        this.addChild(this.result);
-        //this.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.Move,this);
-        //this.result.addEventListener(egret.Event.ENTER_FRAME,this.Move,this)
-        this.result2.texture = texture;
-        this.result2.touchEnabled = true;
-        this.result2.x = this.stage.stageWidth / 3;
-        this.result2.y = this.stage.stageHeight / 2;
-        this.result2.scaleX = 0.5;
-        this.result2.scaleY = 0.5;
-        this.addChild(this.result2);
-        this.result2.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            return _this.talk(_this.result2, Math.abs(_this.result.x - (_this.result2.x - _this.result.width / 2)) * _this.speed, "456");
+        this.createBitmapByName(this.bg, "船艙背景_jpg", 0, this.stage.stageHeight / 2, 0.5, 0.3);
+        this.createBitmapByName(this.char2, "Mario_png", this.stage.stageWidth * 2 / 4, this.stage.stageHeight * 3 / 8, 0.3, 0.3);
+        this.createBitmapByName(this.char3, "Mario_png", this.stage.stageWidth * 3 / 4, this.stage.stageHeight * 3 / 8, 0.3, 0.3);
+        this.createBitmapByName(this.char4, "Mario_png", this.stage.stageWidth * 2 / 4, this.stage.stageHeight * 9 / 16, 0.3, 0.3);
+        this.createBitmapByName(this.char, "Mario_png", this.stage.stageWidth / 4, this.stage.stageHeight * 3 / 8, 0.3, 0.3);
+        this.char2.touchEnabled = true;
+        this.char3.touchEnabled = true;
+        this.char4.touchEnabled = true;
+        this.char2.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            if (_this.stage1 == true && _this.fixed == false) {
+                _this.fixed = true;
+                _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - _this.char.width / 2)) * _this.time, "角色2");
+            }
+            else if (_this.stage2 == true && _this.fixed == false) {
+                _this.fixed = true;
+                egret.Tween.get(_this.char)
+                    .to({ x: _this.stage.stageWidth / 4, y: _this.stage.stageHeight * 4 / 8 }, Math.abs(_this.char.x - _this.stage.stageWidth * 5 / 8) * _this.time)
+                    .to({ x: _this.stage.stageWidth * 3 / 8, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 150)
+                    .call(function () {
+                    _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - _this.char.width / 2)) * _this.time, "角色2");
+                    _this.stage1 = true;
+                    _this.stage2 = false;
+                }, _this);
+            }
         }, this);
-        this.result3.texture = texture;
-        this.result3.touchEnabled = true;
-        this.result3.x = this.stage.stageWidth * 2 / 3;
-        this.result3.y = this.stage.stageHeight / 2;
-        this.result3.scaleX = 0.5;
-        this.result3.scaleY = 0.5;
-        this.addChild(this.result3);
-        this.result3.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            return _this.talk(_this.result3, Math.abs(_this.result.x - (_this.result3.x - _this.result.width / 2)) * _this.speed, "123");
+        this.char3.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            if (_this.stage1 == true && _this.fixed == false) {
+                _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, "角色3");
+            }
+            else if (_this.stage2 == true && _this.fixed == false) {
+                _this.fixed = true;
+                egret.Tween.get(_this.char)
+                    .to({ x: _this.stage.stageWidth / 4, y: _this.stage.stageHeight * 4 / 8 }, Math.abs(_this.char.x - _this.stage.stageWidth * 5 / 8) * _this.time)
+                    .to({ x: _this.stage.stageWidth * 3 / 8, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 150)
+                    .call(function () {
+                    _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, "角色3");
+                    _this.stage1 = true;
+                    _this.stage2 = false;
+                }, _this);
+            }
+        }, this);
+        this.char4.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            if (_this.stage1 == true && _this.fixed == false) {
+                _this.fixed = true;
+                egret.Tween.get(_this.char)
+                    .to({ x: _this.stage.stageWidth * 3 / 8 }, Math.abs(_this.char.x - _this.stage.stageWidth * 3 / 8) * _this.time)
+                    .to({ x: _this.stage.stageWidth / 4, y: _this.stage.stageHeight * 4 / 8 }, _this.time * 150)
+                    .call(function () {
+                    _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, "角色24");
+                    _this.stage1 = false;
+                    _this.stage2 = true;
+                }, _this);
+            }
+            else if (_this.stage2 == true && _this.fixed == false) {
+                _this.fixed = true;
+                _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, "角色4");
+            }
         }, this);
     };
-    Main.prototype.talk = function (char, time, text) {
+    /**
+     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
+     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
+     */
+    Main.prototype.talk = function (target, time, text) {
         var _this = this;
         var message = new Dialog();
-        if (this.fixed == false) {
-            this.fixed = true;
-            var test = egret.Tween.get(this.result);
-            test.to({ x: char.x - this.result.width / 2, y: char.y }, time).call(function () {
-                _this.fixed = false;
-            }, this).call(function () {
-                message.lb_dialog_text.text = text;
-                _this.addChild(message);
-            }, this);
-        }
+        var test = egret.Tween.get(this.char);
+        test.to({ x: target.x - this.char.width / 2, y: target.y }, time).call(function () {
+            message.lb_dialog_text.text = text;
+            _this.addChild(message);
+            _this.fixed = false;
+        }, this);
+    };
+    Main.prototype.createBitmapByName = function (result, name, x, y, scalex, scaley) {
+        var texture = RES.getRes(name);
+        result.texture = texture;
+        result.scaleX = scalex;
+        result.scaleY = scaley;
+        result.anchorOffsetX = result.width / 2;
+        result.anchorOffsetY = result.height / 2;
+        result.x = x;
+        result.y = y;
+        this.addChild(result);
+    };
+    /**
+     * 描述文件加载成功，开始播放动画
+     * Description file loading is successful, start to play the animation
+     */
+    Main.prototype.startAnimation = function (result) {
+        var _this = this;
+        var parser = new egret.HtmlTextParser();
+        var textflowArr = result.map(function (text) { return parser.parse(text); });
+        var textfield = this.textfield;
+        var count = -1;
+        var change = function () {
+            count++;
+            if (count >= textflowArr.length) {
+                count = 0;
+            }
+            var textFlow = textflowArr[count];
+            // 切换描述内容
+            // Switch to described content
+            textfield.textFlow = textFlow;
+            var tw = egret.Tween.get(textfield);
+            tw.to({ "alpha": 1 }, 200);
+            tw.wait(2000);
+            tw.to({ "alpha": 0 }, 200);
+            tw.call(change, _this);
+        };
+        change();
     };
     Main.prototype.Move = function (evt) {
         /*
@@ -211,39 +281,7 @@ var Main = (function (_super) {
                     */
         // this.result.y = ty;
     };
-    Main.prototype.createBitmapByName = function (name) {
-        var result = new egret.Bitmap();
-        var texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    };
-    /**
-     * 描述文件加载成功，开始播放动画
-     * Description file loading is successful, start to play the animation
-     */
-    Main.prototype.startAnimation = function (result) {
-        var _this = this;
-        var parser = new egret.HtmlTextParser();
-        var textflowArr = result.map(function (text) { return parser.parse(text); });
-        var textfield = this.textfield;
-        var count = -1;
-        var change = function () {
-            count++;
-            if (count >= textflowArr.length) {
-                count = 0;
-            }
-            var textFlow = textflowArr[count];
-            // 切换描述内容
-            // Switch to described content
-            textfield.textFlow = textFlow;
-            var tw = egret.Tween.get(textfield);
-            tw.to({ "alpha": 1 }, 200);
-            tw.wait(2000);
-            tw.to({ "alpha": 0 }, 200);
-            tw.call(change, _this);
-        };
-        change();
-    };
     return Main;
 }(egret.DisplayObjectContainer));
 __reflect(Main.prototype, "Main");
+//# sourceMappingURL=Main.js.map
