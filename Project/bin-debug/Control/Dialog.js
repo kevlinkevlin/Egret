@@ -12,10 +12,12 @@ var Dialog = (function (_super) {
     __extends(Dialog, _super);
     function Dialog() {
         var _this = _super.call(this) || this;
+        //this.skinName = "resource/eui_skins/DialogOk.exml";
         _this.skinName = "resource/eui_skins/DialogOk.exml";
-        _this.addEventListener(egret.Event.ADDED_TO_STAGE, function () {
-            _this.width = _this.stage.stageWidth;
-            _this.height = _this.stage.stageHeight;
+        _this.addEventListener(eui.UIEvent.COMPLETE, function () {
+            _this.lb_dialog_text.text = "123123";
+            //this.width = this.stage.stageWidth;
+            //this.height = this.stage.stageHeight;
         }, _this);
         return _this;
     }
@@ -25,7 +27,6 @@ var Dialog = (function (_super) {
     Dialog.prototype.childrenCreated = function () {
         var _this = this;
         _super.prototype.childrenCreated.call(this);
-        //	this.lb_dialog_text.text = "123123";
         this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.Close();
         }, this);

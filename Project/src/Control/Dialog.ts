@@ -1,11 +1,12 @@
 class Dialog extends eui.Component implements eui.UIComponent {
 	public constructor() {
 		super();
+		//this.skinName = "resource/eui_skins/DialogOk.exml";
 		this.skinName = "resource/eui_skins/DialogOk.exml";
-		this.addEventListener(egret.Event.ADDED_TO_STAGE, () => {
-			
-			this.width = this.stage.stageWidth;
-			this.height = this.stage.stageHeight;
+		this.addEventListener(eui.UIEvent.COMPLETE, () => {
+			this.lb_dialog_text.text = "123123";
+			//this.width = this.stage.stageWidth;
+			//this.height = this.stage.stageHeight;
 		}, this)
 	}
 
@@ -18,7 +19,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
 	close_btn:EButton;
 	protected childrenCreated(): void {
 		super.childrenCreated();
-	//	this.lb_dialog_text.text = "123123";
+		
      	this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.Close();
 		}, this)
