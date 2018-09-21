@@ -46,16 +46,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
-        var _this = _super.call(this) || this;
-        /**
-         * 创建游戏场景
-         * Create a game scene
-         */
+        //繼承DisplayObjectContainer
+        /*
+            public constructor() {
+                super();
+                this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+                
+            }
+        
+            private onAddToStage(event: egret.Event) {
+        
+                egret.lifecycle.addLifecycleListener((context) => {
+                    // custom lifecycle plugin
+        
+                    context.onUpdate = () => {
+        
+                    }
+                })
+        
+                egret.lifecycle.onPause = () => {
+                    egret.ticker.pause();
+                }
+        
+                egret.lifecycle.onResume = () => {
+                    egret.ticker.resume();
+                }
+        
+                let assetAdapter = new AssetAdapter();
+                egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
+                egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+                
+                     
+                this.runGame().catch(e => {
+                    console.log(e);
+                })
+        
+        
+        
+            }
+            */
+        //
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.bg = new egret.Bitmap();
+        _this.char = new egret.Sprite();
         _this.char2 = new egret.Sprite();
         _this.char3 = new egret.Sprite();
         _this.char4 = new egret.Sprite();
-        _this.char = new egret.Sprite();
         /*
         private char2:egret.Bitmap = new egret.Bitmap();
         private char3:egret.Bitmap = new egret.Bitmap();
@@ -66,14 +102,63 @@ var Main = (function (_super) {
         _this.stage1 = true;
         _this.stage2 = false;
         _this.fixed = false;
-        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
-    Main.prototype.onAddToStage = function (event) {
+    Main.prototype.position = function (target, x, y, anchorX, anchorY, scaleX, scaleY) {
+        target.x = x;
+        target.y = y;
+        target.scaleX = scaleX;
+        target.scaleY = scaleY;
+        target.anchorOffsetX = anchorX;
+        target.anchorOffsetY = anchorY;
+    };
+    Main.prototype.animation = function (factory, Spine, animation, target) {
+        var Armature = factory.buildArmature(Spine);
+        var dispWorrior = Armature.getDisplay();
+        Armature.animation.gotoAndPlay(animation);
+        dragonBones.WorldClock.clock.add(Armature);
+        target.addChild(dispWorrior);
+        this.addChild(target);
+        return Armature;
+    };
+    Main.prototype.talk = function (target, time, text, name) {
+        var _this = this;
+        var test = egret.Tween.get(this.char);
+        test.to({ x: target.x - this.char.width / 2, y: target.y }, time).call(function () {
+            _this.message.lb_dialog_text.text = text;
+            _this.message.char_name.text = name;
+            _this.addChild(_this.message);
+            _this.fixed = false;
+        }, this);
+        return test;
+    };
+    Main.prototype.createDragonbones = function (factory, directory) {
+        var skeletonData = RES.getRes(directory + "_ske_json");
+        var textureData = RES.getRes(directory + "_tex_json");
+        var texture = RES.getRes(directory + "_tex_png");
+        factory.addSkeletonData(dragonBones.DataParser.parseDragonBonesData(skeletonData));
+        factory.addTextureAtlas(new dragonBones.EgretTextureAtlas(texture, textureData));
+    };
+    Main.prototype.createBitmapByName = function (result, name, x, y, scalex, scaley) {
+        var texture = RES.getRes(name);
+        result.texture = texture;
+        result.scaleX = scalex;
+        result.scaleY = scaley;
+        result.anchorOffsetX = result.width / 2;
+        result.anchorOffsetY = result.height / 2;
+        result.x = x;
+        result.y = y;
+        this.addChild(result);
+    };
+    /**
+     * 描述文件加载成功，开始播放动画
+     * Description file loading is successful, start to play the animation
+     */
+    //繼承UIlayer
+    Main.prototype.createChildren = function () {
+        _super.prototype.createChildren.call(this);
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin
-            context.onUpdate = function () {
-            };
         });
         egret.lifecycle.onPause = function () {
             egret.ticker.pause();
@@ -81,13 +166,18 @@ var Main = (function (_super) {
         egret.lifecycle.onResume = function () {
             egret.ticker.resume();
         };
+        //inject the custom material parser
+        //注入自定義素材解析器
         var assetAdapter = new AssetAdapter();
+        var theme = new eui.Theme("resource/default.thm.json", this.stage);
+        egret.registerImplementation("eui.Theme", theme);
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
         this.runGame().catch(function (e) {
             console.log(e);
         });
     };
+    //
     Main.prototype.runGame = function () {
         return __awaiter(this, void 0, void 0, function () {
             var userInfo;
@@ -97,12 +187,8 @@ var Main = (function (_super) {
                     case 1:
                         _a.sent();
                         this.createGameScene();
-                        //   const result = await RES.getResAsync("description_json")
-                        //   this.startAnimation(result);
                         return [4 /*yield*/, platform.login()];
                     case 2:
-                        //   const result = await RES.getResAsync("description_json")
-                        //   this.startAnimation(result);
                         _a.sent();
                         return [4 /*yield*/, platform.getUserInfo()];
                     case 3:
@@ -142,38 +228,23 @@ var Main = (function (_super) {
             });
         });
     };
-    Main.prototype.position = function (target, x, y, anchorX, anchorY, scaleX, scaleY) {
-        target.x = x;
-        target.y = y;
-        target.scaleX = scaleX;
-        target.scaleY = scaleY;
-        target.anchorOffsetX = anchorX;
-        target.anchorOffsetY = anchorY;
-    };
-    Main.prototype.animation = function (factory, Spine, animation, target) {
-        var Armature = factory.buildArmature(Spine);
-        var dispWorrior = Armature.getDisplay();
-        Armature.animation.gotoAndPlay(animation);
-        dragonBones.WorldClock.clock.add(Armature);
-        target.addChild(dispWorrior);
-        this.addChild(target);
-        return Armature;
-    };
+    //
     Main.prototype.createGameScene = function () {
         var _this = this;
         this.createBitmapByName(this.bg, "bg_jpg", 0, this.stage.stageHeight / 2, 0.5, 0.3);
         /*
-               this.createBitmapByName(this.char2,"Mario_png",this.stage.stageWidth*2/4,this.stage.stageHeight*3/8,0.3,0.3);
-               this.createBitmapByName(this.char3,"Mario_png",this.stage.stageWidth*3/4,this.stage.stageHeight*3/8,0.3,0.3);
-               this.createBitmapByName(this.char4,"Mario_png",this.stage.stageWidth*2/4,this.stage.stageHeight*9/16,0.3,0.3);
-               this.createBitmapByName(this.char,"Mario_png",this.stage.stageWidth /4,this.stage.stageHeight*3/8,0.3,0.3);
-       */
+                this.createBitmapByName(this.char2,"Mario_png",this.stage.stageWidth*2/4,this.stage.stageHeight*3/8,0.3,0.3);
+                this.createBitmapByName(this.char3,"Mario_png",this.stage.stageWidth*3/4,this.stage.stageHeight*3/8,0.3,0.3);
+                this.createBitmapByName(this.char4,"Mario_png",this.stage.stageWidth*2/4,this.stage.stageHeight*9/16,0.3,0.3);
+                this.createBitmapByName(this.char,"Mario_png",this.stage.stageWidth /4,this.stage.stageHeight*3/8,0.3,0.3);
+        */
         var factory = new dragonBones.EgretFactory();
-        this.createDragonbones(factory, "Cat");
-        var cat = this.animation(factory, "Cat", "Idle", this.char);
-        this.animation(factory, "Char1", "Idle", this.char2);
-        this.animation(factory, "Char2", "Idle", this.char3);
-        this.animation(factory, "Char3", "Idle", this.char4);
+        //      this.createDragonbones( factory, "Cat" );
+        this.createDragonbones(factory, "star_char");
+        this.animation(factory, "char2", "Idle", this.char2);
+        this.animation(factory, "char3", "Idle", this.char3);
+        this.animation(factory, "char4", "Idle", this.char4);
+        var cat = this.animation(factory, "char", "Idle", this.char); //賦予參數以便調整動畫
         //this.animation(factory,"Cat","Idle",this.char).animation.gotoAndPlay("Run");
         /*
                 var char1:dragonBones.Armature = factory.buildArmature( "Cat" );
@@ -185,15 +256,13 @@ var Main = (function (_super) {
         */
         this.char.x = this.stage.stageWidth / 4;
         this.char.y = this.stage.stageHeight * 3 / 8;
-        this.char.scaleX = -2;
+        this.char.scaleX = 2;
         this.char.scaleY = 2;
-        this.char.anchorOffsetX = this.char.width / 2 - 60;
-        this.char.anchorOffsetY = this.char.height / 2 - 45;
-        this.position(this.char2, this.stage.stageWidth * 2 / 4, this.stage.stageHeight * 3 / 8, this.char.width / 2, this.char.height / 2 - 25, 2, 2);
-        this.position(this.char3, this.stage.stageWidth * 5 / 8, this.stage.stageHeight * 3 / 8, this.char.width / 2, this.char.height / 2 - 15, 2.2, 2.2);
-        this.position(this.char4, this.stage.stageWidth * 2 / 4, this.stage.stageHeight * 9 / 16, this.char.width / 2, this.char.height / 2 - 25, 2.5, 2.5);
-        this.addChild(this.message);
-        this.removeChild(this.message);
+        this.char.anchorOffsetX = this.char.width / 2 + 10;
+        this.char.anchorOffsetY = this.char.height / 2 - 31;
+        this.position(this.char2, this.stage.stageWidth * 2 / 4, this.stage.stageHeight * 3 / 8, this.char.width / 2, this.char.height / 2 - 31, 2.2, 2.2);
+        this.position(this.char3, this.stage.stageWidth * 5 / 8, this.stage.stageHeight * 3 / 8, this.char.width / 2, this.char.height / 2 - 31, 2.2, 2.2);
+        this.position(this.char4, this.stage.stageWidth * 2 / 4, this.stage.stageHeight * 9 / 16, this.char.width / 2, this.char.height / 2 - 29, 2.2, 2.2);
         this.addEventListener(egret.Event.ENTER_FRAME, function () {
             dragonBones.WorldClock.clock.advanceTime(0.05);
         }, this);
@@ -206,16 +275,21 @@ var Main = (function (_super) {
                 _this.fixed = true;
                 cat.animation.gotoAndPlay("Run");
                 if (_this.stage1 == true) {
-                    _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - _this.char.width / 2)) * _this.time, "角色2").call(function () {
+                    _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - _this.char.width / 2)) * _this.time, "角色2", "シャロン").call(function () {
                         cat.animation.gotoAndPlay("Idle");
+                        //第二段對話
+                        _this.message.textedit = "?????";
                     }, _this);
                 }
                 else if (_this.stage2 == true) {
                     egret.Tween.get(_this.char)
-                        .to({ x: _this.stage.stageWidth / 4, y: _this.stage.stageHeight * 4 / 8 }, Math.abs(_this.char.x - _this.stage.stageWidth * 5 / 8) * _this.time)
-                        .to({ x: _this.stage.stageWidth * 3 / 8, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 150)
+                        .to({ x: _this.stage.stageWidth * 3 / 8 + 35, y: _this.stage.stageHeight * 4 / 8 + 10 }, _this.time * 150)
+                        .to({ x: _this.stage.stageWidth / 4 }, _this.time * 200)
+                        .to({ y: _this.stage.stageHeight * 7 / 16 + 20 }, _this.time * 50)
+                        .to({ x: _this.stage.stageWidth / 4 + 40 }, _this.time * 50)
+                        .to({ x: _this.stage.stageWidth * 3 / 8 + 30, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 200)
                         .call(function () {
-                        _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - _this.char.width / 2)) * _this.time, "角色2").call(function () {
+                        _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - _this.char.width / 2)) * _this.time, "角色2", "シャロン").call(function () {
                             cat.animation.gotoAndPlay("Idle");
                         }, _this);
                         _this.stage1 = true;
@@ -231,16 +305,19 @@ var Main = (function (_super) {
                 _this.fixed = true;
                 cat.animation.gotoAndPlay("Run");
                 if (_this.stage1 == true) {
-                    _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, "角色3").call(function () {
+                    _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, "角色3", "アルティナ").call(function () {
                         cat.animation.gotoAndPlay("Idle");
                     }, _this);
                 }
                 else if (_this.stage2 == true) {
                     egret.Tween.get(_this.char)
-                        .to({ x: _this.stage.stageWidth / 4, y: _this.stage.stageHeight * 4 / 8 }, Math.abs(_this.char.x - _this.stage.stageWidth * 5 / 8) * _this.time)
-                        .to({ x: _this.stage.stageWidth * 3 / 8, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 150)
+                        .to({ x: _this.stage.stageWidth * 3 / 8 + 35, y: _this.stage.stageHeight * 4 / 8 + 10 }, _this.time * 150)
+                        .to({ x: _this.stage.stageWidth / 4 }, _this.time * 200)
+                        .to({ y: _this.stage.stageHeight * 7 / 16 + 20 }, _this.time * 50)
+                        .to({ x: _this.stage.stageWidth / 4 + 40 }, _this.time * 50)
+                        .to({ x: _this.stage.stageWidth * 3 / 8 + 30, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 200)
                         .call(function () {
-                        _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, "角色3").call(function () {
+                        _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, "角色3", "アルティナ").call(function () {
                             cat.animation.gotoAndPlay("Idle");
                         }, _this);
                         _this.stage1 = true;
@@ -257,10 +334,13 @@ var Main = (function (_super) {
                 _this.fixed = true;
                 if (_this.stage1 == true) {
                     egret.Tween.get(_this.char)
-                        .to({ x: _this.stage.stageWidth * 3 / 8 }, Math.abs(_this.char.x - _this.stage.stageWidth * 3 / 8) * _this.time)
-                        .to({ x: _this.stage.stageWidth / 4, y: _this.stage.stageHeight * 4 / 8 }, _this.time * 150)
+                        .to({ x: _this.stage.stageWidth * 3 / 8 + 30, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 200)
+                        .to({ x: _this.stage.stageWidth / 4 + 40, y: _this.stage.stageHeight * 7 / 16 + 20 }, _this.time * 200)
+                        .to({ x: _this.stage.stageWidth / 4 }, _this.time * 50)
+                        .to({ y: _this.stage.stageHeight * 4 / 8 + 10 }, _this.time * 50)
+                        .to({ x: _this.stage.stageWidth * 3 / 8 + 35, y: _this.stage.stageHeight * 4 / 8 + 10 }, _this.time * 150)
                         .call(function () {
-                        _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, "角色4").call(function () {
+                        _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, "角色4", "里維").call(function () {
                             cat.animation.gotoAndPlay("Idle");
                         }, _this);
                         _this.stage1 = false;
@@ -269,7 +349,7 @@ var Main = (function (_super) {
                 }
                 else if (_this.stage2 == true) {
                     _this.fixed = true;
-                    _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, "角色4").call(function () {
+                    _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, "角色4", "里維").call(function () {
                         cat.animation.gotoAndPlay("Idle");
                     }, _this);
                 }
@@ -277,62 +357,7 @@ var Main = (function (_super) {
             }
         }, this);
     };
-    Main.prototype.talk = function (target, time, text) {
-        var _this = this;
-        var test = egret.Tween.get(this.char);
-        test.to({ x: target.x - this.char.width / 2, y: target.y }, time).call(function () {
-            _this.message.lb_dialog_text.text = text;
-            _this.addChild(_this.message);
-            _this.fixed = false;
-        }, this);
-        return test;
-    };
-    Main.prototype.createDragonbones = function (factory, directory) {
-        var skeletonData = RES.getRes(directory + "_ske_json");
-        var textureData = RES.getRes(directory + "_tex_json");
-        var texture = RES.getRes(directory + "_tex_png");
-        factory.addSkeletonData(dragonBones.DataParser.parseDragonBonesData(skeletonData));
-        factory.addTextureAtlas(new dragonBones.EgretTextureAtlas(texture, textureData));
-    };
-    Main.prototype.createBitmapByName = function (result, name, x, y, scalex, scaley) {
-        var texture = RES.getRes(name);
-        result.texture = texture;
-        result.scaleX = scalex;
-        result.scaleY = scaley;
-        result.anchorOffsetX = result.width / 2;
-        result.anchorOffsetY = result.height / 2;
-        result.x = x;
-        result.y = y;
-        this.addChild(result);
-    };
-    /**
-     * 描述文件加载成功，开始播放动画
-     * Description file loading is successful, start to play the animation
-     */
-    Main.prototype.startAnimation = function (result) {
-        var _this = this;
-        var parser = new egret.HtmlTextParser();
-        var textflowArr = result.map(function (text) { return parser.parse(text); });
-        var textfield = this.textfield;
-        var count = -1;
-        var change = function () {
-            count++;
-            if (count >= textflowArr.length) {
-                count = 0;
-            }
-            var textFlow = textflowArr[count];
-            // 切换描述内容
-            // Switch to described content
-            textfield.textFlow = textFlow;
-            var tw = egret.Tween.get(textfield);
-            tw.to({ "alpha": 1 }, 200);
-            tw.wait(2000);
-            tw.to({ "alpha": 0 }, 200);
-            tw.call(change, _this);
-        };
-        change();
-    };
     return Main;
-}(egret.DisplayObjectContainer));
+}(eui.UILayer));
 __reflect(Main.prototype, "Main");
 //# sourceMappingURL=Main.js.map

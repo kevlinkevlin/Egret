@@ -9,15 +9,17 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
+		"bin-debug/Control/EButton.js",
 		"bin-debug/AssetAdapter.js",
-		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/Control/Dialog.js",
-		"bin-debug/Control/DialogBlock.js",
-		"bin-debug/Control/EButton.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/Control/ETimer.js",
-		"bin-debug/Control/EToast.js"
+		"bin-debug/Control/EToast.js",
+		"bin-debug/view/GameScene.js",
+		"bin-debug/view/MusicScene.js",
+		"bin-debug/view/SliderScroll.js"
 	]
 }

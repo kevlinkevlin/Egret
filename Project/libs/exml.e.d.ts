@@ -6,8 +6,6 @@ declare module skins{
 	class CheckBoxSkin extends eui.Skin{
 	}
 }
-declare class DialogBlockSkin extends eui.Skin{
-}
 declare module skins{
 	class DialogOk extends eui.Skin{
 	}
@@ -41,6 +39,8 @@ declare module skins{
 declare module skins{
 	class ScrollerSkin extends eui.Skin{
 	}
+}
+declare class SlotViewSkin extends eui.Skin{
 }
 declare module skins{
 	class TextInputSkin extends eui.Skin{

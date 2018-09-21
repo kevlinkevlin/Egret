@@ -10,7 +10,8 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private createView(): void {
         this.textField = new egret.TextField();
         this.addChild(this.textField);
-        this.textField.y = 300;
+        this.textField.x = 272;
+        this.textField.y = 284;
         this.textField.width = 480;
         this.textField.height = 100;
         this.textField.textAlign = "center";

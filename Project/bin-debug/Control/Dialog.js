@@ -12,17 +12,29 @@ var Dialog = (function (_super) {
     __extends(Dialog, _super);
     function Dialog() {
         var _this = _super.call(this) || this;
+        _this.game = new GameScene();
+        _this.isThemeLoadEnd = false;
         //this.skinName = "resource/eui_skins/DialogOk.exml";
         _this.skinName = "resource/eui_skins/DialogOk.exml";
         _this.addEventListener(eui.UIEvent.COMPLETE, function () {
             _this.lb_dialog_text.text = "123123";
-            //this.width = this.stage.stageWidth;
-            //this.height = this.stage.stageHeight;
         }, _this);
         return _this;
     }
     Dialog.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
+    };
+    Dialog.prototype.onThemeLoadComplete = function () {
+        console.log("LoadSuccess");
+        this.isThemeLoadEnd = true;
+        this.createScene();
+    };
+    Dialog.prototype.createScene = function () {
+        if (this.isThemeLoadEnd) {
+            // this.startCreateScene();
+            var gamescene = new GameScene();
+            this.addChild(gamescene);
+        }
     };
     Dialog.prototype.childrenCreated = function () {
         var _this = this;
@@ -30,13 +42,19 @@ var Dialog = (function (_super) {
         this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.Close();
         }, this);
-        this.close_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.Close();
+        this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            _this.addChild(_this.game);
         }, this);
         /*
-                this.btn_dialog_cancel.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-                    this.Close();
-                }, this)*/
+        this.close_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            this.Close();
+            
+        }, this)
+
+        this.btn_dialog_cancel.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            this.Close();
+        }, this)
+        */
     };
     Dialog.prototype.Show = function (view) {
         if (!view.contains(this)) {
@@ -44,8 +62,13 @@ var Dialog = (function (_super) {
         }
     };
     Dialog.prototype.Close = function () {
-        if (this.parent != null)
+        if (this.parent != null && this.textedit == null) {
             this.parent.removeChild(this);
+        }
+        else {
+            this.lb_dialog_text.text = this.textedit;
+            this.textedit = null;
+        }
     };
     return Dialog;
 }(eui.Component));
