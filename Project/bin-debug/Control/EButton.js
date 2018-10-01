@@ -16,8 +16,8 @@ var EButton = (function (_super) {
             _this.w = _this.width;
             _this.h = _this.height;
             _this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
-                _this.width -= 5;
-                _this.height -= 5;
+                _this.width -= 2;
+                _this.height -= 2;
             }, _this);
             _this.addEventListener(egret.TouchEvent.TOUCH_END, function () {
                 _this.width = _this.w;

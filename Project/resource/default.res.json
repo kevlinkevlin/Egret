@@ -1,11 +1,11 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,slider_png,slider1_png,slot_kake_png,slot_start_png,slot_stop_over_png,slot_stop_up_png",
+			"keys": "slot_kake_png,slot_start_png,slot_stop_over_png,slot_stop_up_png,btn_back_png,laba_mp3,slider_ok_png,slider_ok_nobg_png",
 			"name": "preload"
 		},
 		{
-			"keys": "dialog_bg_png,bg_jpg,Dia01_png,Dia02_png,btn_back_png,dialog_zhunbei_png,star_char_tex_png,star_char_tex_json,star_char_ske_json",
+			"keys": "bg_jpg,description_json,dialog_bg_png,test_png,test_json,Dia01_png,Dia02_png,box_btn_png",
 			"name": "UI"
 		}
 	],
@@ -103,19 +103,49 @@
 			"name": "btn_back_png"
 		},
 		{
-			"url": "assets/CharacterAnimation/star_char_tex.png",
+			"url": "assets/CharacterAnimation/star_char_backup_tex.png",
 			"type": "image",
-			"name": "star_char_tex_png"
+			"name": "star_char_backup_tex_png"
 		},
 		{
-			"url": "assets/CharacterAnimation/star_char_tex.json",
+			"url": "assets/CharacterAnimation/star_char_backup_ske.json",
 			"type": "json",
-			"name": "star_char_tex_json"
+			"name": "star_char_backup_ske_json"
 		},
 		{
-			"url": "assets/CharacterAnimation/star_char_ske.json",
+			"url": "assets/CharacterAnimation/star_char_backup_tex.json",
 			"type": "json",
-			"name": "star_char_ske_json"
+			"name": "star_char_backup_tex_json"
+		},
+		{
+			"url": "music/laba.mp3",
+			"type": "sound",
+			"name": "laba_mp3"
+		},
+		{
+			"url": "assets/CharacterAnimation/test.json",
+			"type": "json",
+			"name": "test_json"
+		},
+		{
+			"url": "assets/CharacterAnimation/test.png",
+			"type": "image",
+			"name": "test_png"
+		},
+		{
+			"url": "Dialog/box_btn.png",
+			"type": "image",
+			"name": "box_btn_png"
+		},
+		{
+			"url": "imgs/sliders/slider_ok.png",
+			"type": "image",
+			"name": "slider_ok_png"
+		},
+		{
+			"url": "imgs/sliders/slider_ok_nobg.png",
+			"type": "image",
+			"name": "slider_ok_nobg_png"
 		}
 	]
 }

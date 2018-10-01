@@ -43,7 +43,7 @@ var Slider;
             //创建第二组sliderBox
             this.bmpArr2 = [];
             //this.addSliderBox(267.5, 489, 265.25, 540, this.rowCount, this.bmpArr2);
-            this.addSliderBox(this.stage.stageWidth / 2 - 50, this.stage.stageHeight / 2, this.stage.stageWidth / 2 - 52.25, this.stage.stageHeight / 2 - 130, this.rowCount, this.bmpArr2);
+            this.addSliderBox(this.stage.stageWidth / 2 - 50, this.stage.stageHeight / 2, this.stage.stageWidth / 2 - 52.25, this.stage.stageHeight / 2 - 122, this.rowCount, this.bmpArr2);
             //创建第三组sliderBox
             // this.bmpArr3 = [];
             // this.addSliderBox(395.5, 489, 393.25, 492, this.rowCount, this.bmpArr3);
@@ -54,7 +54,7 @@ var Slider;
         SliderScroll.prototype.addSliderBox = function (sliderX, sliderY, maskX, maskY, count, bmpA) {
             for (var i = 0; i < count; i++) {
                 var slider;
-                slider = this.createImgSlide("slider_png");
+                slider = this.createImgSlide("slider_ok_nobg_png");
                 //slider的長和寬是固定的，x，y是有三组。下面只是設置了一组。
                 slider.width = 105;
                 slider.height = 420;
@@ -72,6 +72,9 @@ var Slider;
          * 開始滾動
          */
         SliderScroll.prototype.startRoll = function () {
+            this.mus_star = new MusicScene();
+            this.mus_star.addMusic("laba_mp3", 0, -1);
+            this.mus_star.musicSound(0.3);
             this.removeEventListener(egret.Event.ENTER_FRAME, this.enterFrameHandler, this);
             this.addEventListener(egret.Event.ENTER_FRAME, this.enterFrameHandler, this);
             //添加計時功能實現阻尼
@@ -120,7 +123,6 @@ var Slider;
             this.flag = false;
             this.etimer = new egret.Timer(500, 0);
             this.etimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
-                //第一组
                 var _this = this;
                 //第二组
                 if (this.speed2 == -6) {
@@ -136,6 +138,7 @@ var Slider;
                                 if (this.speed2 == 0 && !this.flag) {
                                     this.flag = true;
                                     callback(this.flag);
+                                    this.mus_star.musicStop();
                                 }
                             }
                         }, _this);

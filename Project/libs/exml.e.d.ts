@@ -10,8 +10,6 @@ declare module skins{
 	class DialogOk extends eui.Skin{
 	}
 }
-declare class DialogView extends eui.Skin{
-}
 declare module skins{
 	class HScrollBarSkin extends eui.Skin{
 	}

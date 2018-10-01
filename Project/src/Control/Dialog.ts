@@ -1,45 +1,27 @@
 class Dialog extends eui.Component implements eui.UIComponent {
+
+
 	public constructor() {
 		super();
-		//this.skinName = "resource/eui_skins/DialogOk.exml";
 		this.skinName = "resource/eui_skins/DialogOk.exml";
 		
-		this.addEventListener(eui.UIEvent.COMPLETE, () => {
-			this.lb_dialog_text.text = "123123";
-		
-		}, this)
 	}
 
 	protected partAdded(partName: string, instance: any): void {
 		super.partAdded(partName, instance);
 	}
-
- private game = new GameScene();
-    
-	public textedit:string;
+	public firstscene:boolean = true;
+	public count:number;
+	public name_test:string[] = [];
+	public dia_test:string[] = [];
+	dialog_name:eui.Image;
 	ready_btn:EButton;
+	back_btn:EButton;
 	img_dialog_outer: eui.Image;
 	lb_dialog_text: eui.Label;
 	char_name:eui.Label;
 	close_btn:EButton;
-	private isThemeLoadEnd: boolean = false;
-
-
-	private onThemeLoadComplete(): void {
-     console.log("LoadSuccess");
-        this.isThemeLoadEnd = true;
-        this.createScene();
-    }
-
-
- 	private createScene() {
-       if (this.isThemeLoadEnd ) {
-            // this.startCreateScene();
-            var gamescene = new GameScene();
-            this.addChild(gamescene);
-            
-        }
-    }
+	
 
 
 	protected childrenCreated(): void {
@@ -48,21 +30,15 @@ class Dialog extends eui.Component implements eui.UIComponent {
      	this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.Close();
 		}, this)
-
+		this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+			this.Close();
+		}, this)
 		this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-		this.addChild(this.game);
+		var game =new GameScene(this.count);
+		egret.setTimeout(()=>{this.addChild(game)},this,100)
 		
 		}, this)
-		/*
-		this.close_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			this.Close();
-			
-		}, this)
-
-		this.btn_dialog_cancel.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-			this.Close();
-		}, this)
-		*/
+		
 
 	}
 
@@ -75,11 +51,25 @@ class Dialog extends eui.Component implements eui.UIComponent {
  
 
 	public Close() {
-		if (this.parent != null && this.textedit == null){
+		this.dialog_name.visible = true;
+		if (this.parent != null && this.name_test.length == 0){
 			this.parent.removeChild(this);
-		}else{
-			this.lb_dialog_text.text =this.textedit;
-			this.textedit = null;
+			this.ready_btn.visible = false;
+			this.back_btn.visible = false;
+			
+		}
+		else{
+			if(this.name_test.length == 1 && this.firstscene == false)
+			{
+				this.ready_btn.visible = true;
+			this.back_btn.visible = true;
+			}else
+			{
+			this.ready_btn.visible = false;
+			this.back_btn.visible = false;
+			}
+			this.lb_dialog_text.text =this.dia_test.shift();
+			this.char_name.text = this.name_test.shift();
 		}
 	}
 

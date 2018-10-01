@@ -1,27 +1,26 @@
 class GameScene extends eui.Component {
-    public completed:Boolean = false;
+    
     public startgroup: eui.Group;
     public stopgroup: eui.Group;
     public stop_over: eui.Image;
     public stop_up: eui.Image;
-    public kake0: eui.Image;
     public kake1: eui.Image;
-    public kake: eui.Image;
     public back_btn:eui.Image;
     //申明声音
     private mus_star;
     private mus_move;
     private mus_stop;
 
-    private slider: Slider.SliderScroll;//为了调用sliderscroll里面的方法
+    private count:number;//控制拉霸結果 
 
-    public constructor() {
+    public slider: Slider.SliderScroll;//为了调用sliderscroll里面的方法
+
+    public constructor(num : number) {
         super();
         this.skinName = "resource/eui_skins/SlotViewSkin.exml";
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+        this.count = num;
     }
-
-   
     /**
      * 处理一些遮罩，优化图片和开始
      */
@@ -29,56 +28,33 @@ class GameScene extends eui.Component {
         
         
         //把slider添加到框里
-        // this.addSixSlider(139.5, 492);
         this.slider = new Slider.SliderScroll();
         this.addChild(this.slider);
 
         //把kake置顶
-        this.setChildIndex(this.kake0, this.numChildren - 1);
-        this.setChildIndex(this.kake1, this.numChildren - 1);
-        this.setChildIndex(this.kake, this.numChildren - 1);
+        this.stopgroup.visible = false;
 
+
+        //this.back_btn.visible = false;
+
+
+        
+        this.setChildIndex(this.kake1, this.numChildren - 1);
         //添加start事件
         this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
-
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-        this.stop_up.visible = true;
-        this.stop_over.visible = false;
-        this.back_btn.visible = false;
         this.startgroup.visible = true;
-        this.removeChild(this.slider)
-			this.Close(); 
+        this.Close();
 		}, this);
 
     }
 
 
 
-    public Close() {
+    private Close() {
 		if (this.parent != null)
 			this.parent.removeChild(this);
 	}
-    /**
-     * 生成6张slider
-     
-    private addSixSlider(x: number, y: number) {
-        for (var i = 0; i < 6; i++) {
-            var sliderindex = (i + 1).toString() + "_png";
-            let slide1: egret.Bitmap = this.createImgSlide(sliderindex);
-            slide1.x = 139.5;
-            slide1.y = 489 + 70 * i;
-            slide1.width = 105;
-            slide1.height = 70;
-            this.addChild(slide1);
-
-            //添加遮罩
-            var rectmask: egret.Shape = this.drawMask(x, y);
-            this.addChild(rectmask);
-            slide1.mask = rectmask;
-        }
-
-    }
-*/
     /**
      * 动态生成图片
      */
@@ -106,19 +82,18 @@ class GameScene extends eui.Component {
      */
     private gameStart() {
         console.log("start!");
+        this.back_btn.visible = false;
         this.startgroup.visible = false;
         this.stopgroup.visible = true;
         this.stop_up.visible = false;
         this.stop_over.visible = true;
+        
 
-        this.removeChild(this.slider);//删除之前的slider
+        this.removeChild(this.slider);
         this.slider = new Slider.SliderScroll();//添加新的slider
         this.addChild(this.slider);
         //把kake置顶
-        this.setChildIndex(this.kake0, this.numChildren - 1);
         this.setChildIndex(this.kake1, this.numChildren - 1);
-        this.setChildIndex(this.kake, this.numChildren - 1);
-
         //控制slider开始翻滚
         this.slider.startRoll();
         //添加stop
@@ -139,12 +114,13 @@ class GameScene extends eui.Component {
      * 添加stop
      */
     private gameStop() {
+        
         console.log("stop!");
         this.stop_up.visible = true;
         this.stop_over.visible = false;
 
-        var rad2 = Math.floor(Math.random() * 6 + 1);
-        
+        //var rad2 = Math.floor(Math.random() * 6 + 1);
+       
 
         //停止声音
         /*
@@ -153,14 +129,12 @@ class GameScene extends eui.Component {
         this.mus_stop.addMusic("guzhang_mp3", 0, -1);
         */
         //控制slider停止翻滚
-        console.log(rad2);
-        this.slider.stopScroll(rad2, (r) => {//r回调回来的结果，当r=true时，执行if里的操作
+        console.log(this.count);
+        this.slider.stopScroll(this.count, (r) => {//r回调回来的结果，当r=true时，执行if里的操作
             if (r) {
                 this.stop_up.visible = false;
                 this.stop_over.visible = false;
                this.back_btn.visible = true;
-
-                this.completed = true;
                
             }
         });

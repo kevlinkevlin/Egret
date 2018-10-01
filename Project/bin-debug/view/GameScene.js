@@ -10,11 +10,11 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var GameScene = (function (_super) {
     __extends(GameScene, _super);
-    function GameScene() {
+    function GameScene(num) {
         var _this = _super.call(this) || this;
-        _this.completed = false;
         _this.skinName = "resource/eui_skins/SlotViewSkin.exml";
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
+        _this.count = num;
         return _this;
     }
     /**
@@ -23,21 +23,16 @@ var GameScene = (function (_super) {
     GameScene.prototype.onAddToStage = function (event) {
         var _this = this;
         //把slider添加到框里
-        // this.addSixSlider(139.5, 492);
         this.slider = new Slider.SliderScroll();
         this.addChild(this.slider);
         //把kake置顶
-        this.setChildIndex(this.kake0, this.numChildren - 1);
+        this.stopgroup.visible = false;
+        //this.back_btn.visible = false;
         this.setChildIndex(this.kake1, this.numChildren - 1);
-        this.setChildIndex(this.kake, this.numChildren - 1);
         //添加start事件
         this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.stop_up.visible = true;
-            _this.stop_over.visible = false;
-            _this.back_btn.visible = false;
             _this.startgroup.visible = true;
-            _this.removeChild(_this.slider);
             _this.Close();
         }, this);
     };
@@ -45,27 +40,6 @@ var GameScene = (function (_super) {
         if (this.parent != null)
             this.parent.removeChild(this);
     };
-    /**
-     * 生成6张slider
-     
-    private addSixSlider(x: number, y: number) {
-        for (var i = 0; i < 6; i++) {
-            var sliderindex = (i + 1).toString() + "_png";
-            let slide1: egret.Bitmap = this.createImgSlide(sliderindex);
-            slide1.x = 139.5;
-            slide1.y = 489 + 70 * i;
-            slide1.width = 105;
-            slide1.height = 70;
-            this.addChild(slide1);
-
-            //添加遮罩
-            var rectmask: egret.Shape = this.drawMask(x, y);
-            this.addChild(rectmask);
-            slide1.mask = rectmask;
-        }
-
-    }
-*/
     /**
      * 动态生成图片
      */
@@ -90,17 +64,16 @@ var GameScene = (function (_super) {
      */
     GameScene.prototype.gameStart = function () {
         console.log("start!");
+        this.back_btn.visible = false;
         this.startgroup.visible = false;
         this.stopgroup.visible = true;
         this.stop_up.visible = false;
         this.stop_over.visible = true;
-        this.removeChild(this.slider); //删除之前的slider
+        this.removeChild(this.slider);
         this.slider = new Slider.SliderScroll(); //添加新的slider
         this.addChild(this.slider);
         //把kake置顶
-        this.setChildIndex(this.kake0, this.numChildren - 1);
         this.setChildIndex(this.kake1, this.numChildren - 1);
-        this.setChildIndex(this.kake, this.numChildren - 1);
         //控制slider开始翻滚
         this.slider.startRoll();
         //添加stop
@@ -122,7 +95,7 @@ var GameScene = (function (_super) {
         console.log("stop!");
         this.stop_up.visible = true;
         this.stop_over.visible = false;
-        var rad2 = Math.floor(Math.random() * 6 + 1);
+        //var rad2 = Math.floor(Math.random() * 6 + 1);
         //停止声音
         /*
         this.mus_move.musicSound(0.3);
@@ -130,13 +103,12 @@ var GameScene = (function (_super) {
         this.mus_stop.addMusic("guzhang_mp3", 0, -1);
         */
         //控制slider停止翻滚
-        console.log(rad2);
-        this.slider.stopScroll(rad2, function (r) {
+        console.log(this.count);
+        this.slider.stopScroll(this.count, function (r) {
             if (r) {
                 _this.stop_up.visible = false;
                 _this.stop_over.visible = false;
                 _this.back_btn.visible = true;
-                _this.completed = true;
             }
         });
     };

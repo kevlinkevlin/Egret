@@ -1,14 +1,14 @@
 class EButton extends eui.Button implements eui.UIComponent {
-	w: number;
-	h: number;
+	private w: number;
+	private h: number;
 	public constructor() {
 		super();
 		this.addEventListener(egret.Event.ADDED_TO_STAGE, () => {
 			this.w = this.width;
 			this.h = this.height;
 			this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, () => {
-				this.width -= 5;
-				this.height -= 5;
+				this.width -= 2;
+				this.height -= 2;
 			}, this)
 			this.addEventListener(egret.TouchEvent.TOUCH_END, () => {
 				this.width = this.w;

@@ -12,29 +12,14 @@ var Dialog = (function (_super) {
     __extends(Dialog, _super);
     function Dialog() {
         var _this = _super.call(this) || this;
-        _this.game = new GameScene();
-        _this.isThemeLoadEnd = false;
-        //this.skinName = "resource/eui_skins/DialogOk.exml";
+        _this.firstscene = true;
+        _this.name_test = [];
+        _this.dia_test = [];
         _this.skinName = "resource/eui_skins/DialogOk.exml";
-        _this.addEventListener(eui.UIEvent.COMPLETE, function () {
-            _this.lb_dialog_text.text = "123123";
-        }, _this);
         return _this;
     }
     Dialog.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
-    };
-    Dialog.prototype.onThemeLoadComplete = function () {
-        console.log("LoadSuccess");
-        this.isThemeLoadEnd = true;
-        this.createScene();
-    };
-    Dialog.prototype.createScene = function () {
-        if (this.isThemeLoadEnd) {
-            // this.startCreateScene();
-            var gamescene = new GameScene();
-            this.addChild(gamescene);
-        }
     };
     Dialog.prototype.childrenCreated = function () {
         var _this = this;
@@ -42,19 +27,13 @@ var Dialog = (function (_super) {
         this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.Close();
         }, this);
-        this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.addChild(_this.game);
+        this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            _this.Close();
         }, this);
-        /*
-        this.close_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            this.Close();
-            
-        }, this)
-
-        this.btn_dialog_cancel.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            this.Close();
-        }, this)
-        */
+        this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            var game = new GameScene(_this.count);
+            egret.setTimeout(function () { _this.addChild(game); }, _this, 100);
+        }, this);
     };
     Dialog.prototype.Show = function (view) {
         if (!view.contains(this)) {
@@ -62,12 +41,23 @@ var Dialog = (function (_super) {
         }
     };
     Dialog.prototype.Close = function () {
-        if (this.parent != null && this.textedit == null) {
+        this.dialog_name.visible = true;
+        if (this.parent != null && this.name_test.length == 0) {
             this.parent.removeChild(this);
+            this.ready_btn.visible = false;
+            this.back_btn.visible = false;
         }
         else {
-            this.lb_dialog_text.text = this.textedit;
-            this.textedit = null;
+            if (this.name_test.length == 1 && this.firstscene == false) {
+                this.ready_btn.visible = true;
+                this.back_btn.visible = true;
+            }
+            else {
+                this.ready_btn.visible = false;
+                this.back_btn.visible = false;
+            }
+            this.lb_dialog_text.text = this.dia_test.shift();
+            this.char_name.text = this.name_test.shift();
         }
     };
     return Dialog;
