@@ -3,6 +3,7 @@ class EButton extends eui.Button implements eui.UIComponent {
 	private h: number;
 	public constructor() {
 		super();
+		
 		this.addEventListener(egret.Event.ADDED_TO_STAGE, () => {
 			this.w = this.width;
 			this.h = this.height;
@@ -18,11 +19,13 @@ class EButton extends eui.Button implements eui.UIComponent {
 			this.addEventListener(egret.TouchEvent.TOUCH_CANCEL, () => {
 				this.width = this.w;
 				this.height = this.h;
+				
 			}, this)
 
 			this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, () => {
 				this.width = this.w;
 				this.height = this.h;
+				
 			}, this)
 		}, this)
 	}

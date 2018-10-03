@@ -223,8 +223,15 @@ private async loadResource() {
         this.message.gameover_name ="艾蒂莉亞" 
         this.message.gameover_dia ="哎呀...欸?這個該不會是..."
         }else{
+        if(this.message.completed == false)
+        {
         this.message.name_test = ["艾蒂莉亞"];
         this.message.dia_test = ["去找其他人聊聊吧~"]
+        }else{
+        console.log(this.message.completed)
+         this.message.name_test = ["艾蒂莉亞"];
+        this.message.dia_test = ["今天天氣真的不錯呢~"]
+        }
         }
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
@@ -298,8 +305,17 @@ private async loadResource() {
         this.message.gameover_dia ="喔喔..!!你今天看起來運勢不錯呢..."
         }else
         {
+        if(this.message.completed == false)
+        {
         this.message.name_test = ["黎恩"];
         this.message.dia_test = ["去找其他人聊聊吧~"]
+        }else{
+        this.message.name_test = ["黎恩","庫洛艾","黎恩","庫洛艾"];
+        this.message.dia_test = ["26個英文字母妳知道我最喜歡什麼嗎?"
+        ,"恩??.......不知道..."
+        ,"我喜歡........You"
+        ,"...........>/////<"]
+        }
         }
         
         this.message.char_name.text = this.message.name_test.shift();
@@ -312,7 +328,7 @@ private async loadResource() {
         this.talk(this.char3
         ,Math.abs(this.char.x-(this.char3.x-this.char.width/2))*this.time
         ,this.char3_b
-        ,2).call(()=>{
+        ,5).call(()=>{
         this.char.gotoAndPlay("Idle",-1);
         
         },this);
@@ -333,7 +349,7 @@ private async loadResource() {
         this.talk(this.char3
         ,Math.abs(this.char.x-(this.char3.x-this.char.width/2))*this.time
         ,this.char3_b
-        ,2).call(()=>{
+        ,5).call(()=>{
         this.char.gotoAndPlay("Idle",-1);
         
         },this);
@@ -361,9 +377,10 @@ private async loadResource() {
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
         }else{
 
+        if(this.message.completed == false)
+        {
+        this.message.diamond = true;
         this.message.completed = true        //////遊戲結束
-
-
         this.message.gameover = true;
         this.message.gameover_name ="咪西" 
         this.message.gameover_dia ="竟然被你抽到我的薪資袋了Q_Q"
@@ -372,7 +389,14 @@ private async loadResource() {
         ,"喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的主編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"]
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
-
+        this.message.char4_target = true;
+        }else
+        {   
+        this.message.name_test = ["咪西"];
+        this.message.dia_test = ["我的薪資袋Q_Q........."]
+         this.message.char_name.text = this.message.name_test.shift();
+        this.message.lb_dialog_text.text = this.message.dia_test.shift();
+        }
 
         }
 
@@ -400,7 +424,7 @@ private async loadResource() {
         this.talk(this.char4
         ,Math.abs(this.char.x-(this.char4.x-this.char.width/2))*this.time
         ,this.char4_b
-        ,5).call(()=>{
+        ,4).call(()=>{
         this.char.gotoAndPlay("Idle",-1);
         
         },this);
@@ -416,7 +440,7 @@ private async loadResource() {
         this.talk(this.char4
         ,Math.abs(this.char.x-(this.char4.x-this.char.width/2))*this.time
         ,this.char4_b
-        ,5).call(()=>{
+        ,4).call(()=>{
         this.char.gotoAndPlay("Idle",-1);
         
         },this);
@@ -427,7 +451,7 @@ private async loadResource() {
         this.talk(this.char4
         ,Math.abs(this.char.x-(this.char4.x-this.char.width/2))*this.time
         ,this.char4_b
-        ,5).call(()=>{
+        ,4).call(()=>{
         this.char.gotoAndPlay("Idle",-1);
         
         },this);
@@ -457,8 +481,14 @@ private async loadResource() {
         this.message.gameover_dia ="哈哈...是個不錯的開始呢！"
         }else
         {
+        if(this.message.completed == false)
+        {
         this.message.name_test = ["艾莉"];
         this.message.dia_test = ["快去找其他人聊聊吧~"]
+        }else{
+        this.message.name_test = ["艾莉","庫洛艾"];
+        this.message.dia_test = ["恭喜你抽到大獎!","謝謝妳啦~~~~~~ヽ(●´∀`●)ﾉ"]
+        }
         }
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
@@ -485,7 +515,7 @@ private async loadResource() {
         this.talk(this.char5
         ,Math.abs(this.char.x-(this.char4.x-this.char.width/2))*this.time
         ,this.char5_b
-        ,4).call(()=>{
+        ,3).call(()=>{
         this.char.scaleX = 0.55;
         this.char.gotoAndPlay("Idle",-1);
         },this);
@@ -506,8 +536,8 @@ private async loadResource() {
         .call(()=>{
         this.talk(this.char5
         ,Math.abs(this.char.x-(this.char5.x-this.char.width/2))*this.time
-         ,this.char5_b
-         ,4).call(()=>{
+        ,this.char5_b
+        ,3).call(()=>{
         this.char.scaleX = 0.55;
         this.char.gotoAndPlay("Idle",-1);
         },this);
@@ -517,7 +547,7 @@ private async loadResource() {
         this.talk(this.char5
         ,Math.abs(this.char.x-(this.char5.x-this.char.width/2))*this.time
          ,this.char5_b
-         ,4).call(()=>{
+         ,6).call(()=>{
         this.char.gotoAndPlay("Idle",-1);
         },this);
         }

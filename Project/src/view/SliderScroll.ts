@@ -20,11 +20,11 @@ module Slider {
         private speed2: number = 0;
         private speed3: number = 0;
         /**slider框的宽*/
-        private sliderboxwidth: number = 109.5;
+        private sliderboxwidth: number = 109.5*2;
         /**slider框的高*/
-        private sliderboxheight: number = 201.5;
+        private sliderboxheight: number = 201.5*2;
         /**slider本身的高度*/
-        private sliderHeight: number = 420;
+        private sliderHeight: number = 420*2;
         /**添加计时，阻尼用*/
         private stimer: egret.Timer;
         /**添加计时，阻尼用*/
@@ -49,8 +49,8 @@ module Slider {
             //创建第二组sliderBox
             this.bmpArr2 = [];
             //this.addSliderBox(267.5, 489, 265.25, 540, this.rowCount, this.bmpArr2);
-            this.addSliderBox(this.stage.stageWidth/2-50 ,this.stage.stageHeight/2 
-            ,this.stage.stageWidth/2-52.25 , this.stage.stageHeight/2-122, this.rowCount, this.bmpArr2);
+            this.addSliderBox(this.stage.stageWidth/2-100 ,this.stage.stageHeight/2-400 
+            ,this.stage.stageWidth/2-100 , this.stage.stageHeight/2-300, this.rowCount, this.bmpArr2);
             //创建第三组sliderBox
            // this.bmpArr3 = [];
            // this.addSliderBox(395.5, 489, 393.25, 492, this.rowCount, this.bmpArr3);
@@ -65,8 +65,8 @@ module Slider {
                 slider = this.createImgSlide("slider_ok_nobg_png");
                 
                 //slider的長和寬是固定的，x，y是有三组。下面只是設置了一组。
-                slider.width = 105;
-                slider.height = 420;
+                slider.width = 105*2;
+                slider.height = 420*2;
                 slider.x = sliderX;
                 slider.y = sliderY + this.sliderHeight * i;
                 bmpA.push(slider);
@@ -126,11 +126,11 @@ module Slider {
                 //第二组
                 var bgBmp2: egret.Bitmap = this.bmpArr2[i];
                 bgBmp2.y += this.speed2;
-                if (this.bmpArr2[0].y < -260) {
-                    this.bmpArr2[0].y = this.bmpArr2[0].y + 420 * 2;
+                if (this.bmpArr2[0].y < -260*3) {
+                    this.bmpArr2[0].y = this.bmpArr2[0].y + 420 * 2 * 2;
                 }
-                if (this.bmpArr2[1].y < -260) {
-                    this.bmpArr2[1].y = this.bmpArr2[1].y + 420 * 2;
+                if (this.bmpArr2[1].y < -260*3) {
+                    this.bmpArr2[1].y = this.bmpArr2[1].y + 420 * 2 * 2;
                 }
 
          
@@ -155,7 +155,7 @@ module Slider {
                     setTimeout(() => {//保存this不变
                         this.addEventListener(egret.Event.ENTER_FRAME, function AdjustmentSlider() {
                             var stopsign2 = 0;
-                            stopsign2 = (-1) * (rad2) * 70 + 140;//调整slider的吻合
+                        stopsign2 = (-1) * (rad2) * 70 *2 + 95 *2;//调整slider的吻合
                             if ((this.bmpArr2[0].y - 489 > -4 + stopsign2) && (this.bmpArr2[0].y - 489 < 4 + stopsign2)) {
                                 this.speed2 = 0;
                                 //控制返回状的回调
@@ -196,7 +196,7 @@ module Slider {
         private drawMask(x: number, y: number) {
             var mask: egret.Shape = new egret.Shape();
             mask.graphics.beginFill(0xff0000, 1);
-            mask.graphics.drawRect(x, y, 105, 110);
+            mask.graphics.drawRect(x, y, 105*2, 110*2);
             mask.graphics.endFill();
             return mask;
         }

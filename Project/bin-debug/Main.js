@@ -264,8 +264,15 @@ var Main = (function (_super) {
                     _this.message.gameover_dia = "哎呀...欸?這個該不會是...";
                 }
                 else {
-                    _this.message.name_test = ["艾蒂莉亞"];
-                    _this.message.dia_test = ["去找其他人聊聊吧~"];
+                    if (_this.message.completed == false) {
+                        _this.message.name_test = ["艾蒂莉亞"];
+                        _this.message.dia_test = ["去找其他人聊聊吧~"];
+                    }
+                    else {
+                        console.log(_this.message.completed);
+                        _this.message.name_test = ["艾蒂莉亞"];
+                        _this.message.dia_test = ["今天天氣真的不錯呢~"];
+                    }
                 }
                 _this.message.char_name.text = _this.message.name_test.shift();
                 _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
@@ -313,14 +320,23 @@ var Main = (function (_super) {
                     _this.message.gameover_dia = "喔喔..!!你今天看起來運勢不錯呢...";
                 }
                 else {
-                    _this.message.name_test = ["黎恩"];
-                    _this.message.dia_test = ["去找其他人聊聊吧~"];
+                    if (_this.message.completed == false) {
+                        _this.message.name_test = ["黎恩"];
+                        _this.message.dia_test = ["去找其他人聊聊吧~"];
+                    }
+                    else {
+                        _this.message.name_test = ["黎恩", "庫洛艾", "黎恩", "庫洛艾"];
+                        _this.message.dia_test = ["26個英文字母妳知道我最喜歡什麼嗎?",
+                            "恩??.......不知道...",
+                            "我喜歡........You",
+                            "...........>/////<"];
+                    }
                 }
                 _this.message.char_name.text = _this.message.name_test.shift();
                 _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
                 _this.char.gotoAndPlay("Walk", -1);
                 if (_this.stage1 == true) {
-                    _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, _this.char3_b, 2).call(function () {
+                    _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, _this.char3_b, 5).call(function () {
                         _this.char.gotoAndPlay("Idle", -1);
                     }, _this);
                 }
@@ -335,7 +351,7 @@ var Main = (function (_super) {
                         .to({ x: _this.stage.stageWidth / 4 + 40 }, _this.time * 50)
                         .to({ x: _this.stage.stageWidth * 3 / 8 + 30, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 200)
                         .call(function () {
-                        _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, _this.char3_b, 2).call(function () {
+                        _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, _this.char3_b, 5).call(function () {
                             _this.char.gotoAndPlay("Idle", -1);
                         }, _this);
                         _this.stage1 = true;
@@ -357,15 +373,25 @@ var Main = (function (_super) {
                         _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
                     }
                     else {
-                        _this.message.completed = true; //////遊戲結束
-                        _this.message.gameover = true;
-                        _this.message.gameover_name = "咪西";
-                        _this.message.gameover_dia = "竟然被你抽到我的薪資袋了Q_Q";
-                        _this.message.name_test = ["庫洛艾", "咪西"];
-                        _this.message.dia_test = ["嗨嗨~~小貓咪~~~~~！",
-                            "喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的主編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"];
-                        _this.message.char_name.text = _this.message.name_test.shift();
-                        _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
+                        if (_this.message.completed == false) {
+                            _this.message.diamond = true;
+                            _this.message.completed = true; //////遊戲結束
+                            _this.message.gameover = true;
+                            _this.message.gameover_name = "咪西";
+                            _this.message.gameover_dia = "竟然被你抽到我的薪資袋了Q_Q";
+                            _this.message.name_test = ["庫洛艾", "咪西"];
+                            _this.message.dia_test = ["嗨嗨~~小貓咪~~~~~！",
+                                "喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的主編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"];
+                            _this.message.char_name.text = _this.message.name_test.shift();
+                            _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
+                            _this.message.char4_target = true;
+                        }
+                        else {
+                            _this.message.name_test = ["咪西"];
+                            _this.message.dia_test = ["我的薪資袋Q_Q........."];
+                            _this.message.char_name.text = _this.message.name_test.shift();
+                            _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
+                        }
                     }
                     _this.char.gotoAndPlay("Walk", -1);
                     if (_this.stage1 == true) {
@@ -385,7 +411,7 @@ var Main = (function (_super) {
                             .to({ y: _this.stage.stageHeight * 4 / 8 + 10 }, _this.time * 50)
                             .to({ x: _this.stage.stageWidth * 3 / 8 + 35, y: _this.stage.stageHeight * 4 / 8 + 20 }, _this.time * 150)
                             .call(function () {
-                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 5).call(function () {
+                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 4).call(function () {
                                 _this.char.gotoAndPlay("Idle", -1);
                             }, _this);
                             _this.stage1 = false;
@@ -398,13 +424,13 @@ var Main = (function (_super) {
                             egret.Tween.get(_this.char)
                                 .to({ x: _this.stage.stageWidth * 3 / 8 + 35, y: _this.stage.stageHeight * 4 / 8 + 20 }, _this.time * 350)
                                 .call(function () {
-                                _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 5).call(function () {
+                                _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 4).call(function () {
                                     _this.char.gotoAndPlay("Idle", -1);
                                 }, _this);
                             }, _this);
                         }
                         else {
-                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 5).call(function () {
+                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 4).call(function () {
                                 _this.char.gotoAndPlay("Idle", -1);
                             }, _this);
                         }
@@ -425,8 +451,14 @@ var Main = (function (_super) {
                     _this.message.gameover_dia = "哈哈...是個不錯的開始呢！";
                 }
                 else {
-                    _this.message.name_test = ["艾莉"];
-                    _this.message.dia_test = ["快去找其他人聊聊吧~"];
+                    if (_this.message.completed == false) {
+                        _this.message.name_test = ["艾莉"];
+                        _this.message.dia_test = ["快去找其他人聊聊吧~"];
+                    }
+                    else {
+                        _this.message.name_test = ["艾莉", "庫洛艾"];
+                        _this.message.dia_test = ["恭喜你抽到大獎!", "謝謝妳啦~~~~~~ヽ(●´∀`●)ﾉ"];
+                    }
                 }
                 _this.message.char_name.text = _this.message.name_test.shift();
                 _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
@@ -448,7 +480,7 @@ var Main = (function (_super) {
                         .to({ x: _this.stage.stageWidth / 4 }, _this.time * 50)
                         .to({ y: _this.stage.stageHeight * 4 / 8 + 10 }, _this.time * 50)
                         .call(function () {
-                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char5_b, 4).call(function () {
+                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char5_b, 3).call(function () {
                             _this.char.scaleX = 0.55;
                             _this.char.gotoAndPlay("Idle", -1);
                         }, _this);
@@ -464,14 +496,14 @@ var Main = (function (_super) {
                         egret.Tween.get(_this.char)
                             .to({ x: _this.stage.stageWidth * 3 / 8 + 35, y: _this.stage.stageHeight * 4 / 8 + 10 }, _this.time * 150)
                             .call(function () {
-                            _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - _this.char.width / 2)) * _this.time, _this.char5_b, 4).call(function () {
+                            _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - _this.char.width / 2)) * _this.time, _this.char5_b, 3).call(function () {
                                 _this.char.scaleX = 0.55;
                                 _this.char.gotoAndPlay("Idle", -1);
                             }, _this);
                         }, _this);
                     }
                     else {
-                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - _this.char.width / 2)) * _this.time, _this.char5_b, 4).call(function () {
+                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - _this.char.width / 2)) * _this.time, _this.char5_b, 6).call(function () {
                             _this.char.gotoAndPlay("Idle", -1);
                         }, _this);
                     }

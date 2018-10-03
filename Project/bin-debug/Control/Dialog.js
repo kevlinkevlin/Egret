@@ -20,6 +20,9 @@ var Dialog = (function (_super) {
         _this.lastscene = false;
         _this.gameover = false;
         _this.completed = false;
+        _this.diamond = false;
+        _this.code = false;
+        _this.char4_target = false;
         _this.skinName = "resource/eui_skins/DialogOk.exml";
         return _this;
     }
@@ -45,6 +48,9 @@ var Dialog = (function (_super) {
                 _this.lastscene = true;
                 _this.name_test.push(_this.gameover_name);
                 _this.dia_test.push(_this.gameover_dia);
+                if (_this.char4_target) {
+                    _this.code = true;
+                }
             }
         }, this);
     };
@@ -55,8 +61,11 @@ var Dialog = (function (_super) {
     };
     Dialog.prototype.Close = function () {
         this.dialog_name.visible = true;
-        if (this.completed = true && this.name_test.length == 0) {
-            //////////////產生序號
+        if (this.code == true) {
+            this.code = false;
+            if (window.parent.document) {
+                window.parent["finishGame"](true); //////////////產生序號
+            }
         }
         if (this.parent != null && this.name_test.length == 0) {
             this.parent.removeChild(this);
@@ -67,9 +76,15 @@ var Dialog = (function (_super) {
                 this.firstscene = false;
                 this.ready_btn.visible = false;
             }
-            else if (this.name_test.length == 1 && this.firstscene == false && this.lastscene == false) {
+            else if (this.name_test.length == 1 && this.firstscene == false
+                && this.lastscene == false && this.completed == false) {
                 this.ready_btn.visible = true;
                 this.back_btn.visible = false;
+            }
+            else if (this.diamond == true) {
+                this.ready_btn.visible = true;
+                this.back_btn.visible = false;
+                this.diamond = false;
             }
             else {
                 this.lastscene = false;

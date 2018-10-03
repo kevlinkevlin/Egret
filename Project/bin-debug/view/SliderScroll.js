@@ -25,11 +25,11 @@ var Slider;
             _this.speed2 = 0;
             _this.speed3 = 0;
             /**slider框的宽*/
-            _this.sliderboxwidth = 109.5;
+            _this.sliderboxwidth = 109.5 * 2;
             /**slider框的高*/
-            _this.sliderboxheight = 201.5;
+            _this.sliderboxheight = 201.5 * 2;
             /**slider本身的高度*/
-            _this.sliderHeight = 420;
+            _this.sliderHeight = 420 * 2;
             _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
             return _this;
         }
@@ -43,7 +43,7 @@ var Slider;
             //创建第二组sliderBox
             this.bmpArr2 = [];
             //this.addSliderBox(267.5, 489, 265.25, 540, this.rowCount, this.bmpArr2);
-            this.addSliderBox(this.stage.stageWidth / 2 - 50, this.stage.stageHeight / 2, this.stage.stageWidth / 2 - 52.25, this.stage.stageHeight / 2 - 122, this.rowCount, this.bmpArr2);
+            this.addSliderBox(this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 - 400, this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 - 300, this.rowCount, this.bmpArr2);
             //创建第三组sliderBox
             // this.bmpArr3 = [];
             // this.addSliderBox(395.5, 489, 393.25, 492, this.rowCount, this.bmpArr3);
@@ -56,8 +56,8 @@ var Slider;
                 var slider;
                 slider = this.createImgSlide("slider_ok_nobg_png");
                 //slider的長和寬是固定的，x，y是有三组。下面只是設置了一组。
-                slider.width = 105;
-                slider.height = 420;
+                slider.width = 105 * 2;
+                slider.height = 420 * 2;
                 slider.x = sliderX;
                 slider.y = sliderY + this.sliderHeight * i;
                 bmpA.push(slider);
@@ -106,11 +106,11 @@ var Slider;
                 //第二组
                 var bgBmp2 = this.bmpArr2[i];
                 bgBmp2.y += this.speed2;
-                if (this.bmpArr2[0].y < -260) {
-                    this.bmpArr2[0].y = this.bmpArr2[0].y + 420 * 2;
+                if (this.bmpArr2[0].y < -260 * 3) {
+                    this.bmpArr2[0].y = this.bmpArr2[0].y + 420 * 2 * 2;
                 }
-                if (this.bmpArr2[1].y < -260) {
-                    this.bmpArr2[1].y = this.bmpArr2[1].y + 420 * 2;
+                if (this.bmpArr2[1].y < -260 * 3) {
+                    this.bmpArr2[1].y = this.bmpArr2[1].y + 420 * 2 * 2;
                 }
             }
         };
@@ -131,7 +131,7 @@ var Slider;
                     setTimeout(function () {
                         _this.addEventListener(egret.Event.ENTER_FRAME, function AdjustmentSlider() {
                             var stopsign2 = 0;
-                            stopsign2 = (-1) * (rad2) * 70 + 140; //调整slider的吻合
+                            stopsign2 = (-1) * (rad2) * 70 * 2 + 95 * 2; //调整slider的吻合
                             if ((this.bmpArr2[0].y - 489 > -4 + stopsign2) && (this.bmpArr2[0].y - 489 < 4 + stopsign2)) {
                                 this.speed2 = 0;
                                 //控制返回状的回调
@@ -165,7 +165,7 @@ var Slider;
         SliderScroll.prototype.drawMask = function (x, y) {
             var mask = new egret.Shape();
             mask.graphics.beginFill(0xff0000, 1);
-            mask.graphics.drawRect(x, y, 105, 110);
+            mask.graphics.drawRect(x, y, 105 * 2, 110 * 2);
             mask.graphics.endFill();
             return mask;
         };

@@ -26,8 +26,9 @@ class Dialog extends eui.Component implements eui.UIComponent {
 	public lastscene:boolean = false;
 	public gameover:boolean = false;
 	public completed:boolean = false;
-
-
+	public diamond:boolean = false;
+	private code:boolean = false;
+	public char4_target:boolean = false;
 	protected childrenCreated(): void {
 		super.childrenCreated();
 		
@@ -48,6 +49,10 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		this.lastscene = true;
 		this.name_test.push(this.gameover_name);
 		this.dia_test.push(this.gameover_dia);
+		if(this.char4_target)
+		{
+		this.code = true;
+		}
 		}
 		}, this)
 		
@@ -64,9 +69,13 @@ class Dialog extends eui.Component implements eui.UIComponent {
 
 	public Close() {
 		this.dialog_name.visible = true;
-		if(this.completed = true && this.name_test.length == 0)
+		if(this.code == true)
 		{
-			//////////////產生序號
+			this.code = false;
+		if(window.parent.document)
+        {
+            window.parent["finishGame"](true)                //////////////產生序號
+        }               
 		}
 		if(this.parent != null && this.name_test.length == 0){
 			this.parent.removeChild(this);
@@ -78,10 +87,18 @@ class Dialog extends eui.Component implements eui.UIComponent {
 			this.firstscene = false
 			this.ready_btn.visible = false
 			}
-			else if(this.name_test.length == 1 && this.firstscene == false && this.lastscene == false)
+			else if(this.name_test.length == 1 && this.firstscene == false 
+			&& this.lastscene == false &&this.completed == false)
+			{
+			
+			this.ready_btn.visible = true;
+			this.back_btn.visible = false;
+			}else if(this.diamond == true)
 			{
 			this.ready_btn.visible = true;
 			this.back_btn.visible = false;
+			this.diamond = false
+			
 			}else
 			{
 			this.lastscene = false
