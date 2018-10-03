@@ -10,9 +10,7 @@ class GameScene extends eui.Component {
     private mus_star;
     private mus_move;
     private mus_stop;
-
     private count:number;//控制拉霸結果 
-
     public slider: Slider.SliderScroll;//为了调用sliderscroll里面的方法
 
     public constructor(num : number) {

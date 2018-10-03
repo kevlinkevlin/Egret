@@ -25,6 +25,7 @@ var MusicScene = (function (_super) {
             this._channel.removeEventListener(egret.Event.SOUND_COMPLETE, this.onComplete, this);
             this._channel.stop();
             this._channel = null;
+            this._sound.play(0, 1).volume = 0.3;
         }
     };
     //播放完成

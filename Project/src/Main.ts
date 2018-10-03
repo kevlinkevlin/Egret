@@ -62,7 +62,7 @@ protected createChildren(): void {
         //注入自定義素材解析器
         
         egret.registerImplementation("eui.IAssetAdapter",new AssetAdapter());
-        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+       // egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
         
 
         this.runGame().catch(e => {
@@ -197,8 +197,10 @@ private async loadResource() {
         this.message.dia_test = ["…好緊張呀，前面綁著雙馬尾的姐姐，好像是軌跡系列最有人氣的艾絲蒂雅小姐呢！"]
         this.message.ready_btn.visible = false;
         this.addChild(this.message);
-        this.message.firstscene = false;
-      
+        if(window.parent.document)
+        {
+          //  window.parent["finishGame"](true)
+        }
 /*
 
         let theme = new eui.Theme("resource/default.thm.json", this.stage);
@@ -209,15 +211,24 @@ private async loadResource() {
         this.char2.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
          
 //      
-       
+       if(this.fixed == false)
         {
+        this.fixed = true;
+        if(this.char2_b == false){
         this.message.name_test = ["艾蒂莉亞","庫洛艾","艾蒂莉亞"];
         this.message.dia_test = ["咦，妳是新來的遊擊士嗎？看起來呆萌呆萌的，趕緊和大夥們匯合呀"
         ,"是..！這艘飛空艇上好像有各代軌跡系列的人氣角色都在呢！"
         ,"那當然囉，超過70位超人氣軌跡系列角色外，還能和過往的Boss成為夥伴呢~~新的軌跡，你看的見！"]
+        this.message.gameover = true;
+        this.message.gameover_name ="艾蒂莉亞" 
+        this.message.gameover_dia ="哎呀...欸?這個該不會是..."
+        }else{
+        this.message.name_test = ["艾蒂莉亞"];
+        this.message.dia_test = ["去找其他人聊聊吧~"]
+        }
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
-         this.fixed = true;
+         
          this.char.gotoAndPlay("Walk",-1);
         if(this.stage1 == true)
         {
@@ -275,15 +286,27 @@ private async loadResource() {
 
         if(this.fixed ==false)
         {
+        this.fixed = true;
 
+        if(this.char3_b == false)
+        {
         this.message.name_test = ["庫洛艾","黎恩"];
         this.message.dia_test = ["啊！你不是今年《閃之軌跡》IV的男主角黎恩嗎！能和你一起冒險嗎？"
         ,"欸…這個嘛。(打量一下)這當然事沒問題的囉。不過呀，你得先學會SRPG的戰鬥方式，像是戰鬥時施放技能和使用道具上都要注意到回合，並與大家配合呢！"]
+        this.message.gameover = true;
+        this.message.gameover_name ="黎恩" 
+        this.message.gameover_dia ="喔喔..!!你今天看起來運勢不錯呢..."
+        }else
+        {
+        this.message.name_test = ["黎恩"];
+        this.message.dia_test = ["去找其他人聊聊吧~"]
+        }
+        
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
 
 
-        this.fixed = true;
+        
         this.char.gotoAndPlay("Walk",-1);
         if(this.stage1 == true){
         this.talk(this.char3
@@ -329,18 +352,23 @@ private async loadResource() {
 //      
         if(this.fixed ==false)
         {
-
+        this.fixed = true;
 
         if( this.char4_b == false ){
         this.message.name_test = ["庫洛艾"];
-        this.message.dia_test = ["先去找找其他人好了"]
+        this.message.dia_test = ["還有些很熟悉的人呢，先去看看吧！"]
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
         }else{
 
+        this.message.completed = true        //////遊戲結束
 
+
+        this.message.gameover = true;
+        this.message.gameover_name ="咪西" 
+        this.message.gameover_dia ="竟然被你抽到我的薪資袋了Q_Q"
         this.message.name_test = ["庫洛艾","咪西"];
-        this.message.dia_test = ["咦、這裡怎麼有貓！"
+        this.message.dia_test = ["嗨嗨~~小貓咪~~~~~！"
         ,"喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的主編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"]
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
@@ -350,7 +378,7 @@ private async loadResource() {
 
 
         this.char.gotoAndPlay("Walk",-1);
-        this.fixed = true;
+        
         if(this.stage1 == true)
         {
         var test = egret.Tween.get(this.char)
@@ -420,9 +448,18 @@ private async loadResource() {
      
         if(this.fixed ==false)
         {
-
-        this.message.name_test = ["緹妲","庫洛艾","緹妲"];
-        this.message.dia_test = ["是嗎!!太好了!! 那你要當我夥伴嗎?","完成遊擊士事前登錄 我們就是夥伴啦 ^_^","欸!是嗎 那看看有什麼更多禮物吧~~"]
+        if(this.char5_b == false){
+        this.message.name_test = ["庫洛艾","艾莉"];
+        this.message.dia_test = ["這位姐姐您好呀！請問這裡…是哪裡呀？"
+        ,"這裡可是非常重要的地方呢。想要在塞姆利亞大陸上自由行走，都靠我們搭乘的飛空艇唷！另外妳看看妳手上的導力器，它可是一切能量的來源呢！"]
+        this.message.gameover = true;
+        this.message.gameover_name ="艾莉" 
+        this.message.gameover_dia ="哈哈...是個不錯的開始呢！"
+        }else
+        {
+        this.message.name_test = ["艾莉"];
+        this.message.dia_test = ["快去找其他人聊聊吧~"]
+        }
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
 
@@ -510,18 +547,17 @@ private animation(factory:dragonBones.EgretFactory,Spine:string,animation:string
         this.addChild(target);
         return Armature;
     }
-private test(target,click:boolean)
+private _bool(target:any ,click:boolean)
 {
-         click = true
-        console.log(this.char2_b); 
-        console.log(this.char3_b); 
-        console.log(this.char4_b); 
-        console.log(this.char5_b); 
+    if(target == this.char2){this.char2_b = true;}
+    else if (target == this.char3){this.char3_b = true;}
+    else if (target == this.char5){this.char5_b = true;}
+    if (this.char2_b == true && this.char3_b == true && this.char5_b == true){this.char4_b = true;}     
 }
    
 private talk(target:any,time:number,click:boolean,num:number){
         this.message.count = num;
-       this.test(target,click);
+       this._bool(target,click);
         var test = egret.Tween.get(this.char);
         test.to({x:target.x-this.char.width/2,y:target.y},time).call(()=> {
                 this.addChild(this.message);

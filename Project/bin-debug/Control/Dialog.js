@@ -15,6 +15,11 @@ var Dialog = (function (_super) {
         _this.firstscene = true;
         _this.name_test = [];
         _this.dia_test = [];
+        _this.gameover_name = "";
+        _this.gameover_dia = "";
+        _this.lastscene = false;
+        _this.gameover = false;
+        _this.completed = false;
         _this.skinName = "resource/eui_skins/DialogOk.exml";
         return _this;
     }
@@ -25,7 +30,7 @@ var Dialog = (function (_super) {
         var _this = this;
         _super.prototype.childrenCreated.call(this);
         this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.Close();
+            //this.Close();
         }, this);
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.Close();
@@ -33,6 +38,14 @@ var Dialog = (function (_super) {
         this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             var game = new GameScene(_this.count);
             egret.setTimeout(function () { _this.addChild(game); }, _this, 100);
+            _this.back_btn.visible = true;
+            _this.ready_btn.visible = false;
+            if (_this.gameover == true) {
+                _this.gameover = false;
+                _this.lastscene = true;
+                _this.name_test.push(_this.gameover_name);
+                _this.dia_test.push(_this.gameover_dia);
+            }
         }, this);
     };
     Dialog.prototype.Show = function (view) {
@@ -42,19 +55,25 @@ var Dialog = (function (_super) {
     };
     Dialog.prototype.Close = function () {
         this.dialog_name.visible = true;
+        if (this.completed = true && this.name_test.length == 0) {
+            //////////////產生序號
+        }
         if (this.parent != null && this.name_test.length == 0) {
             this.parent.removeChild(this);
             this.ready_btn.visible = false;
-            this.back_btn.visible = false;
         }
         else {
-            if (this.name_test.length == 1 && this.firstscene == false) {
+            if (this.name_test.length == 1 && this.firstscene == true) {
+                this.firstscene = false;
+                this.ready_btn.visible = false;
+            }
+            else if (this.name_test.length == 1 && this.firstscene == false && this.lastscene == false) {
                 this.ready_btn.visible = true;
-                this.back_btn.visible = true;
+                this.back_btn.visible = false;
             }
             else {
+                this.lastscene = false;
                 this.ready_btn.visible = false;
-                this.back_btn.visible = false;
             }
             this.lb_dialog_text.text = this.dia_test.shift();
             this.char_name.text = this.name_test.shift();

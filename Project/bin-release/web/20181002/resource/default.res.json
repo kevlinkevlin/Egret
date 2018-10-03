@@ -1,0 +1,151 @@
+{
+	"groups": [
+		{
+			"keys": "slot_kake_png,slot_start_png,slot_stop_over_png,slot_stop_up_png,btn_back_png,laba_mp3,slider_ok_png,slider_ok_nobg_png",
+			"name": "preload"
+		},
+		{
+			"keys": "bg_jpg,description_json,dialog_bg_png,test_png,test_json,Dia01_png,Dia02_png,box_btn_png",
+			"name": "UI"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "UI/dialog_bg.png",
+			"type": "image",
+			"name": "dialog_bg_png"
+		},
+		{
+			"url": "UI/dialog_cancel.png",
+			"type": "image",
+			"name": "dialog_cancel_png"
+		},
+		{
+			"url": "UI/dialog_panel.png",
+			"type": "image",
+			"name": "dialog_panel_png"
+		},
+		{
+			"url": "UI/dialog_zhunbei.png",
+			"type": "image",
+			"name": "dialog_zhunbei_png"
+		},
+		{
+			"url": "Dialog/Dia01.png",
+			"type": "image",
+			"name": "Dia01_png",
+			"scale9grid": "313,749,658,155"
+		},
+		{
+			"url": "Dialog/Dia02.png",
+			"type": "image",
+			"name": "Dia02_png",
+			"scale9grid": "3,877,1917,200"
+		},
+		{
+			"url": "imgs/slot_kake.png",
+			"type": "image",
+			"name": "slot_kake_png"
+		},
+		{
+			"url": "imgs/slot_kake01.png",
+			"type": "image",
+			"name": "slot_kake01_png"
+		},
+		{
+			"url": "imgs/slot_start.jpg",
+			"type": "image",
+			"name": "slot_start_jpg"
+		},
+		{
+			"url": "imgs/slot_start.png",
+			"type": "image",
+			"name": "slot_start_png"
+		},
+		{
+			"url": "imgs/slot_stop_over.png",
+			"type": "image",
+			"name": "slot_stop_over_png"
+		},
+		{
+			"url": "imgs/slot_stop_up.png",
+			"type": "image",
+			"name": "slot_stop_up_png"
+		},
+		{
+			"url": "imgs/sliders/slider.png",
+			"type": "image",
+			"name": "slider_png"
+		},
+		{
+			"url": "imgs/sliders/slider1.png",
+			"type": "image",
+			"name": "slider1_png"
+		},
+		{
+			"url": "imgs/slot_back.jpg",
+			"type": "image",
+			"name": "slot_back_jpg"
+		},
+		{
+			"url": "UI/btn_back.png",
+			"type": "image",
+			"name": "btn_back_png"
+		},
+		{
+			"url": "assets/CharacterAnimation/star_char_backup_tex.png",
+			"type": "image",
+			"name": "star_char_backup_tex_png"
+		},
+		{
+			"url": "assets/CharacterAnimation/star_char_backup_ske.json",
+			"type": "json",
+			"name": "star_char_backup_ske_json"
+		},
+		{
+			"url": "assets/CharacterAnimation/star_char_backup_tex.json",
+			"type": "json",
+			"name": "star_char_backup_tex_json"
+		},
+		{
+			"url": "music/laba.mp3",
+			"type": "sound",
+			"name": "laba_mp3"
+		},
+		{
+			"url": "assets/CharacterAnimation/test.json",
+			"type": "json",
+			"name": "test_json"
+		},
+		{
+			"url": "assets/CharacterAnimation/test.png",
+			"type": "image",
+			"name": "test_png"
+		},
+		{
+			"url": "Dialog/box_btn.png",
+			"type": "image",
+			"name": "box_btn_png"
+		},
+		{
+			"url": "imgs/sliders/slider_ok.png",
+			"type": "image",
+			"name": "slider_ok_png"
+		},
+		{
+			"url": "imgs/sliders/slider_ok_nobg.png",
+			"type": "image",
+			"name": "slider_ok_nobg_png"
+		}
+	]
+}
