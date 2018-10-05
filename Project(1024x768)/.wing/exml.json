@@ -1,0 +1,27 @@
+{
+  "global": {
+    "globalAutoLayerMarkEnable": false,
+    "globalRulerEnable": true,
+    "globalAdsorbEnable": true
+  },
+  "165e52916c9": {
+    "backgroundX": 0,
+    "backgroundY": 0,
+    "backgroundWidth": -1,
+    "backgroundHeight": -1,
+    "useBgImage": true,
+    "useBgColor": true,
+    "backgroundAlpha": 100,
+    "guideLinesEnabled": false
+  },
+  "165e56e09bb": {
+    "path": "..\\resource\\eui_skins\\3211.ts",
+    "class": "3211",
+    "parentPath": ""
+  },
+  "165e5833196": {
+    "path": "Control\\DialogBlock.ts",
+    "class": "DialogBlock",
+    "parentPath": ""
+  }
+}
