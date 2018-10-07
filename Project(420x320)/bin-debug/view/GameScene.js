@@ -30,7 +30,8 @@ var GameScene = (function (_super) {
         //this.back_btn.visible = false;
         this.setChildIndex(this.kake1, this.numChildren - 1);
         //添加start事件
-        this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+        //this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+        this.gameStart();
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.startgroup.visible = true;
             _this.Close();

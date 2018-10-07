@@ -49,7 +49,7 @@ module Slider {
             //创建第二组sliderBox
             this.bmpArr2 = [];
             //this.addSliderBox(267.5, 489, 265.25, 540, this.rowCount, this.bmpArr2);
-            this.addSliderBox(this.stage.stageWidth/2-100 ,this.stage.stageHeight/2+240 
+            this.addSliderBox(this.stage.stageWidth/2-100 ,this.stage.stageHeight/2 
             ,this.stage.stageWidth/2-100 , this.stage.stageHeight/2-100, this.rowCount, this.bmpArr2);
             //创建第三组sliderBox
            // this.bmpArr3 = [];
@@ -96,24 +96,12 @@ module Slider {
             //添加計時功能實現阻尼
             this.stimer = new egret.Timer(100, 0);
             this.stimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
-                if (this.speed1 <= -50) {
-
-                } else {
-                    this.speed1 = this.speed1 - 5;
-                }
-
                 if (this.speed2 <= -60) {
 
                 } else {
-                    this.speed2 = this.speed2 - 6;
+                    //this.speed2 = this.speed2 - 6;
+                    this.speed2 = -60;
                 }
-
-                if (this.speed3 <= -70) {
-
-                } else {
-                    this.speed3 = this.speed3 - 7;
-                }
-
             }, this);
             this.stimer.start();
         }
@@ -146,36 +134,39 @@ module Slider {
             //开始减速
             this.stimer.stop();
             this.flag = false;
-            this.etimer = new egret.Timer(500, 0);
+            this.etimer = new egret.Timer(100, 0);
 
             this.etimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
     
                 //第二组
-                if (this.speed2 == -6) {
+               // if (this.speed2 == -50) {
+                   this.speed2 = -48
                     this.etimer.stop();
                     var count2 = 0;
                     setTimeout(() => {//保存this不变
                         this.addEventListener(egret.Event.ENTER_FRAME, function AdjustmentSlider() {
                             var stopsign2 = 0;
                         stopsign2 = (-1) * (rad2) * 70 *2 - 720;//调整slider的吻合
-                            if ((this.bmpArr2[0].y - 489 > -4 + stopsign2) && (this.bmpArr2[0].y - 489 < 4 + stopsign2)) {
+                            if ((this.bmpArr2[0].y - 489 > -6 + stopsign2) && (this.bmpArr2[0].y - 489 < 6 + stopsign2)) {
                                 this.speed2 = 0;
                                 //控制返回状的回调
-                                if ( this.speed2 == 0 && !this.flag) {
+                            } else if ((this.bmpArr2[1].y - 489 > -6 + stopsign2) && (this.bmpArr2[1].y - 489 < 6 + stopsign2)) {
+                                this.speed2 = 0;
+                                //控制返回状的回调
+                            }
+                            if ( this.speed2 == 0 && !this.flag) {
                                     this.flag = true;
                                     callback(this.flag);
-
-                                   // this.mus_star.musicStop();//////////////////////////////
-                                    
+                                   // this.mus_star.musicStop();//////////////////////////////  
                                 }
-                            }
+
                         }, this);
                     }, 500);
-
+/*
                 } else {
-                    this.speed2 = this.speed2 + 6;
+                    this.speed2 = this.speed2 + 2;
                 }
-
+*/
             
 
             }, this);

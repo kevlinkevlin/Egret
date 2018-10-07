@@ -94,7 +94,7 @@ var Main = (function (_super) {
         */
         // private game:GameScene = new GameScene();
         _this.message = new Dialog();
-        _this.time = 10;
+        _this.time = 5;
         _this.stage1 = true;
         _this.stage2 = false;
         _this.fixed = false;

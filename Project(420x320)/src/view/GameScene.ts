@@ -28,18 +28,19 @@ class GameScene extends eui.Component {
         //把slider添加到框里
         this.slider = new Slider.SliderScroll();
         this.addChild(this.slider);
-
+       
         //把kake置顶
         this.stopgroup.visible = false;
 
-
+        
         //this.back_btn.visible = false;
 
 
         
         this.setChildIndex(this.kake1, this.numChildren - 1);
         //添加start事件
-        this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+        //this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+        this.gameStart();
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
         this.startgroup.visible = true;
         this.Close();

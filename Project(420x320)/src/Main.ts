@@ -113,7 +113,7 @@ private async loadResource() {
     */
    // private game:GameScene = new GameScene();
     private message:Dialog = new Dialog();
-    private time:number = 10;
+    private time:number = 5;
     private stage1:boolean = true;
     private stage2:boolean = false;
     public fixed:boolean = false;
