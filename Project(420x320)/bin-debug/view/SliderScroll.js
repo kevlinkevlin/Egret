@@ -43,7 +43,7 @@ var Slider;
             //创建第二组sliderBox
             this.bmpArr2 = [];
             //this.addSliderBox(267.5, 489, 265.25, 540, this.rowCount, this.bmpArr2);
-            this.addSliderBox(this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2, this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 - 100, this.rowCount, this.bmpArr2);
+            this.addSliderBox(this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 + 20, this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 - 120, this.rowCount, this.bmpArr2);
             //创建第三组sliderBox
             // this.bmpArr3 = [];
             // this.addSliderBox(395.5, 489, 393.25, 492, this.rowCount, this.bmpArr3);
@@ -54,10 +54,11 @@ var Slider;
         SliderScroll.prototype.addSliderBox = function (sliderX, sliderY, maskX, maskY, count, bmpA) {
             for (var i = 0; i < count; i++) {
                 var slider;
-                slider = this.createImgSlide("slider_ok_nobg_png");
+                //slider = this.createImgSlide("slider_ok_nobg_png");
+                slider = this.createImgSlide("slider_big_png");
                 //slider的長和寬是固定的，x，y是有三组。下面只是設置了一组。
-                slider.width = 105 * 2;
-                slider.height = 420 * 2;
+                slider.width = 210;
+                slider.height = 840;
                 slider.x = sliderX;
                 slider.y = sliderY + this.sliderHeight * i;
                 bmpA.push(slider);
@@ -82,11 +83,11 @@ var Slider;
             //添加計時功能實現阻尼
             this.stimer = new egret.Timer(100, 0);
             this.stimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
-                if (this.speed2 <= -60) {
+                if (this.speed2 <= -35) {
                 }
                 else {
-                    //this.speed2 = this.speed2 - 6;
-                    this.speed2 = -60;
+                    //this.speed2 = this.speed2 - 5;
+                    this.speed2 = -35;
                 }
             }, this);
             this.stimer.start();
@@ -118,34 +119,32 @@ var Slider;
             this.etimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
                 var _this = this;
                 //第二组
-                // if (this.speed2 == -50) {
-                this.speed2 = -48;
-                this.etimer.stop();
-                var count2 = 0;
-                setTimeout(function () {
-                    _this.addEventListener(egret.Event.ENTER_FRAME, function AdjustmentSlider() {
-                        var stopsign2 = 0;
-                        stopsign2 = (-1) * (rad2) * 70 * 2 - 720; //调整slider的吻合
-                        if ((this.bmpArr2[0].y - 489 > -6 + stopsign2) && (this.bmpArr2[0].y - 489 < 6 + stopsign2)) {
-                            this.speed2 = 0;
-                            //控制返回状的回调
-                        }
-                        else if ((this.bmpArr2[1].y - 489 > -6 + stopsign2) && (this.bmpArr2[1].y - 489 < 6 + stopsign2)) {
-                            this.speed2 = 0;
-                            //控制返回状的回调
-                        }
-                        if (this.speed2 == 0 && !this.flag) {
-                            this.flag = true;
-                            callback(this.flag);
-                            // this.mus_star.musicStop();//////////////////////////////  
-                        }
-                    }, _this);
-                }, 500);
-                /*
-                                } else {
-                                    this.speed2 = this.speed2 + 2;
-                                }
-                */
+                if (this.speed2 == -35 / 4) {
+                    this.etimer.stop();
+                    var count2 = 0;
+                    setTimeout(function () {
+                        _this.addEventListener(egret.Event.ENTER_FRAME, function AdjustmentSlider() {
+                            var stopsign2 = 0;
+                            stopsign2 = (-1) * (rad2) * 140 - 240; //调整slider的吻合
+                            if ((this.bmpArr2[0].y > -6 + stopsign2) && (this.bmpArr2[0].y < 6 + stopsign2)) {
+                                this.speed2 = 0;
+                                //控制返回状的回调
+                            }
+                            else if ((this.bmpArr2[1].y > -6 + stopsign2) && (this.bmpArr2[1].y < 6 + stopsign2)) {
+                                this.speed2 = 0;
+                                //控制返回状的回调
+                            }
+                            if (this.speed2 == 0 && !this.flag) {
+                                this.flag = true;
+                                callback(this.flag);
+                                // this.mus_star.musicStop();//////////////////////////////  
+                            }
+                        }, _this);
+                    }, 500);
+                }
+                else {
+                    this.speed2 = this.speed2 + 5.25;
+                }
             }, this);
             this.etimer.start();
         };

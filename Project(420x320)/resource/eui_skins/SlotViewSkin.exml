@@ -2,16 +2,16 @@
 <e:Skin class="SlotViewSkin" height="320" width="420" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="dialog_bg_png" fillMode="scale" anchorOffsetX="0" anchorOffsetY="0" top="0" bottom="0" left="0" right="0"/>
 	<!--<e:Rect id="rect_kake0" width="109.5" height="201.5" x="137.25" y="492" />-->
-    <e:Image id="kake1" source="slot_kake_png" x="458" y="182.5" anchorOffsetX="0" width="109.5" anchorOffsetY="0"
-             height="201.5"  visible="false"/>
-	<e:Group id="startgroup" width="211.33" height="94.34" x="104.34" y="112.49" anchorOffsetX="0" anchorOffsetY="0">
+    <e:Image id="kake1" x="155.09" y="55.33" anchorOffsetX="0" width="109.5" anchorOffsetY="0"
+             height="201.5"  source="" visible="false"/>
+	<e:Group id="startgroup" width="211.33" height="94.34" x="104.34" y="112.49" anchorOffsetX="0" anchorOffsetY="0" visible="false">
 		<e:Image id="slotstart" scaleX="0.75" scaleY="0.75" fillMode="scale" height="42.66" width="121.33" source="box_btn_png" anchorOffsetX="0" anchorOffsetY="0" verticalCenter="0" horizontalCenter="0"/>
 		<e:Label text="點擊開始" anchorOffsetX="0" width="90" anchorOffsetY="0" height="31" size="16" textAlign="center" verticalAlign="middle" fontFamily="Microsoft YaHei" verticalCenter="0" horizontalCenter="0"/>
 	</e:Group>
 
-	<e:Group id="stopgroup" width="50" height="50" y="206.83" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" >
-        <e:Image id="stop_over" source="slot_stop_over_png"  width="50" height="50" verticalCenter="0" horizontalCenter="0" visible="false"/>
-        <e:Image id="stop_up" source="slot_stop_up_png"  width="50" height="50" verticalCenter="0" horizontalCenter="0"/>
+	<e:Group id="stopgroup" width="50" height="50" y="192.83" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="1" >
+        <e:Image id="stop_over"  width="50" height="50" verticalCenter="0" horizontalCenter="0" source="stop_png" visible="false"/>
+        <e:Image id="stop_up"  anchorOffsetX="0" anchorOffsetY="0" left="0" right="0" top="0" bottom="0" source="stop_light_png"/>
 		<e:Image id="back_btn" source="btn_back_png" horizontalCenter="0" verticalCenter="0" width="50" height="50" visible="false"/>
     </e:Group>
 

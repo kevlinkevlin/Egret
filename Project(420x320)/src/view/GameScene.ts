@@ -13,36 +13,31 @@ class GameScene extends eui.Component {
     private count:number;//控制拉霸結果 
     public slider: Slider.SliderScroll;//为了调用sliderscroll里面的方法
 
+    public message:Dialog;
+
     public constructor(num : number) {
         super();
         this.skinName = "resource/eui_skins/SlotViewSkin.exml";
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         this.count = num;
+        
     }
     /**
      * 处理一些遮罩，优化图片和开始
      */
     private onAddToStage(event: egret.Event) {
-        
-        
         //把slider添加到框里
         this.slider = new Slider.SliderScroll();
         this.addChild(this.slider);
-       
-        //把kake置顶
-        this.stopgroup.visible = false;
-
-        
+        // this.startgroup.visible = true;
         //this.back_btn.visible = false;
-
-
-        
-        this.setChildIndex(this.kake1, this.numChildren - 1);
+        this.stopgroup.visible = false; 
+        //把kake置顶
+        //this.setChildIndex(this.kake1, this.numChildren - 1);
         //添加start事件
         //this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
         this.gameStart();
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-        this.startgroup.visible = true;
         this.Close();
 		}, this);
 
@@ -82,7 +77,7 @@ class GameScene extends eui.Component {
     private gameStart() {
         console.log("start!");
         this.back_btn.visible = false;
-        this.startgroup.visible = false;
+        //this.startgroup.visible = false;
         this.stopgroup.visible = true;
         this.stop_up.visible = false;
         this.stop_over.visible = true;
@@ -109,31 +104,43 @@ class GameScene extends eui.Component {
 
     }
 
-    /**
-     * 添加stop
-     */
+ 
     private gameStop() {
         
         console.log("stop!");
         this.stop_up.visible = true;
         this.stop_over.visible = false;
-
         //var rad2 = Math.floor(Math.random() * 6 + 1);
-       
-
-        //停止声音
-        /*
-        this.mus_move.musicSound(0.3);
-        this.mus_stop = new MusicScene();
-        this.mus_stop.addMusic("guzhang_mp3", 0, -1);
-        */
-        //控制slider停止翻滚
+  
         console.log(this.count);
         this.slider.stopScroll(this.count, (r) => {//r回调回来的结果，当r=true时，执行if里的操作
             if (r) {
                 this.stop_up.visible = false;
                 this.stop_over.visible = false;
-               this.back_btn.visible = true;
+                setTimeout(()=>{
+                this.back_btn.visible = true;
+                this.message = new Dialog();
+                this.message.ready_btn.visible = false;
+                this.message.char_name.text = "拉霸機";
+                var num = Math.ceil(Math.random()*3)
+                switch(num)
+                {
+                case 1:
+                this.message.lb_dialog_text.text = "嗶嗶.......恭喜抽到送禮自用兩相宜的紀念徽章一枚，還有其他機台去試試手氣吧！";
+                break;
+                case 2:
+                this.message.lb_dialog_text.text = "嗶嗶.......恭喜抽到非常具有紀念價值的紀念徽章一枚，還有其他機台去試試手氣吧！";
+                break;
+                case 3:
+                this.message.lb_dialog_text.text = "嗶嗶嗶嗶.....恭喜抽到的紀念徽章一枚，還有其他機台去試試手氣吧！";
+                break;
+                default:
+                break;
+                }
+                this.addChild(this.message);
+                },1000)
+                
+             //  this.back_btn.visible = true;
                
             }
         });

@@ -23,6 +23,7 @@ var Dialog = (function (_super) {
         _this.diamond = false;
         _this.code = false;
         _this.char4_target = false;
+        _this.count_num = 0;
         _this.skinName = "resource/eui_skins/DialogOk.exml";
         return _this;
     }

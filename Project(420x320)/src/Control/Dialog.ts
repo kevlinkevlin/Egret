@@ -32,6 +32,9 @@ class Dialog extends eui.Component implements eui.UIComponent {
 	public diamond:boolean = false;
 	private code:boolean = false;
 	public char4_target:boolean = false;
+	public count_num:number = 0;
+
+
 	protected childrenCreated(): void {
 		super.childrenCreated();
 		
@@ -53,6 +56,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		this.back_btn.visible = true;
 		this.ready_btn.visible = false;
 		this.img_dialog_outer2.visible = false;
+		
 		if(this.gameover == true)
 		{
 		this.gameover = false;

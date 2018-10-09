@@ -25,15 +25,15 @@ var GameScene = (function (_super) {
         //把slider添加到框里
         this.slider = new Slider.SliderScroll();
         this.addChild(this.slider);
-        //把kake置顶
-        this.stopgroup.visible = false;
+        // this.startgroup.visible = true;
         //this.back_btn.visible = false;
-        this.setChildIndex(this.kake1, this.numChildren - 1);
+        this.stopgroup.visible = false;
+        //把kake置顶
+        //this.setChildIndex(this.kake1, this.numChildren - 1);
         //添加start事件
         //this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
         this.gameStart();
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.startgroup.visible = true;
             _this.Close();
         }, this);
     };
@@ -66,7 +66,7 @@ var GameScene = (function (_super) {
     GameScene.prototype.gameStart = function () {
         console.log("start!");
         this.back_btn.visible = false;
-        this.startgroup.visible = false;
+        //this.startgroup.visible = false;
         this.stopgroup.visible = true;
         this.stop_up.visible = false;
         this.stop_over.visible = true;
@@ -88,28 +88,39 @@ var GameScene = (function (_super) {
         this.mus_move.addMusic("mus_move_mp3", 0, -1);
         */
     };
-    /**
-     * 添加stop
-     */
     GameScene.prototype.gameStop = function () {
         var _this = this;
         console.log("stop!");
         this.stop_up.visible = true;
         this.stop_over.visible = false;
         //var rad2 = Math.floor(Math.random() * 6 + 1);
-        //停止声音
-        /*
-        this.mus_move.musicSound(0.3);
-        this.mus_stop = new MusicScene();
-        this.mus_stop.addMusic("guzhang_mp3", 0, -1);
-        */
-        //控制slider停止翻滚
         console.log(this.count);
         this.slider.stopScroll(this.count, function (r) {
             if (r) {
                 _this.stop_up.visible = false;
                 _this.stop_over.visible = false;
-                _this.back_btn.visible = true;
+                setTimeout(function () {
+                    _this.back_btn.visible = true;
+                    _this.message = new Dialog();
+                    _this.message.ready_btn.visible = false;
+                    _this.message.char_name.text = "拉霸機";
+                    _this.message.count_num++;
+                    switch (_this.message.count_num) {
+                        case 1:
+                            _this.message.lb_dialog_text.text = "嗶嗶.......恭喜抽到紀念獎章一枚，抽獎次數為零，請使用其他機台";
+                            break;
+                        case 2:
+                            _this.message.lb_dialog_text.text = "嗶嗶.......恭喜又抽到紀念徽章一枚~~~~~請您移駕到其他機台繼續抽獎";
+                            break;
+                        case 3:
+                            _this.message.lb_dialog_text.text = "嗶嗶嗶嗶嗶.......親愛的客人，請您先別生氣......給我最後一次機會保證你抽到大獎(怕)";
+                            break;
+                        default:
+                            break;
+                    }
+                    _this.addChild(_this.message);
+                }, 1000);
+                //  this.back_btn.visible = true;
             }
         });
     };

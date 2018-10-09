@@ -94,7 +94,7 @@ var Main = (function (_super) {
         */
         // private game:GameScene = new GameScene();
         _this.message = new Dialog();
-        _this.time = 5;
+        _this.time = 10;
         _this.stage1 = true;
         _this.stage2 = false;
         _this.fixed = false;
@@ -107,6 +107,7 @@ var Main = (function (_super) {
     //繼承UIlayer
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
+        RES.setMaxLoadingThread(1); ////////////避免多線程載入時卡住
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin
         });
@@ -120,6 +121,11 @@ var Main = (function (_super) {
         //注入自定義素材解析器
         egret.registerImplementation("eui.IAssetAdapter", new AssetAdapter());
         // egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+        this.loadingView = new LoadingUI();
+        this.stage.addChild(this.loadingView);
+        //RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        //RES.loadConfig("resource/default.res.json", "resource/");
+        RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
         this.runGame().catch(function (e) {
             console.log(e);
         });
@@ -146,15 +152,16 @@ var Main = (function (_super) {
             });
         });
     };
+    Main.prototype.onResourceProgress = function (event) {
+        this.loadingView.onProgress(event.itemsLoaded, event.itemsTotal);
+    };
     Main.prototype.loadResource = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var loadingView, e_1;
+            var e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 4, , 5]);
-                        loadingView = new LoadingUI();
-                        this.stage.addChild(loadingView);
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
                     case 1:
                         _a.sent();
@@ -164,6 +171,8 @@ var Main = (function (_super) {
                         return [4 /*yield*/, RES.loadGroup("UI")];
                     case 3:
                         _a.sent();
+                        RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+                        this.stage.removeChild(this.loadingView);
                         return [3 /*break*/, 5];
                     case 4:
                         e_1 = _a.sent();
@@ -177,7 +186,7 @@ var Main = (function (_super) {
     //
     Main.prototype.createGameScene = function () {
         var _this = this;
-        this.createBitmapByName(this.bg, "bg_png", 0, 0, 0.51, 0.51);
+        this.createBitmapByName(this.bg, "bg_png", 0, 0, 0.52, 0.51);
         /*
                 this.createBitmapByName(this.char2,"Mario_png",this.stage.stageWidth*2/4,this.stage.stageHeight*3/8,0.3,0.3);
                 this.createBitmapByName(this.char3,"Mario_png",this.stage.stageWidth*3/4,this.stage.stageHeight*3/8,0.3,0.3);
@@ -280,7 +289,7 @@ var Main = (function (_super) {
                     if (_this.char.x > _this.char2.x) {
                         _this.char.scaleX = -0.3;
                     }
-                    _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - _this.char.width / 2)) * _this.time, _this.char2_b, 1).call(function () {
+                    _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - 50)) * _this.time, _this.char2_b, 1).call(function () {
                         _this.char.scaleX = 0.3;
                         _this.char.gotoAndPlay("Idle", -1);
                     }, _this);
@@ -291,12 +300,12 @@ var Main = (function (_super) {
                         _this.char.scaleX = -0.3;
                     }
                     test.to({ x: _this.stage.stageWidth / 2 + 20 }, _this.time * 100).call(function () { _this.char.scaleX = 0.3; }, _this)
-                        .to({ y: _this.stage.stageHeight / 2 + 25 }, _this.time * 50)
-                        .to({ x: _this.stage.stageWidth * 2 / 3 + 20 }, _this.time * 50)
-                        .to({ x: _this.stage.stageWidth * 7 / 8 + 35, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 200)
+                        .to({ y: _this.stage.stageHeight / 2 + 25 }, _this.time * 80)
+                        .to({ x: _this.stage.stageWidth * 2 / 3 + 5 }, _this.time * 50)
+                        .to({ x: _this.stage.stageWidth * 7 / 8 + 20, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 100)
                         .call(function () {
                         _this.char.scaleX = -0.3;
-                        _this.talk(_this.char2, Math.abs((_this.char.x - _this.char2.x) + (_this.char.y - _this.char2.y)) * _this.time, _this.char2_b, 1).call(function () {
+                        _this.talk(_this.char2, Math.abs(_this.char.x - (_this.char2.x - 50)) * _this.time, _this.char2_b, 1).call(function () {
                             _this.char.scaleX = 0.3;
                             _this.char.gotoAndPlay("Idle", -1);
                         }, _this);
@@ -314,7 +323,7 @@ var Main = (function (_super) {
                 if (_this.char3_b == false) {
                     _this.message.name_test = ["庫洛艾", "黎恩"];
                     _this.message.dia_test = ["啊！你不是今年《閃之軌跡》IV的男主角黎恩嗎！能和你一起冒險嗎？",
-                        "欸…這個嘛。(打量一下)這當然事沒問題的囉。不過呀，你得先學會SRPG的戰鬥方式，像是戰鬥時施放技能和使用道具上都要注意到回合，並與大家配合呢！"];
+                        "欸…這個嘛。(打量一下)這當然事沒問題的囉。不過呀，你得先學會RSLG的戰鬥方式，像是戰鬥時施放技能和使用道具上都要注意到回合，並與大家配合呢！"];
                     _this.message.gameover = true;
                     _this.message.gameover_name = "黎恩";
                     _this.message.gameover_dia = "喔喔..!!你今天看起來運勢不錯呢...";
@@ -334,7 +343,7 @@ var Main = (function (_super) {
                 _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
                 _this.char.gotoAndPlay("Walk", -1);
                 if (_this.stage1 == true) {
-                    _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, _this.char3_b, 5).call(function () {
+                    _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - 50)) * _this.time, _this.char3_b, 5).call(function () {
                         _this.char.gotoAndPlay("Idle", -1);
                     }, _this);
                 }
@@ -344,12 +353,12 @@ var Main = (function (_super) {
                         _this.char.scaleX = -0.3;
                     }
                     test.to({ x: _this.stage.stageWidth / 2 + 20 }, _this.time * 100).call(function () { _this.char.scaleX = 0.3; }, _this)
-                        .to({ y: _this.stage.stageHeight / 2 + 25 }, _this.time * 50)
-                        .to({ x: _this.stage.stageWidth * 2 / 3 + 20 }, _this.time * 50)
-                        .to({ x: _this.stage.stageWidth * 7 / 8 + 35, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 200)
+                        .to({ y: _this.stage.stageHeight / 2 + 25 }, _this.time * 80)
+                        .to({ x: _this.stage.stageWidth * 2 / 3 + 5 }, _this.time * 50)
+                        .to({ x: _this.stage.stageWidth * 7 / 8 + 20, y: _this.stage.stageHeight * 3 / 8 }, _this.time * 100)
                         .call(function () {
                         _this.char.scaleX = -0.3;
-                        _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - _this.char.width / 2)) * _this.time, _this.char3_b, 5).call(function () {
+                        _this.talk(_this.char3, Math.abs(_this.char.x - (_this.char3.x - 50)) * _this.time, _this.char3_b, 5).call(function () {
                             _this.char.scaleX = 0.3;
                             _this.char.gotoAndPlay("Idle", -1);
                         }, _this);
@@ -380,7 +389,7 @@ var Main = (function (_super) {
                             _this.message.gameover_dia = "竟然被你抽到我的薪資袋了Q_Q";
                             _this.message.name_test = ["庫洛艾", "咪西"];
                             _this.message.dia_test = ["嗨嗨~~小貓咪~~~~~！",
-                                "喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的主編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"];
+                                "喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的小編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"];
                             _this.message.char_name.text = _this.message.name_test.shift();
                             _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
                             _this.message.char4_target = true;
@@ -395,18 +404,21 @@ var Main = (function (_super) {
                     _this.char.gotoAndPlay("Walk", -1);
                     if (_this.stage1 == true) {
                         var test = egret.Tween.get(_this.char);
-                        if (_this.char.x <= _this.char2.x) {
-                            test.to({ x: _this.stage.stageWidth * 7 / 8 + 35 }, _this.time * 300);
+                        if (_this.char.x <= _this.char2.x && _this.char.x >= _this.char2.x - 60) {
+                            test.to({ x: _this.stage.stageWidth * 7 / 8 + 20 }, _this.time * 200);
+                        }
+                        else if (_this.char.x < _this.char2.x - 60) {
+                            test.to({ x: _this.stage.stageWidth * 7 / 8 + 20 }, _this.time * 300);
                         }
                         else {
-                            test.to({ x: _this.stage.stageWidth * 7 / 8 + 35 }, _this.time * 250);
+                            test.to({ x: _this.stage.stageWidth * 7 / 8 + 20 }, _this.time * 150);
                         }
                         test.call(function () { _this.char.scaleX = -0.3; }, _this)
-                            .to({ x: _this.stage.stageWidth * 2 / 3 + 20, y: _this.stage.stageHeight / 2 + 25 }, _this.time * 200)
+                            .to({ x: _this.stage.stageWidth * 2 / 3 + 5, y: _this.stage.stageHeight / 2 + 25 }, _this.time * 200)
                             .to({ x: _this.stage.stageWidth / 2 + 20 }, _this.time * 100).call(function () { _this.char.scaleX = 0.3; }, _this)
-                            .to({ y: _this.stage.stageHeight * 2 / 3 + 20 }, _this.time * 50)
+                            .to({ y: _this.stage.stageHeight * 2 / 3 + 20 }, _this.time * 80)
                             .call(function () {
-                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 4).call(function () {
+                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - 50)) * _this.time, _this.char4_b, 4).call(function () {
                                 _this.char.gotoAndPlay("Idle", -1);
                             }, _this);
                             _this.stage1 = false;
@@ -418,13 +430,13 @@ var Main = (function (_super) {
                         if (_this.char.x <= _this.char5.x) {
                             egret.Tween.get(_this.char)
                                 .call(function () {
-                                _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 4).call(function () {
+                                _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - 50)) * _this.time, _this.char4_b, 4).call(function () {
                                     _this.char.gotoAndPlay("Idle", -1);
                                 }, _this);
                             }, _this);
                         }
                         else {
-                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - _this.char.width / 2)) * _this.time, _this.char4_b, 4).call(function () {
+                            _this.talk(_this.char4, Math.abs(_this.char.x - (_this.char4.x - 50)) * _this.time, _this.char4_b, 4).call(function () {
                                 _this.char.gotoAndPlay("Idle", -1);
                             }, _this);
                         }
@@ -460,18 +472,21 @@ var Main = (function (_super) {
                 _this.fixed = true;
                 if (_this.stage1 == true) {
                     var test = egret.Tween.get(_this.char);
-                    if (_this.char.x <= _this.char2.x) {
-                        test.to({ x: _this.stage.stageWidth * 7 / 8 + 35 }, _this.time * 300);
+                    if (_this.char.x <= _this.char2.x && _this.char.x >= _this.char2.x - 60) {
+                        test.to({ x: _this.stage.stageWidth * 7 / 8 + 20 }, _this.time * 200);
+                    }
+                    else if (_this.char.x < _this.char2.x - 60) {
+                        test.to({ x: _this.stage.stageWidth * 7 / 8 + 20 }, _this.time * 300);
                     }
                     else {
-                        test.to({ x: _this.stage.stageWidth * 7 / 8 + 35 }, _this.time * 250);
+                        test.to({ x: _this.stage.stageWidth * 7 / 8 + 20 }, _this.time * 150);
                     }
                     test.call(function () { _this.char.scaleX = -0.3; }, _this)
-                        .to({ x: _this.stage.stageWidth * 2 / 3 + 20, y: _this.stage.stageHeight / 2 + 25 }, _this.time * 200)
+                        .to({ x: _this.stage.stageWidth * 2 / 3 + 5, y: _this.stage.stageHeight / 2 + 25 }, _this.time * 200)
                         .to({ x: _this.stage.stageWidth / 2 + 20 }, _this.time * 100)
-                        .to({ y: _this.stage.stageHeight * 2 / 3 + 20 }, _this.time * 50)
+                        .to({ y: _this.stage.stageHeight * 2 / 3 + 20 }, _this.time * 80)
                         .call(function () {
-                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - _this.char.width / 2)) * _this.time, _this.char5_b, 3).call(function () {
+                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - 50)) * _this.time, _this.char5_b, 3).call(function () {
                             _this.char.scaleX = 0.3;
                             _this.char.gotoAndPlay("Idle", -1);
                         }, _this);
@@ -486,14 +501,14 @@ var Main = (function (_super) {
                         _this.char.gotoAndPlay("Walk", -1);
                         egret.Tween.get(_this.char)
                             .call(function () {
-                            _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - _this.char.width / 2)) * _this.time, _this.char5_b, 3).call(function () {
+                            _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - 50)) * _this.time, _this.char5_b, 3).call(function () {
                                 _this.char.scaleX = 0.3;
                                 _this.char.gotoAndPlay("Idle", -1);
                             }, _this);
                         }, _this);
                     }
                     else {
-                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - _this.char.width / 2)) * _this.time, _this.char5_b, 6).call(function () {
+                        _this.talk(_this.char5, Math.abs(_this.char.x - (_this.char5.x - 50)) * _this.time, _this.char5_b, 6).call(function () {
                             _this.char.gotoAndPlay("Idle", -1);
                         }, _this);
                     }
@@ -538,7 +553,7 @@ var Main = (function (_super) {
         this.message.count = num;
         this._bool(target, click);
         var test = egret.Tween.get(this.char);
-        test.to({ x: target.x - this.char.width / 2, y: target.y }, time).call(function () {
+        test.to({ x: target.x - 50, y: target.y }, time).call(function () {
             _this.addChild(_this.message);
             _this.fixed = false;
         }, this);
