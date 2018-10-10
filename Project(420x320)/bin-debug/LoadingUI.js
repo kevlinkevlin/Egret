@@ -12,7 +12,7 @@ var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
     function LoadingUI() {
         var _this = _super.call(this) || this;
-        _this.loadingBg = ""; //加载页面背景
+        _this.loadingBg = "resource/UI/dialog_bg.png"; //加载页面背景
         _this.loading0 = ""; //进度条的条
         _this.loading1 = "resource/Dialog/Dia01.png"; //进度条的 条背景    
         _this.createView();

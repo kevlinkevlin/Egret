@@ -10,7 +10,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private img_loadingBg: egret.Bitmap;
     private img_loading0: egret.Bitmap;
     private img_loading1: egret.Bitmap;
-    private loadingBg = "";    //加载页面背景
+    private loadingBg = "resource/UI/dialog_bg.png";    //加载页面背景
     private loading0 = ""; //进度条的条
     private loading1 = "resource/Dialog/Dia01.png";  //进度条的 条背景    
     private w: number;
