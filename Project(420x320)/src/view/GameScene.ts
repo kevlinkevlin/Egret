@@ -12,7 +12,7 @@ class GameScene extends eui.Component {
     private mus_stop;
     private count:number;//控制拉霸結果 
     public slider: Slider.SliderScroll;//为了调用sliderscroll里面的方法
-
+    public char4_target:boolean = false;
     public message:Dialog;
 
     public constructor(num : number) {
@@ -81,8 +81,6 @@ class GameScene extends eui.Component {
         this.stopgroup.visible = true;
         this.stop_up.visible = false;
         this.stop_over.visible = true;
-        
-
         this.removeChild(this.slider);
         this.slider = new Slider.SliderScroll();//添加新的slider
         this.addChild(this.slider);
@@ -123,6 +121,8 @@ class GameScene extends eui.Component {
                 this.message.ready_btn.visible = false;
                 this.message.char_name.text = "拉霸機";
                 var num = Math.ceil(Math.random()*3)
+                if(!this.char4_target)
+                {
                 switch(num)
                 {
                 case 1:
@@ -137,6 +137,7 @@ class GameScene extends eui.Component {
                 default:
                 break;
                 }
+                }else{this.message.lb_dialog_text.text = "登登豋登登登登登登....................恭喜你抽到大獎!!!!!!!!!!";}
                 this.addChild(this.message);
                 },1000)
                 

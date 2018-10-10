@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="skins.DialogOk" width="420" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+<e:Skin class="skins.DialogOk" width="420" height="320" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" xmlns:tween="egret.tween.*" >
+	<w:Declarations>
+	</w:Declarations>
 	<w:Config id="165e52916c9"/>
 
 
@@ -32,18 +34,16 @@
 		<e:Label id="char_name" text="一二三" x="1.9600000000000009" y="3.23" anchorOffsetX="0" width="146.32" anchorOffsetY="0" height="33.32" textAlign="center" verticalAlign="middle" bold="true" fontFamily="Microsoft YaHei" size="14" scaleX="1" scaleY="1"/>
 	</e:Group>
 	<e:Image id="img_dialog_outer2" top="0" bottom="0" left="-3" right="3" source="dialog_bg_png" fillMode="scale" alpha="0" anchorOffsetX="0" visible="false"/>
-
-
-	<ns1:EButton id="ready_btn" label="免費抽獎" anchorOffsetX="0" width="140.03" anchorOffsetY="0" height="46.59" horizontalCenter="0" verticalCenter="0.5">
+	<ns1:EButton id="ready_btn" label="免費抽獎" anchorOffsetX="0" width="140.03" anchorOffsetY="0" height="46.59" horizontalCenter="0" verticalCenter="0">
 		<ns1:skinName>
-			<e:Skin states="up,down,disabled">
+		<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="button02_png" source.down="button02_light_png"/>
 			<e:Label id="labelDisplay" size="20" fontFamily="Microsoft YaHei" bold="true" textColor="0xffffff" textAlign="center" verticalAlign="middle" left="0" right="0" top="0" bottom="0"/>
-			</e:Skin>
+		</e:Skin>
 		</ns1:skinName>
+	</ns1:EButton>
 
-
-	</ns1:EButton>>
+>
 
 
 

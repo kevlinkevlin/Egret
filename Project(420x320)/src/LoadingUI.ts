@@ -86,14 +86,14 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
 
         } else if (urlLoader._request.url == this.loading1) {
             this.img_loading1.scale9Grid = new egret.Rectangle(5, 5, 10, 10);
-            this.img_loading1.width = this.stage.stageWidth -140;
+            this.img_loading1.width = 0;
             this.img_loading1.height = 100;
 
             this.img_loading1.texture = texture;
             this.img_loading1.anchorOffsetX = this.img_loading1.width * 0.5;
             this.img_loading1.anchorOffsetY = this.img_loading1.height * 0.5;
-            this.img_loading1.x = this.stage.stageWidth/2;
-            this.img_loading1.y = this.stage.stageHeight - 100;
+            this.img_loading1.x = this.stage.stageWidth/7;
+            this.img_loading1.y = this.stage.stageHeight*3/4;
             console.log(this.stage.stageWidth +"AAAA"+this.img_loading1.width );
 
             // this.img_loading1.scaleX =  10;
@@ -112,7 +112,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
         this.textField.text = "" + Math.round((current / total) * 100) + "%";
         //进度条宽度
         if (this.img_loading1 != null) {
-            this.img_loading1.width = 400 * (current / total);
+            this.img_loading1.width = 280 * (current / total);
         }
     }
 

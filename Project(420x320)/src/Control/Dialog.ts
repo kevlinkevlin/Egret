@@ -56,7 +56,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		this.back_btn.visible = true;
 		this.ready_btn.visible = false;
 		this.img_dialog_outer2.visible = false;
-		
+		game.char4_target = this.char4_target;
 		if(this.gameover == true)
 		{
 		this.gameover = false;

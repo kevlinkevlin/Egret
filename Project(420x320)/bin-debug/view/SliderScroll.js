@@ -101,10 +101,10 @@ var Slider;
                 var bgBmp2 = this.bmpArr2[i];
                 bgBmp2.y += this.speed2;
                 if (this.bmpArr2[0].y < -500 * 3) {
-                    this.bmpArr2[0].y = this.bmpArr2[0].y + 420 * 2 * 2;
+                    this.bmpArr2[0].y = this.bmpArr2[0].y + 1680;
                 }
                 if (this.bmpArr2[1].y < -500 * 3) {
-                    this.bmpArr2[1].y = this.bmpArr2[1].y + 420 * 2 * 2;
+                    this.bmpArr2[1].y = this.bmpArr2[1].y + 1680;
                 }
             }
         };

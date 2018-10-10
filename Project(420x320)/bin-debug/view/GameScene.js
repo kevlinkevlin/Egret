@@ -12,6 +12,7 @@ var GameScene = (function (_super) {
     __extends(GameScene, _super);
     function GameScene(num) {
         var _this = _super.call(this) || this;
+        _this.char4_target = false;
         _this.skinName = "resource/eui_skins/SlotViewSkin.exml";
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         _this.count = num;
@@ -104,19 +105,24 @@ var GameScene = (function (_super) {
                     _this.message = new Dialog();
                     _this.message.ready_btn.visible = false;
                     _this.message.char_name.text = "拉霸機";
-                    _this.message.count_num++;
-                    switch (_this.message.count_num) {
-                        case 1:
-                            _this.message.lb_dialog_text.text = "嗶嗶.......恭喜抽到紀念獎章一枚，抽獎次數為零，請使用其他機台";
-                            break;
-                        case 2:
-                            _this.message.lb_dialog_text.text = "嗶嗶.......恭喜又抽到紀念徽章一枚~~~~~請您移駕到其他機台繼續抽獎";
-                            break;
-                        case 3:
-                            _this.message.lb_dialog_text.text = "嗶嗶嗶嗶嗶.......親愛的客人，請您先別生氣......給我最後一次機會保證你抽到大獎(怕)";
-                            break;
-                        default:
-                            break;
+                    var num = Math.ceil(Math.random() * 3);
+                    if (!_this.char4_target) {
+                        switch (num) {
+                            case 1:
+                                _this.message.lb_dialog_text.text = "嗶嗶.......恭喜抽到送禮自用兩相宜的紀念徽章一枚，還有其他機台去試試手氣吧！";
+                                break;
+                            case 2:
+                                _this.message.lb_dialog_text.text = "嗶嗶.......恭喜抽到非常具有紀念價值的紀念徽章一枚，還有其他機台去試試手氣吧！";
+                                break;
+                            case 3:
+                                _this.message.lb_dialog_text.text = "嗶嗶嗶嗶.....恭喜抽到的紀念徽章一枚，還有其他機台去試試手氣吧！";
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else {
+                        _this.message.lb_dialog_text.text = "登登豋登登登登登登....................恭喜你抽到大獎!!!!!!!!!!";
                     }
                     _this.addChild(_this.message);
                 }, 1000);

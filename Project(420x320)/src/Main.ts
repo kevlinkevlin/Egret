@@ -131,6 +131,10 @@ private async loadResource() {
     private char3_b:boolean = false;
     private char4_b:boolean = false;
     private char5_b:boolean = false;
+    private arrow_2:egret.Sprite = new egret.Sprite();
+    private arrow_3:egret.Sprite = new egret.Sprite();
+    private arrow_4:egret.Sprite = new egret.Sprite();
+    private arrow_5:egret.Sprite = new egret.Sprite();
 //
     private createGameScene() {
         
@@ -147,6 +151,8 @@ private async loadResource() {
         var txtr = RES.getRes("test_png");
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
         
+
+       
 /*
         var factory = new dragonBones.EgretFactory();
         this.createDragonbones( factory, "star_char_backup" );
@@ -174,25 +180,39 @@ private async loadResource() {
         this.char4 = new egret.MovieClip(mcFactory.generateMovieClipData("char5"));
         this.char5 = new egret.MovieClip(mcFactory.generateMovieClipData("char4"));
 
+         var factory = new dragonBones.EgretFactory();
+        this.createDragonbones( factory, "arrowanimation" );
+        this.animation(factory,"arrow","Idle",this.arrow_2);
+        this.animation(factory,"arrow","Idle",this.arrow_3);
+        this.animation(factory,"arrow","Idle",this.arrow_4);
+        this.animation(factory,"arrow","Idle",this.arrow_5);
+
+
         this.addChild(this.char2);
         this.addChild(this.char3);
         this.addChild(this.char4);
         this.addChild(this.char5);
         this.addChild(this.char);
-
-      
+       
 
         this.char.gotoAndPlay("Idle",-1);
         this.char2.gotoAndPlay("Idle",-1);
         this.char3.gotoAndPlay("Idle",-1);
         this.char4.gotoAndPlay("Idle",-1);
         this.char5.gotoAndPlay("Idle",-1);
-
+        
         this.position(this.char,this.stage.stageWidth/8,this.stage.stageHeight*3/8,0,this.char.height/2+10,0.3,0.3);
         this.position(this.char2,this.stage.stageWidth/2,this.stage.stageHeight*3/8,this.char2.width/2,this.char2.height/2+30,0.3,0.3);
         this.position(this.char3,this.stage.stageWidth*6/8,this.stage.stageHeight*3/8,this.char3.width/2,this.char3.height/2+30,0.3,0.3);
         this.position(this.char4,this.stage.stageWidth*7/8,this.stage.stageHeight*2/3+20,this.char4.width/2,this.char4.height/2+20,0.21,0.21);
         this.position(this.char5,this.stage.stageWidth*2/5,this.stage.stageHeight*2/3+20,this.char5.width/2,this.char5.height/2+10,0.3,0.3);
+
+        this.position(this.arrow_2,this.stage.stageWidth/2,this.stage.stageHeight*3/8,this.arrow_2.width,this.char2.height/2,1,1);
+        this.position(this.arrow_3,this.stage.stageWidth*6/8,this.stage.stageHeight*3/8,this.arrow_3.width-10,this.char2.height/2,1,1);
+        this.position(this.arrow_4,this.stage.stageWidth*7/8,this.stage.stageHeight*2/3+20,this.arrow_4.width-5,this.char2.height/2,1,1);
+        this.position(this.arrow_5,this.stage.stageWidth*2/5,this.stage.stageHeight*2/3+20,this.arrow_5.width-10,this.char2.height/2,1,1);
+        
+
         this.addEventListener( egret.Event.ENTER_FRAME, function():void{
           dragonBones.WorldClock.clock.advanceTime( 0.05 );
         }, this );
@@ -208,10 +228,7 @@ private async loadResource() {
         this.message.dia_test = ["…好緊張呀，前面綁著雙馬尾的姐姐，好像是軌跡系列最有人氣的艾絲蒂雅小姐呢！"]
         this.message.ready_btn.visible = false;
         this.addChild(this.message);
-        if(window.parent.document)
-        {
-          //  window.parent["finishGame"](true)
-        }
+       
 /*
 
         let theme = new eui.Theme("resource/default.thm.json", this.stage);
@@ -293,8 +310,8 @@ private async loadResource() {
         this.stage2 = false;
         },this)
         }
-//
-       
+//      
+      
         }},this);
         
 
@@ -370,7 +387,7 @@ private async loadResource() {
         ,this)
         }
 //
-       
+      
         }},this);
 
 
@@ -402,6 +419,7 @@ private async loadResource() {
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
         this.message.char4_target = true;
+        
         }else
         {   
         this.message.name_test = ["咪西"];
@@ -567,6 +585,7 @@ private async loadResource() {
         }
 //
         }
+        
         },this);
         
 

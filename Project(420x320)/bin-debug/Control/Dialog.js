@@ -51,6 +51,7 @@ var Dialog = (function (_super) {
             _this.back_btn.visible = true;
             _this.ready_btn.visible = false;
             _this.img_dialog_outer2.visible = false;
+            game.char4_target = _this.char4_target;
             if (_this.gameover == true) {
                 _this.gameover = false;
                 _this.lastscene = true;
