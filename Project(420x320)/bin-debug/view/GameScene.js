@@ -28,12 +28,16 @@ var GameScene = (function (_super) {
         this.addChild(this.slider);
         // this.startgroup.visible = true;
         //this.back_btn.visible = false;
+        this.close_scene.visible = false;
         this.stopgroup.visible = false;
         //把kake置顶
         //this.setChildIndex(this.kake1, this.numChildren - 1);
         //添加start事件
         //this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
         this.gameStart();
+        this.close_scene.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            _this.Close();
+        }, this);
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.Close();
         }, this);
@@ -101,6 +105,7 @@ var GameScene = (function (_super) {
                 _this.stop_up.visible = false;
                 _this.stop_over.visible = false;
                 setTimeout(function () {
+                    _this.close_scene.visible = true;
                     _this.back_btn.visible = true;
                     _this.message = new Dialog();
                     _this.message.ready_btn.visible = false;
@@ -122,6 +127,9 @@ var GameScene = (function (_super) {
                         }
                     }
                     else {
+                        if (window.parent.document) {
+                            window.parent["finishGame"](true);
+                        } //////////////產生序號                   
                         _this.message.lb_dialog_text.text = "登登豋登登登登登登....................恭喜你抽到大獎!!!!!!!!!!";
                     }
                     _this.addChild(_this.message);

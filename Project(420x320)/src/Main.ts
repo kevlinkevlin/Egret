@@ -209,8 +209,8 @@ private async loadResource() {
 
         this.position(this.arrow_2,this.stage.stageWidth/2,this.stage.stageHeight*3/8,this.arrow_2.width,this.char2.height/2,1,1);
         this.position(this.arrow_3,this.stage.stageWidth*6/8,this.stage.stageHeight*3/8,this.arrow_3.width-10,this.char2.height/2,1,1);
-        this.position(this.arrow_4,this.stage.stageWidth*7/8,this.stage.stageHeight*2/3+20,this.arrow_4.width-5,this.char2.height/2,1,1);
-        this.position(this.arrow_5,this.stage.stageWidth*2/5,this.stage.stageHeight*2/3+20,this.arrow_5.width-10,this.char2.height/2,1,1);
+        this.position(this.arrow_4,this.stage.stageWidth*7/8,this.stage.stageHeight*2/3+20,this.arrow_4.width-8,this.char2.height/2,1,1);
+        this.position(this.arrow_5,this.stage.stageWidth*2/5,this.stage.stageHeight*2/3+20,this.arrow_5.width-15,this.char2.height/2,1,1);
         
 
         this.addEventListener( egret.Event.ENTER_FRAME, function():void{
@@ -243,21 +243,23 @@ private async loadResource() {
         {
         this.fixed = true;
         if(this.char2_b == false){
-        this.message.name_test = ["艾蒂莉亞","庫洛艾","艾蒂莉亞"];
+        this.message.name_test = ["艾絲蒂爾","庫洛艾","艾絲蒂爾"];
         this.message.dia_test = ["咦，妳是新來的遊擊士嗎？看起來呆萌呆萌的，趕緊和大夥們匯合呀"
         ,"是..！這艘飛空艇上好像有各代軌跡系列的人氣角色都在呢！"
         ,"那當然囉，超過70位超人氣軌跡系列角色外，還能和過往的Boss成為夥伴呢~~新的軌跡，你看的見！"]
         this.message.gameover = true;
-        this.message.gameover_name ="艾蒂莉亞" 
-        this.message.gameover_dia ="哎呀...欸?這個該不會是..."
+        this.message.gameover_name ="艾絲蒂爾" 
+        this.message.gameover_dia ="會拿到什麼呢~~~~~"
+        this.message.gameover_name2 ="艾絲蒂爾" 
+        this.message.gameover_dia2 ="看起來很適合你呢~~再去找其他人聊聊吧!"
         }else{
         if(this.message.completed == false)
         {
-        this.message.name_test = ["艾蒂莉亞"];
+        this.message.name_test = ["艾絲蒂爾"];
         this.message.dia_test = ["去找其他人聊聊吧~"]
         }else{
         console.log(this.message.completed)
-         this.message.name_test = ["艾蒂莉亞"];
+         this.message.name_test = ["艾絲蒂爾"];
         this.message.dia_test = ["今天天氣真的不錯呢~"]
         }
         }
@@ -331,7 +333,9 @@ private async loadResource() {
         ,"欸…這個嘛。(打量一下)這當然事沒問題的囉。不過呀，你得先學會RSLG的戰鬥方式，像是戰鬥時施放技能和使用道具上都要注意到回合，並與大家配合呢！"]
         this.message.gameover = true;
         this.message.gameover_name ="黎恩" 
-        this.message.gameover_dia ="喔喔..!!你今天看起來運勢不錯呢..."
+        this.message.gameover_dia ="看你這個氣勢一定能拿到好東西!"
+        this.message.gameover_name2 ="黎恩" 
+        this.message.gameover_dia2 ="再多找其他人聊聊吧~~~說不定會有收穫"
         }else
         {
         if(this.message.completed == false)
@@ -411,11 +415,13 @@ private async loadResource() {
         this.message.diamond = true;
         this.message.completed = true        //////遊戲結束
         this.message.gameover = true;
-        this.message.gameover_name ="咪西" 
-        this.message.gameover_dia ="竟然被你抽到我的薪資袋了Q_Q"
         this.message.name_test = ["庫洛艾","咪西"];
         this.message.dia_test = ["嗨嗨~~小貓咪~~~~~！"
         ,"喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的小編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"]
+        this.message.gameover_name ="咪西" 
+        this.message.gameover_dia ="會抽到什麼呢~~~~~~~"
+        this.message.gameover_name2 ="咪西" 
+        this.message.gameover_dia2 ="可...可惡...竟然被你抽到我的薪資袋了Q_Q"
         this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
         this.message.char4_target = true;
@@ -424,6 +430,7 @@ private async loadResource() {
         {   
         this.message.name_test = ["咪西"];
         this.message.dia_test = ["我的薪資袋Q_Q........."]
+        
          this.message.char_name.text = this.message.name_test.shift();
         this.message.lb_dialog_text.text = this.message.dia_test.shift();
         }
@@ -508,7 +515,9 @@ private async loadResource() {
         ,"這裡可是非常重要的地方呢。想要在塞姆利亞大陸上自由行走，都靠我們搭乘的飛空艇唷！另外妳看看妳手上的導力器，它可是一切能量的來源呢！"]
         this.message.gameover = true;
         this.message.gameover_name ="艾莉" 
-        this.message.gameover_dia ="哈哈...是個不錯的開始呢！"
+        this.message.gameover_dia = "你今天的運勢看起來不錯呢加油!"
+        this.message.gameover_name2 ="艾莉" 
+        this.message.gameover_dia2 ="哈哈...是個不錯的開始呢！再去找找其他人吧"
         }else
         {
         if(this.message.completed == false)

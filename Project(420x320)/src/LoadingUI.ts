@@ -10,7 +10,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private img_loadingBg: egret.Bitmap;
     private img_loading0: egret.Bitmap;
     private img_loading1: egret.Bitmap;
-    private loadingBg = "resource/UI/dialog_bg.png";    //加载页面背景
+    private loadingBg = "";    //加载页面背景
     private loading0 = ""; //进度条的条
     private loading1 = "resource/Dialog/Dia01.png";  //进度条的 条背景    
     private w: number;
@@ -42,6 +42,13 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
         this.img_loading1 = new egret.Bitmap();
 
         this.uiContainer = new egret.DisplayObjectContainer();
+
+        var mask: egret.Shape = new egret.Shape();
+        mask.graphics.beginFill(0x000000, 1);
+        mask.graphics.drawRect(0, 0, 420,320);
+        mask.graphics.endFill();
+        this.addChild(mask);
+
         this.addChild(this.uiContainer);
         this.addChildAt(this.img_loadingBg, 0);
         this.addChild(this.img_loading0);
@@ -53,6 +60,8 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private onComplete(e: egret.Event): void {   
         var urlLoader: egret.URLLoader = <egret.URLLoader>e.target;
         var texture = urlLoader.data;
+      
+        /*
         if (urlLoader._request.url == this.loadingBg) {
             this.img_loadingBg.texture = texture;
             var bgW = this.img_loadingBg.width;     
@@ -64,12 +73,12 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
             console.log(this.h + "视口高");
             if(this.w / 640 < this.h / 1136){       
                 //W
-                this.img_loadingBg.scaleX = 1;   
+                this.img_loadingBg.scaleX = this.stage.stageWidth/bgW;   
                 this.img_loadingBg.scaleY = this.stage.stageHeight/bgH;
 
             }else{
                 //H
-                this.img_loadingBg.scaleY = 1;
+                this.img_loadingBg.scaleY = this.stage.stageHeight/bgH;
                 this.img_loadingBg.scaleX = this.stage.stageWidth/bgW;
             }
 
@@ -84,17 +93,17 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
             this.img_loading0.x = this.stage.stageWidth/2;
             this.img_loading0.y = this.stage.stageHeight- 100;
 
-        } else if (urlLoader._request.url == this.loading1) {
-            this.img_loading1.scale9Grid = new egret.Rectangle(5, 5, 10, 10);
+        } else */if (urlLoader._request.url == this.loading1) {
+            //this.img_loading1.scale9Grid = new egret.Rectangle(5, 5, 10, 10);
             this.img_loading1.width = 0;
             this.img_loading1.height = 100;
 
             this.img_loading1.texture = texture;
-            this.img_loading1.anchorOffsetX = this.img_loading1.width * 0.5;
+            this.img_loading1.anchorOffsetX = 0;
             this.img_loading1.anchorOffsetY = this.img_loading1.height * 0.5;
             this.img_loading1.x = this.stage.stageWidth/7;
             this.img_loading1.y = this.stage.stageHeight*3/4;
-            console.log(this.stage.stageWidth +"AAAA"+this.img_loading1.width );
+            console.log(this.stage.stageWidth +"------"+this.img_loading1.width );
 
             // this.img_loading1.scaleX =  10;
             this.textField.textColor = 0xffffff;
@@ -112,7 +121,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
         this.textField.text = "" + Math.round((current / total) * 100) + "%";
         //进度条宽度
         if (this.img_loading1 != null) {
-            this.img_loading1.width = 280 * (current / total);
+            this.img_loading1.width = 300 * (current / total);
         }
     }
 

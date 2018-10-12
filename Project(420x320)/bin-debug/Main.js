@@ -247,8 +247,8 @@ var Main = (function (_super) {
         this.position(this.char5, this.stage.stageWidth * 2 / 5, this.stage.stageHeight * 2 / 3 + 20, this.char5.width / 2, this.char5.height / 2 + 10, 0.3, 0.3);
         this.position(this.arrow_2, this.stage.stageWidth / 2, this.stage.stageHeight * 3 / 8, this.arrow_2.width, this.char2.height / 2, 1, 1);
         this.position(this.arrow_3, this.stage.stageWidth * 6 / 8, this.stage.stageHeight * 3 / 8, this.arrow_3.width - 10, this.char2.height / 2, 1, 1);
-        this.position(this.arrow_4, this.stage.stageWidth * 7 / 8, this.stage.stageHeight * 2 / 3 + 20, this.arrow_4.width - 5, this.char2.height / 2, 1, 1);
-        this.position(this.arrow_5, this.stage.stageWidth * 2 / 5, this.stage.stageHeight * 2 / 3 + 20, this.arrow_5.width - 10, this.char2.height / 2, 1, 1);
+        this.position(this.arrow_4, this.stage.stageWidth * 7 / 8, this.stage.stageHeight * 2 / 3 + 20, this.arrow_4.width - 8, this.char2.height / 2, 1, 1);
+        this.position(this.arrow_5, this.stage.stageWidth * 2 / 5, this.stage.stageHeight * 2 / 3 + 20, this.arrow_5.width - 15, this.char2.height / 2, 1, 1);
         this.addEventListener(egret.Event.ENTER_FRAME, function () {
             dragonBones.WorldClock.clock.advanceTime(0.05);
         }, this);
@@ -274,22 +274,24 @@ var Main = (function (_super) {
             if (_this.fixed == false) {
                 _this.fixed = true;
                 if (_this.char2_b == false) {
-                    _this.message.name_test = ["艾蒂莉亞", "庫洛艾", "艾蒂莉亞"];
+                    _this.message.name_test = ["艾絲蒂爾", "庫洛艾", "艾絲蒂爾"];
                     _this.message.dia_test = ["咦，妳是新來的遊擊士嗎？看起來呆萌呆萌的，趕緊和大夥們匯合呀",
                         "是..！這艘飛空艇上好像有各代軌跡系列的人氣角色都在呢！",
                         "那當然囉，超過70位超人氣軌跡系列角色外，還能和過往的Boss成為夥伴呢~~新的軌跡，你看的見！"];
                     _this.message.gameover = true;
-                    _this.message.gameover_name = "艾蒂莉亞";
-                    _this.message.gameover_dia = "哎呀...欸?這個該不會是...";
+                    _this.message.gameover_name = "艾絲蒂爾";
+                    _this.message.gameover_dia = "會拿到什麼呢~~~~~";
+                    _this.message.gameover_name2 = "艾絲蒂爾";
+                    _this.message.gameover_dia2 = "看起來很適合你呢~~再去找其他人聊聊吧!";
                 }
                 else {
                     if (_this.message.completed == false) {
-                        _this.message.name_test = ["艾蒂莉亞"];
+                        _this.message.name_test = ["艾絲蒂爾"];
                         _this.message.dia_test = ["去找其他人聊聊吧~"];
                     }
                     else {
                         console.log(_this.message.completed);
-                        _this.message.name_test = ["艾蒂莉亞"];
+                        _this.message.name_test = ["艾絲蒂爾"];
                         _this.message.dia_test = ["今天天氣真的不錯呢~"];
                     }
                 }
@@ -337,7 +339,9 @@ var Main = (function (_super) {
                         "欸…這個嘛。(打量一下)這當然事沒問題的囉。不過呀，你得先學會RSLG的戰鬥方式，像是戰鬥時施放技能和使用道具上都要注意到回合，並與大家配合呢！"];
                     _this.message.gameover = true;
                     _this.message.gameover_name = "黎恩";
-                    _this.message.gameover_dia = "喔喔..!!你今天看起來運勢不錯呢...";
+                    _this.message.gameover_dia = "看你這個氣勢一定能拿到好東西!";
+                    _this.message.gameover_name2 = "黎恩";
+                    _this.message.gameover_dia2 = "再多找其他人聊聊吧~~~說不定會有收穫";
                 }
                 else {
                     if (_this.message.completed == false) {
@@ -396,11 +400,13 @@ var Main = (function (_super) {
                             _this.message.diamond = true;
                             _this.message.completed = true; //////遊戲結束
                             _this.message.gameover = true;
-                            _this.message.gameover_name = "咪西";
-                            _this.message.gameover_dia = "竟然被你抽到我的薪資袋了Q_Q";
                             _this.message.name_test = ["庫洛艾", "咪西"];
                             _this.message.dia_test = ["嗨嗨~~小貓咪~~~~~！",
                                 "喵～被發現啦，我、我、我可不是喵呢，我是FB粉絲團的小編哦！這樣～厲害吧，但千萬不要告訴別人我也上飛空艇了！"];
+                            _this.message.gameover_name = "咪西";
+                            _this.message.gameover_dia = "會抽到什麼呢~~~~~~~";
+                            _this.message.gameover_name2 = "咪西";
+                            _this.message.gameover_dia2 = "可...可惡...竟然被你抽到我的薪資袋了Q_Q";
                             _this.message.char_name.text = _this.message.name_test.shift();
                             _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
                             _this.message.char4_target = true;
@@ -465,7 +471,9 @@ var Main = (function (_super) {
                         "這裡可是非常重要的地方呢。想要在塞姆利亞大陸上自由行走，都靠我們搭乘的飛空艇唷！另外妳看看妳手上的導力器，它可是一切能量的來源呢！"];
                     _this.message.gameover = true;
                     _this.message.gameover_name = "艾莉";
-                    _this.message.gameover_dia = "哈哈...是個不錯的開始呢！";
+                    _this.message.gameover_dia = "你今天的運勢看起來不錯呢加油!";
+                    _this.message.gameover_name2 = "艾莉";
+                    _this.message.gameover_dia2 = "哈哈...是個不錯的開始呢！再去找找其他人吧";
                 }
                 else {
                     if (_this.message.completed == false) {

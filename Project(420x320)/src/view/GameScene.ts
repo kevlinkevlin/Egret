@@ -6,6 +6,7 @@ class GameScene extends eui.Component {
     public stop_up: eui.Image;
     public kake1: eui.Image;
     public back_btn:eui.Image;
+    public close_scene:eui.Image;
     //申明声音
     private mus_star;
     private mus_move;
@@ -29,14 +30,19 @@ class GameScene extends eui.Component {
         //把slider添加到框里
         this.slider = new Slider.SliderScroll();
         this.addChild(this.slider);
+        
         // this.startgroup.visible = true;
         //this.back_btn.visible = false;
+        this.close_scene.visible = false;
         this.stopgroup.visible = false; 
         //把kake置顶
         //this.setChildIndex(this.kake1, this.numChildren - 1);
         //添加start事件
         //this.startgroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
         this.gameStart();
+        this.close_scene.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+        this.Close();
+		}, this);
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
         this.Close();
 		}, this);
@@ -116,6 +122,7 @@ class GameScene extends eui.Component {
                 this.stop_up.visible = false;
                 this.stop_over.visible = false;
                 setTimeout(()=>{
+                this.close_scene.visible = true;
                 this.back_btn.visible = true;
                 this.message = new Dialog();
                 this.message.ready_btn.visible = false;
@@ -137,7 +144,10 @@ class GameScene extends eui.Component {
                 default:
                 break;
                 }
-                }else{this.message.lb_dialog_text.text = "登登豋登登登登登登....................恭喜你抽到大獎!!!!!!!!!!";}
+                }else{
+                if(window.parent.document)
+                { window.parent["finishGame"](true)}                //////////////產生序號                   
+                this.message.lb_dialog_text.text = "登登豋登登登登登登....................恭喜你抽到大獎!!!!!!!!!!";}
                 this.addChild(this.message);
                 },1000)
                 

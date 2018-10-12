@@ -17,6 +17,8 @@ var Dialog = (function (_super) {
         _this.dia_test = [];
         _this.gameover_name = "";
         _this.gameover_dia = "";
+        _this.gameover_name2 = "";
+        _this.gameover_dia2 = "";
         _this.lastscene = false;
         _this.gameover = false;
         _this.completed = false;
@@ -47,7 +49,7 @@ var Dialog = (function (_super) {
         }, this);
         this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             var game = new GameScene(_this.count);
-            egret.setTimeout(function () { _this.addChild(game); }, _this, 100);
+            _this.addChild(game);
             _this.back_btn.visible = true;
             _this.ready_btn.visible = false;
             _this.img_dialog_outer2.visible = false;
@@ -57,6 +59,10 @@ var Dialog = (function (_super) {
                 _this.lastscene = true;
                 _this.name_test.push(_this.gameover_name);
                 _this.dia_test.push(_this.gameover_dia);
+                _this.name_test.push(_this.gameover_name2);
+                _this.dia_test.push(_this.gameover_dia2);
+                _this.lb_dialog_text.text = _this.dia_test.shift();
+                _this.char_name.text = _this.name_test.shift();
                 if (_this.char4_target) {
                     _this.code = true;
                 }
@@ -71,12 +77,17 @@ var Dialog = (function (_super) {
     Dialog.prototype.Close = function () {
         this.dialog_name.visible = true;
         this.img_dialog_outer2.visible = false;
-        if (this.code == true) {
+        /*
+        if(this.code == true)
+        {
             this.code = false;
-            if (window.parent.document) {
-                window.parent["finishGame"](true); //////////////產生序號
-            }
+            if(window.parent.document)
+        {
+            window.parent["finishGame"](true)                //////////////產生序號
         }
+
+        }
+        */
         if (this.parent != null && this.name_test.length == 0) {
             this.parent.removeChild(this);
             this.ready_btn.visible = false;

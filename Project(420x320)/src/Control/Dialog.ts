@@ -26,6 +26,8 @@ class Dialog extends eui.Component implements eui.UIComponent {
 	diagroup:eui.Group;
 	public gameover_name:string = "";
 	public gameover_dia:string = "";
+	public gameover_name2:string = "";
+	public gameover_dia2:string = "";
 	public lastscene:boolean = false;
 	public gameover:boolean = false;
 	public completed:boolean = false;
@@ -52,7 +54,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		}, this)
 		this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 		var game =new GameScene(this.count);
-		egret.setTimeout(()=>{this.addChild(game)},this,100)
+		this.addChild(game)
 		this.back_btn.visible = true;
 		this.ready_btn.visible = false;
 		this.img_dialog_outer2.visible = false;
@@ -63,6 +65,10 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		this.lastscene = true;
 		this.name_test.push(this.gameover_name);
 		this.dia_test.push(this.gameover_dia);
+		this.name_test.push(this.gameover_name2);
+		this.dia_test.push(this.gameover_dia2);
+		this.lb_dialog_text.text =this.dia_test.shift();
+		this.char_name.text = this.name_test.shift();
 		if(this.char4_target)
 		{
 		this.code = true;
@@ -84,6 +90,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
 	public Close() {
 		this.dialog_name.visible = true;
 		this.img_dialog_outer2.visible = false;
+		/*
 		if(this.code == true)
 		{
 			this.code = false;
@@ -93,6 +100,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
         }               
 
 		}
+		*/
 		if(this.parent != null && this.name_test.length == 0){
 			this.parent.removeChild(this);
 			this.ready_btn.visible = false;

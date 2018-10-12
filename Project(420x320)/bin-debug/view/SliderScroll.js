@@ -83,11 +83,11 @@ var Slider;
             //添加計時功能實現阻尼
             this.stimer = new egret.Timer(100, 0);
             this.stimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
-                if (this.speed2 <= -35) {
+                if (this.speed2 <= -70) {
                 }
                 else {
                     //this.speed2 = this.speed2 - 5;
-                    this.speed2 = -35;
+                    this.speed2 = -70;
                 }
             }, this);
             this.stimer.start();
@@ -119,7 +119,7 @@ var Slider;
             this.etimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
                 var _this = this;
                 //第二组
-                if (this.speed2 == -35 / 4) {
+                if (this.speed2 == -35 / 2) {
                     this.etimer.stop();
                     var count2 = 0;
                     setTimeout(function () {
@@ -143,7 +143,7 @@ var Slider;
                     }, 500);
                 }
                 else {
-                    this.speed2 = this.speed2 + 5.25;
+                    this.speed2 = this.speed2 + 10.5;
                 }
             }, this);
             this.etimer.start();
