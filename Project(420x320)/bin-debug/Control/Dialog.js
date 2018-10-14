@@ -47,27 +47,34 @@ var Dialog = (function (_super) {
         this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.Close();
         }, this);
-        this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            //var game =new GameScene(this.count);
-            //egret.setTimeout(()=>{this.addChild(game)},this,500)
-            //game.char4_target = this.char4_target;
-            _this.back_btn.visible = true;
-            _this.ready_btn.visible = false;
-            _this.img_dialog_outer2.visible = false;
-            if (_this.gameover == true) {
-                _this.gameover = false;
-                _this.lastscene = true;
-                _this.name_test.push(_this.gameover_name);
-                _this.dia_test.push(_this.gameover_dia);
-                _this.name_test.push(_this.gameover_name2);
-                _this.dia_test.push(_this.gameover_dia2);
-                _this.lb_dialog_text.text = _this.dia_test.shift();
-                _this.char_name.text = _this.name_test.shift();
-                if (_this.char4_target) {
-                    _this.code = true;
+        /*
+                this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+                
+                var game =new GameScene(this.count);
+                egret.setTimeout(()=>{this.addChild(game)},this,500)
+                game.char4_target = this.char4_target;
+                this.back_btn.visible = true;
+                this.ready_btn.visible = false;
+                this.img_dialog_outer2.visible = false;
+                
+                if(this.gameover == true)
+                {
+                this.gameover = false;
+                this.lastscene = true;
+                this.name_test.push(this.gameover_name);
+                this.dia_test.push(this.gameover_dia);
+                this.name_test.push(this.gameover_name2);
+                this.dia_test.push(this.gameover_dia2);
+                this.lb_dialog_text.text =this.dia_test.shift();
+                this.char_name.text = this.name_test.shift();
+                if(this.char4_target)
+                {
+                this.code = true;
                 }
-            }
-        }, this);
+                }
+                
+                }, this)
+        */
     };
     Dialog.prototype.Show = function (view) {
         if (!view.contains(this)) {

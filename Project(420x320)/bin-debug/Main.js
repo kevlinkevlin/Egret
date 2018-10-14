@@ -226,17 +226,17 @@ var Main = (function (_super) {
         this.char3 = new egret.MovieClip(mcFactory.generateMovieClipData("char3"));
         this.char4 = new egret.MovieClip(mcFactory.generateMovieClipData("char5"));
         this.char5 = new egret.MovieClip(mcFactory.generateMovieClipData("char4"));
+        this.addChild(this.char2);
+        this.addChild(this.char3);
+        this.addChild(this.char4);
+        this.addChild(this.char5);
+        this.addChild(this.char);
         var factory = new dragonBones.EgretFactory();
         this.createDragonbones(factory, "arrowanimation");
         this.animation(factory, "arrow", "Idle", this.arrow_2);
         this.animation(factory, "arrow", "Idle", this.arrow_3);
         this.animation(factory, "arrow", "Idle", this.arrow_4);
         this.animation(factory, "arrow", "Idle", this.arrow_5);
-        this.addChild(this.char2);
-        this.addChild(this.char3);
-        this.addChild(this.char4);
-        this.addChild(this.char5);
-        this.addChild(this.char);
         this.char.gotoAndPlay("Idle", -1);
         this.char2.gotoAndPlay("Idle", -1);
         this.char3.gotoAndPlay("Idle", -1);
@@ -269,6 +269,22 @@ var Main = (function (_super) {
             var game = new GameScene(_this.message.count);
             egret.setTimeout(function () { _this.addChild(game); }, _this, 300);
             game.char4_target = _this.message.char4_target;
+            _this.message.back_btn.visible = true;
+            _this.message.ready_btn.visible = false;
+            _this.message.img_dialog_outer2.visible = false;
+            if (_this.message.gameover == true) {
+                _this.message.gameover = false;
+                _this.message.lastscene = true;
+                _this.message.name_test.push(_this.message.gameover_name);
+                _this.message.dia_test.push(_this.message.gameover_dia);
+                _this.message.name_test.push(_this.message.gameover_name2);
+                _this.message.dia_test.push(_this.message.gameover_dia2);
+                _this.message.lb_dialog_text.text = _this.message.dia_test.shift();
+                _this.message.char_name.text = _this.message.name_test.shift();
+                if (_this.message.char4_target) {
+                    _this.message.code = true;
+                }
+            }
         }, this);
         /*
         

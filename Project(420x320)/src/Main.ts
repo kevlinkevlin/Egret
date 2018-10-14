@@ -180,7 +180,14 @@ private async loadResource() {
         this.char4 = new egret.MovieClip(mcFactory.generateMovieClipData("char5"));
         this.char5 = new egret.MovieClip(mcFactory.generateMovieClipData("char4"));
 
-         var factory = new dragonBones.EgretFactory();
+
+        this.addChild(this.char2);
+        this.addChild(this.char3);
+        this.addChild(this.char4);
+        this.addChild(this.char5);
+        this.addChild(this.char);
+
+        var factory = new dragonBones.EgretFactory();
         this.createDragonbones( factory, "arrowanimation" );
         this.animation(factory,"arrow","Idle",this.arrow_2);
         this.animation(factory,"arrow","Idle",this.arrow_3);
@@ -188,12 +195,6 @@ private async loadResource() {
         this.animation(factory,"arrow","Idle",this.arrow_5);
 
 
-        this.addChild(this.char2);
-        this.addChild(this.char3);
-        this.addChild(this.char4);
-        this.addChild(this.char5);
-        this.addChild(this.char);
-      
         this.char.gotoAndPlay("Idle",-1);
         this.char2.gotoAndPlay("Idle",-1);
         this.char3.gotoAndPlay("Idle",-1);
@@ -227,11 +228,38 @@ private async loadResource() {
         this.message.dia_test = ["…好緊張呀，前面綁著雙馬尾的姐姐，好像是軌跡系列最有人氣的艾絲蒂雅小姐呢！"]
         this.message.ready_btn.visible = false;
         this.addChild(this.message);
+
+////////////////////////////////
+
        this.message.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
         var game =new GameScene(this.message.count);
         egret.setTimeout(()=>{this.addChild(game)},this,300)
         game.char4_target = this.message.char4_target;
-       },this)
+        this.message.back_btn.visible = true;
+		this.message.ready_btn.visible = false;
+		this.message.img_dialog_outer2.visible = false;
+		
+		if(this.message.gameover == true)
+		{
+		this.message.gameover = false;
+		this.message.lastscene = true;
+		this.message.name_test.push(this.message.gameover_name);
+		this.message.dia_test.push(this.message.gameover_dia);
+		this.message.name_test.push(this.message.gameover_name2);
+		this.message.dia_test.push(this.message.gameover_dia2);
+		this.message.lb_dialog_text.text =this.message.dia_test.shift();
+		this.message.char_name.text = this.message.name_test.shift();
+		if(this.message.char4_target)
+		{
+		this.message.code = true;
+		}
+		}
+		}, this)
+      
+
+//////////////////////////////////////////
+
+
 /*
 
         let theme = new eui.Theme("resource/default.thm.json", this.stage);

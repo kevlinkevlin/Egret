@@ -32,7 +32,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
 	public gameover:boolean = false;
 	public completed:boolean = false;
 	public diamond:boolean = false;
-	private code:boolean = false;
+	public code:boolean = false;
 	public char4_target:boolean = false;
 	public count_num:number = 0;
 
@@ -52,10 +52,13 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.Close();
 		}, this)
+
+/*
 		this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-		//var game =new GameScene(this.count);
-		//egret.setTimeout(()=>{this.addChild(game)},this,500)
-		//game.char4_target = this.char4_target;
+		
+		var game =new GameScene(this.count);
+		egret.setTimeout(()=>{this.addChild(game)},this,500)
+		game.char4_target = this.char4_target;
 		this.back_btn.visible = true;
 		this.ready_btn.visible = false;
 		this.img_dialog_outer2.visible = false;
@@ -75,8 +78,9 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		this.code = true;
 		}
 		}
-		}, this)
 		
+		}, this)
+*/
 
 	}
 
