@@ -12,7 +12,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
     private img_loading1: egret.Bitmap;
     private loadingBg = "";    //加载页面背景
     private loading0 = ""; //进度条的条
-    private loading1 = "resource/Dialog/Dia01.png";  //进度条的 条背景    
+    private loading1 = "resource/Dialog/box_btn.png";  //进度条的 条背景    
     private w: number;
     private h: number;
     private r: number;
@@ -96,7 +96,7 @@ class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
         } else */if (urlLoader._request.url == this.loading1) {
             //this.img_loading1.scale9Grid = new egret.Rectangle(5, 5, 10, 10);
             this.img_loading1.width = 0;
-            this.img_loading1.height = 100;
+            this.img_loading1.height = 20;
 
             this.img_loading1.texture = texture;
             this.img_loading1.anchorOffsetX = 0;

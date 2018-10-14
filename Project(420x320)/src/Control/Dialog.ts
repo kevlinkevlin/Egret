@@ -53,12 +53,13 @@ class Dialog extends eui.Component implements eui.UIComponent {
 			this.Close();
 		}, this)
 		this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-		var game =new GameScene(this.count);
-		this.addChild(game)
+		//var game =new GameScene(this.count);
+		//egret.setTimeout(()=>{this.addChild(game)},this,500)
+		//game.char4_target = this.char4_target;
 		this.back_btn.visible = true;
 		this.ready_btn.visible = false;
 		this.img_dialog_outer2.visible = false;
-		game.char4_target = this.char4_target;
+		
 		if(this.gameover == true)
 		{
 		this.gameover = false;

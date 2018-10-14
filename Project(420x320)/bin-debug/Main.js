@@ -86,6 +86,8 @@ var Main = (function (_super) {
             }
             */
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        //變數
+        _this.testloading = new egret.Bitmap();
         _this.bg = new egret.Bitmap();
         /*
         private char2:egret.Bitmap = new egret.Bitmap();
@@ -263,6 +265,11 @@ var Main = (function (_super) {
         this.message.dia_test = ["…好緊張呀，前面綁著雙馬尾的姐姐，好像是軌跡系列最有人氣的艾絲蒂雅小姐呢！"];
         this.message.ready_btn.visible = false;
         this.addChild(this.message);
+        this.message.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            var game = new GameScene(_this.message.count);
+            egret.setTimeout(function () { _this.addChild(game); }, _this, 300);
+            game.char4_target = _this.message.char4_target;
+        }, this);
         /*
         
                 let theme = new eui.Theme("resource/default.thm.json", this.stage);

@@ -70,7 +70,8 @@
 		{
 			"url": "imgs/sliders/slider_big.png",
 			"type": "image",
-			"name": "slider_big_png"
+			"name": "slider_big_png",
+			"scale9grid": "0,0,300,1200"
 		},
 		{
 			"url": "Dialog/button02.png",
@@ -95,7 +96,8 @@
 		{
 			"url": "assets/CharacterAnimation/arrowanimation_tex.png",
 			"type": "image",
-			"name": "arrowanimation_tex_png"
+			"name": "arrowanimation_tex_png",
+			"scale9grid": "0,0,68,18"
 		},
 		{
 			"url": "assets/CharacterAnimation/arrowanimation_ske.json",

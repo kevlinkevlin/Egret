@@ -48,12 +48,12 @@ var Dialog = (function (_super) {
             _this.Close();
         }, this);
         this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            var game = new GameScene(_this.count);
-            _this.addChild(game);
+            //var game =new GameScene(this.count);
+            //egret.setTimeout(()=>{this.addChild(game)},this,500)
+            //game.char4_target = this.char4_target;
             _this.back_btn.visible = true;
             _this.ready_btn.visible = false;
             _this.img_dialog_outer2.visible = false;
-            game.char4_target = _this.char4_target;
             if (_this.gameover == true) {
                 _this.gameover = false;
                 _this.lastscene = true;

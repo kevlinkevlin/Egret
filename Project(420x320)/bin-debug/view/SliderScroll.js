@@ -29,7 +29,7 @@ var Slider;
             /**slider框的高*/
             _this.sliderboxheight = 201.5 * 2;
             /**slider本身的高度*/
-            _this.sliderHeight = 420 * 2;
+            _this.sliderHeight = 840;
             _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
             return _this;
         }
@@ -43,7 +43,7 @@ var Slider;
             //创建第二组sliderBox
             this.bmpArr2 = [];
             //this.addSliderBox(267.5, 489, 265.25, 540, this.rowCount, this.bmpArr2);
-            this.addSliderBox(this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 + 20, this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 - 120, this.rowCount, this.bmpArr2);
+            this.addSliderBox(this.stage.stageWidth / 2 - 100, -800, this.stage.stageWidth / 2 - 100, this.stage.stageHeight / 2 - 120, this.rowCount, this.bmpArr2);
             //创建第三组sliderBox
             // this.bmpArr3 = [];
             // this.addSliderBox(395.5, 489, 393.25, 492, this.rowCount, this.bmpArr3);
@@ -83,11 +83,11 @@ var Slider;
             //添加計時功能實現阻尼
             this.stimer = new egret.Timer(100, 0);
             this.stimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
-                if (this.speed2 <= -70) {
+                if (this.speed2 > 70) {
                 }
                 else {
                     //this.speed2 = this.speed2 - 5;
-                    this.speed2 = -70;
+                    this.speed2 = 70;
                 }
             }, this);
             this.stimer.start();
@@ -100,11 +100,11 @@ var Slider;
                 //第二组
                 var bgBmp2 = this.bmpArr2[i];
                 bgBmp2.y += this.speed2;
-                if (this.bmpArr2[0].y < -500 * 3) {
-                    this.bmpArr2[0].y = this.bmpArr2[0].y + 1680;
+                if (this.bmpArr2[0].y >= 880) {
+                    this.bmpArr2[0].y = this.bmpArr2[0].y - 1680;
                 }
-                if (this.bmpArr2[1].y < -500 * 3) {
-                    this.bmpArr2[1].y = this.bmpArr2[1].y + 1680;
+                if (this.bmpArr2[1].y >= 880) {
+                    this.bmpArr2[1].y = this.bmpArr2[1].y - 1680;
                 }
             }
         };
@@ -119,13 +119,13 @@ var Slider;
             this.etimer.addEventListener(egret.TimerEvent.TIMER, function timerFunc() {
                 var _this = this;
                 //第二组
-                if (this.speed2 == -35 / 2) {
+                if (this.speed2 < 18 && this.speed2 > 16) {
                     this.etimer.stop();
                     var count2 = 0;
                     setTimeout(function () {
                         _this.addEventListener(egret.Event.ENTER_FRAME, function AdjustmentSlider() {
                             var stopsign2 = 0;
-                            stopsign2 = (-1) * (rad2) * 140 - 240; //调整slider的吻合
+                            stopsign2 = (-1) * (rad2) * 140 + 600; //调整slider的吻合
                             if ((this.bmpArr2[0].y > -6 + stopsign2) && (this.bmpArr2[0].y < 6 + stopsign2)) {
                                 this.speed2 = 0;
                                 //控制返回状的回调
@@ -143,7 +143,7 @@ var Slider;
                     }, 500);
                 }
                 else {
-                    this.speed2 = this.speed2 + 10.5;
+                    this.speed2 = this.speed2 - 10.5;
                 }
             }, this);
             this.etimer.start();
@@ -163,7 +163,7 @@ var Slider;
         SliderScroll.prototype.drawMask = function (x, y) {
             var mask = new egret.Shape();
             mask.graphics.beginFill(0xff0000, 1);
-            mask.graphics.drawRect(x, y, 105 * 2, 70 * 2);
+            mask.graphics.drawRect(x, y, 210, 140);
             mask.graphics.endFill();
             return mask;
         };

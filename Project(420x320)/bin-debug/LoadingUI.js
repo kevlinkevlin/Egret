@@ -14,7 +14,7 @@ var LoadingUI = (function (_super) {
         var _this = _super.call(this) || this;
         _this.loadingBg = ""; //加载页面背景
         _this.loading0 = ""; //进度条的条
-        _this.loading1 = "resource/Dialog/Dia01.png"; //进度条的 条背景    
+        _this.loading1 = "resource/Dialog/box_btn.png"; //进度条的 条背景    
         _this.createView();
         return _this;
     }
@@ -88,7 +88,7 @@ var LoadingUI = (function (_super) {
         } else */ if (urlLoader._request.url == this.loading1) {
             //this.img_loading1.scale9Grid = new egret.Rectangle(5, 5, 10, 10);
             this.img_loading1.width = 0;
-            this.img_loading1.height = 100;
+            this.img_loading1.height = 20;
             this.img_loading1.texture = texture;
             this.img_loading1.anchorOffsetX = 0;
             this.img_loading1.anchorOffsetY = this.img_loading1.height * 0.5;

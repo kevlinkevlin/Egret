@@ -108,7 +108,7 @@ private async loadResource() {
 
 
 //變數
-
+    private testloading:egret.Bitmap = new egret.Bitmap();
     private textfield: egret.TextField;
     private bg:egret.Bitmap = new egret.Bitmap();
     private char:egret.MovieClip;
@@ -193,8 +193,7 @@ private async loadResource() {
         this.addChild(this.char4);
         this.addChild(this.char5);
         this.addChild(this.char);
-       
-
+      
         this.char.gotoAndPlay("Idle",-1);
         this.char2.gotoAndPlay("Idle",-1);
         this.char3.gotoAndPlay("Idle",-1);
@@ -228,7 +227,11 @@ private async loadResource() {
         this.message.dia_test = ["…好緊張呀，前面綁著雙馬尾的姐姐，好像是軌跡系列最有人氣的艾絲蒂雅小姐呢！"]
         this.message.ready_btn.visible = false;
         this.addChild(this.message);
-       
+       this.message.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+        var game =new GameScene(this.message.count);
+        egret.setTimeout(()=>{this.addChild(game)},this,300)
+        game.char4_target = this.message.char4_target;
+       },this)
 /*
 
         let theme = new eui.Theme("resource/default.thm.json", this.stage);
@@ -618,12 +621,12 @@ private animation(factory:dragonBones.EgretFactory,Spine:string,animation:string
         return Armature;
     }
 private _bool(target:any ,click:boolean)
-{
+ {
     if(target == this.char2){this.char2_b = true;}
     else if (target == this.char3){this.char3_b = true;}
     else if (target == this.char5){this.char5_b = true;}
     if (this.char2_b == true && this.char3_b == true && this.char5_b == true){this.char4_b = true;}     
-}
+ }
    
 private talk(target:any,time:number,click:boolean,num:number){
         this.message.count = num;
@@ -636,7 +639,7 @@ private talk(target:any,time:number,click:boolean,num:number){
             return test;
         
         
-}
+ }
 private createDragonbones( factory:dragonBones.EgretFactory, directory:string ){
     var skeletonData = RES.getRes( directory + "_ske_json" );
     var textureData = RES.getRes( directory + "_tex_json" );
@@ -649,7 +652,7 @@ private createMovieclip(Factory:egret.MovieClipDataFactory, directory:string ){
     var data = RES.getRes( directory + "_json" );
     var texture = RES.getRes( directory + "_png" );
     Factory = new egret.MovieClipDataFactory( data, texture );
-}
+ }
 
 private createBitmapByName(result:egret.Bitmap,name:string, x:number, y:number,scalex:number,scaley:number):void {
         
