@@ -108,6 +108,9 @@ var Main = (function (_super) {
         _this.arrow_3 = new egret.Sprite();
         _this.arrow_4 = new egret.Sprite();
         _this.arrow_5 = new egret.Sprite();
+        //
+        //////////////////////////////////
+        _this.gametest = new GameScene(1);
         return _this;
     }
     //繼承UIlayer
@@ -132,6 +135,7 @@ var Main = (function (_super) {
         //RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         //RES.loadConfig("resource/default.res.json", "resource/");
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+        RES.addEventListener(RES.ResourceEvent.CONFIG_LOAD_ERROR, this.onResourceProgress, this);
         this.runGame().catch(function (e) {
             console.log(e);
         });
@@ -178,6 +182,7 @@ var Main = (function (_super) {
                     case 3:
                         _a.sent();
                         RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+                        RES.removeEventListener(RES.ResourceEvent.CONFIG_LOAD_ERROR, this.onResourceProgress, this);
                         this.stage.removeChild(this.loadingView);
                         return [3 /*break*/, 5];
                     case 4:
@@ -189,7 +194,24 @@ var Main = (function (_super) {
             });
         });
     };
-    //
+    Main.prototype.test = function () {
+        this.gametest = new GameScene(this.message.count);
+    };
+    Main.prototype.loadgame = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.test()];
+                    case 1:
+                        _a.sent();
+                        this.gametest.char4_target = this.message.char4_target;
+                        this.addChild(this.gametest);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ///////////////////////////////////////////////////
     Main.prototype.createGameScene = function () {
         var _this = this;
         this.createBitmapByName(this.bg, "bg_png", 0, 0, 0.52, 0.51);
@@ -265,10 +287,14 @@ var Main = (function (_super) {
         this.message.dia_test = ["…好緊張呀，前面綁著雙馬尾的姐姐，好像是軌跡系列最有人氣的艾絲蒂雅小姐呢！"];
         this.message.ready_btn.visible = false;
         this.addChild(this.message);
+        ////////////////////////////////
         this.message.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            var game = new GameScene(_this.message.count);
-            egret.setTimeout(function () { _this.addChild(game); }, _this, 300);
-            game.char4_target = _this.message.char4_target;
+            /*
+            var game =new GameScene(this.message.count);
+            egret.setTimeout(()=>{this.addChild(game)},this,200)
+            game.char4_target = this.message.char4_target;
+            */
+            _this.loadgame(); ///////////////////異步加載
             _this.message.back_btn.visible = true;
             _this.message.ready_btn.visible = false;
             _this.message.img_dialog_outer2.visible = false;
@@ -286,6 +312,7 @@ var Main = (function (_super) {
                 }
             }
         }, this);
+        //////////////////////////////////////////
         /*
         
                 let theme = new eui.Theme("resource/default.thm.json", this.stage);

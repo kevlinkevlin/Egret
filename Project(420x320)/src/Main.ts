@@ -67,6 +67,7 @@ protected createChildren(): void {
         //RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         //RES.loadConfig("resource/default.res.json", "resource/");
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+        RES.addEventListener(RES.ResourceEvent.CONFIG_LOAD_ERROR, this.onResourceProgress, this);
         this.runGame().catch(e => {
             console.log(e);
         })
@@ -99,6 +100,7 @@ private async loadResource() {
             await RES.loadGroup("preload");
             await RES.loadGroup("UI");
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+            RES.removeEventListener(RES.ResourceEvent.CONFIG_LOAD_ERROR, this.onResourceProgress, this);
             this.stage.removeChild(this.loadingView);
         }
         catch (e) {
@@ -136,6 +138,28 @@ private async loadResource() {
     private arrow_4:egret.Sprite = new egret.Sprite();
     private arrow_5:egret.Sprite = new egret.Sprite();
 //
+
+//////////////////////////////////
+private gametest = new GameScene(1);
+private test()
+{
+    
+      this.gametest = new GameScene(this.message.count);
+}
+private async loadgame(){
+   
+        
+      await this.test();
+      this.gametest.char4_target = this.message.char4_target;
+      this.addChild(this.gametest);
+      
+    
+}
+
+
+
+///////////////////////////////////////////////////
+
     private createGameScene() {
         
         
@@ -232,9 +256,14 @@ private async loadResource() {
 ////////////////////////////////
 
        this.message.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+        /*
         var game =new GameScene(this.message.count);
-        egret.setTimeout(()=>{this.addChild(game)},this,300)
+        egret.setTimeout(()=>{this.addChild(game)},this,200)
         game.char4_target = this.message.char4_target;
+        */
+        
+        this.loadgame();   ///////////////////異步加載
+        
         this.message.back_btn.visible = true;
 		this.message.ready_btn.visible = false;
 		this.message.img_dialog_outer2.visible = false;
@@ -662,12 +691,14 @@ private talk(target:any,time:number,click:boolean,num:number){
         var test = egret.Tween.get(this.char);
         test.to({x:target.x-50,y:target.y},time).call(()=> {
                 this.addChild(this.message);
+
                 this.fixed = false; 
             } ,this);
             return test;
         
         
  }
+
 private createDragonbones( factory:dragonBones.EgretFactory, directory:string ){
     var skeletonData = RES.getRes( directory + "_ske_json" );
     var textureData = RES.getRes( directory + "_tex_json" );

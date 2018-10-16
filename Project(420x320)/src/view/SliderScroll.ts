@@ -49,8 +49,10 @@ module Slider {
             //创建第二组sliderBox
             this.bmpArr2 = [];
             //this.addSliderBox(267.5, 489, 265.25, 540, this.rowCount, this.bmpArr2);
+           
             this.addSliderBox(this.stage.stageWidth/2-100 , -800
             ,this.stage.stageWidth/2-100 , this.stage.stageHeight/2-120, this.rowCount, this.bmpArr2);
+            
             //创建第三组sliderBox
            // this.bmpArr3 = [];
            // this.addSliderBox(395.5, 489, 393.25, 492, this.rowCount, this.bmpArr3);

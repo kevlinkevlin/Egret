@@ -55,7 +55,8 @@
 		{
 			"url": "Dialog/box_btn.png",
 			"type": "image",
-			"name": "box_btn_png"
+			"name": "box_btn_png",
+			"scale9grid": "53,30,325,39"
 		},
 		{
 			"url": "Dialog/arrow03.png",
@@ -70,8 +71,7 @@
 		{
 			"url": "imgs/sliders/slider_big.png",
 			"type": "image",
-			"name": "slider_big_png",
-			"scale9grid": "0,0,300,1200"
+			"name": "slider_big_png"
 		},
 		{
 			"url": "Dialog/button02.png",

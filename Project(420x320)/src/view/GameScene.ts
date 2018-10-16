@@ -52,8 +52,11 @@ class GameScene extends eui.Component {
 
 
     private Close() {
-		if (this.parent != null)
+        //this.removeChildren();
+		//this.removeChild(this.slider)
+        if (this.parent != null)
 			this.parent.removeChild(this);
+        
 	}
     /**
      * 动态生成图片

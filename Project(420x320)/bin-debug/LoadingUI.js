@@ -94,7 +94,6 @@ var LoadingUI = (function (_super) {
             this.img_loading1.anchorOffsetY = this.img_loading1.height * 0.5;
             this.img_loading1.x = this.stage.stageWidth / 7;
             this.img_loading1.y = this.stage.stageHeight * 3 / 4;
-            console.log(this.stage.stageWidth + "------" + this.img_loading1.width);
             // this.img_loading1.scaleX =  10;
             this.textField.textColor = 0xffffff;
             this.textField.size = 20;
@@ -111,6 +110,7 @@ var LoadingUI = (function (_super) {
         //进度条宽度
         if (this.img_loading1 != null) {
             this.img_loading1.width = 300 * (current / total);
+            console.log("進度條寬------" + this.img_loading1.width);
         }
     };
     return LoadingUI;

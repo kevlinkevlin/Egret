@@ -43,6 +43,8 @@ var GameScene = (function (_super) {
         }, this);
     };
     GameScene.prototype.Close = function () {
+        //this.removeChildren();
+        //this.removeChild(this.slider)
         if (this.parent != null)
             this.parent.removeChild(this);
     };
