@@ -233,27 +233,14 @@ window.skins={};
 
 	function DialogOk() {
 		_super.call(this);
-		this.skinParts = ["img_dialog_outer","dialog_box","lb_dialog_text","back_btn","diagroup","dialog_name","char_name","namegroup","img_dialog_outer2","ready_btn"];
+		this.skinParts = ["dialog_box","lb_dialog_text","back_btn","diagroup","dialog_name","char_name","namegroup","img_dialog_outer","img_dialog_outer2","ready_btn"];
 		
 		this.height = 320;
 		this.width = 420;
-		this.elementsContent = [this.img_dialog_outer_i(),this.diagroup_i(),this.namegroup_i(),this.img_dialog_outer2_i(),this.ready_btn_i()];
+		this.elementsContent = [this.diagroup_i(),this.namegroup_i(),this.img_dialog_outer_i(),this.img_dialog_outer2_i(),this.ready_btn_i()];
 	}
 	var _proto = DialogOk.prototype;
 
-	_proto.img_dialog_outer_i = function () {
-		var t = new eui.Image();
-		this.img_dialog_outer = t;
-		t.alpha = 0;
-		t.anchorOffsetX = 0;
-		t.bottom = 0;
-		t.fillMode = "scale";
-		t.left = 0;
-		t.right = 0;
-		t.source = "dialog_bg_png";
-		t.top = 0;
-		return t;
-	};
 	_proto.diagroup_i = function () {
 		var t = new eui.Group();
 		this.diagroup = t;
@@ -363,6 +350,19 @@ window.skins={};
 		t.textAlign = "center";
 		t.top = 0;
 		t.verticalAlign = "middle";
+		return t;
+	};
+	_proto.img_dialog_outer_i = function () {
+		var t = new eui.Image();
+		this.img_dialog_outer = t;
+		t.alpha = 0;
+		t.anchorOffsetX = 0;
+		t.bottom = 0;
+		t.fillMode = "scale";
+		t.left = 0;
+		t.right = 0;
+		t.source = "dialog_bg_png";
+		t.top = 0;
 		return t;
 	};
 	_proto.img_dialog_outer2_i = function () {
@@ -736,6 +736,7 @@ window.skins={};
 	};
 	_proto._Image1_i = function () {
 		var t = new eui.Image();
+		t.alpha = 0;
 		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
 		t.bottom = 0;
@@ -855,9 +856,10 @@ window.skins={};
 	_proto.back_btn_i = function () {
 		var t = new eui.Image();
 		this.back_btn = t;
+		t.alpha = 0;
 		t.height = 50;
 		t.horizontalCenter = 0;
-		t.source = "btn_back_png";
+		t.source = "dialog_bg_png";
 		t.verticalCenter = 0;
 		t.visible = false;
 		t.width = 50;

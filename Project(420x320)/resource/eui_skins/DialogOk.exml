@@ -11,7 +11,7 @@
 
 
 
-	<e:Image id="img_dialog_outer" top="0" bottom="0" left="0" right="0" source="dialog_bg_png" fillMode="scale" alpha="0" anchorOffsetX="0"/>
+
 
 
 
@@ -33,6 +33,7 @@
 		<e:Image id="dialog_name" anchorOffsetY="0" anchorOffsetX="0" fillMode="scale" source="box_btn_png" scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0"/>
 		<e:Label id="char_name" text="一二三" anchorOffsetX="0" anchorOffsetY="0" textAlign="center" verticalAlign="middle" bold="true" fontFamily="Verdana" size="14" scaleX="1" scaleY="1" left="0" right="0" top="0" bottom="0"/>
 	</e:Group>
+	<e:Image id="img_dialog_outer" top="0" bottom="0" left="0" right="0" source="dialog_bg_png" fillMode="scale" alpha="0" anchorOffsetX="0"/>
 	<e:Image id="img_dialog_outer2" top="0" bottom="0" left="-3" right="3" source="dialog_bg_png" fillMode="scale" alpha="0" anchorOffsetX="0" visible="false"/>
 	<ns1:EButton id="ready_btn" label="免費抽獎" anchorOffsetX="0" width="140.03" anchorOffsetY="0" height="46.59" horizontalCenter="0" verticalCenter="0">
 		<ns1:skinName>

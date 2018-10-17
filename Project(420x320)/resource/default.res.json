@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "description_json,dialog_bg_png,test_png,test_json,Dia01_png,Dia02_png,box_btn_png,arrow03_png,button02_png,button02_light_png,arrowanimation_tex_png,arrowanimation_ske_json,arrowanimation_tex_json",
+			"keys": "description_json,dialog_bg_png,test_json,Dia01_png,Dia02_png,box_btn_png,arrow03_png,button02_png,button02_light_png,arrowanimation_tex_png,arrowanimation_ske_json,arrowanimation_tex_json,test_png",
 			"name": "UI"
 		}
 	],
@@ -46,11 +46,6 @@
 			"url": "assets/CharacterAnimation/test.json",
 			"type": "json",
 			"name": "test_json"
-		},
-		{
-			"url": "assets/CharacterAnimation/test.png",
-			"type": "image",
-			"name": "test_png"
 		},
 		{
 			"url": "Dialog/box_btn.png",
@@ -108,6 +103,11 @@
 			"url": "assets/CharacterAnimation/arrowanimation_tex.json",
 			"type": "json",
 			"name": "arrowanimation_tex_json"
+		},
+		{
+			"url": "assets/CharacterAnimation/test.png",
+			"type": "image",
+			"name": "test_png"
 		}
 	]
 }

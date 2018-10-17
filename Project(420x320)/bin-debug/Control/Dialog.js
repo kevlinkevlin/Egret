@@ -38,15 +38,17 @@ var Dialog = (function (_super) {
         this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             _this.Close();
         }, this);
-        this.namegroup.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.Close();
-        }, this);
-        this.diagroup.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.Close();
-        }, this);
-        this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            _this.Close();
-        }, this);
+        /*
+        this.namegroup.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            this.Close();
+        }, this)
+        this.diagroup.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            this.Close();
+        }, this)
+        this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            this.Close();
+        }, this)
+        */
         /*
                 this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
                 

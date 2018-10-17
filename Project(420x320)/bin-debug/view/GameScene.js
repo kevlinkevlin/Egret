@@ -45,6 +45,9 @@ var GameScene = (function (_super) {
     GameScene.prototype.Close = function () {
         //this.removeChildren();
         //this.removeChild(this.slider)
+        if (this.message.parent) {
+            this.removeChild(this.message);
+        }
         if (this.parent != null)
             this.parent.removeChild(this);
     };
@@ -134,7 +137,7 @@ var GameScene = (function (_super) {
                         } //////////////產生序號                   
                         _this.message.lb_dialog_text.text = "登登豋登登登登登登....................恭喜你抽到大獎!!!!!!!!!!";
                     }
-                    _this.addChild(_this.message);
+                    _this.addChildAt(_this.message, 1);
                 }, 1000);
                 //  this.back_btn.visible = true;
             }

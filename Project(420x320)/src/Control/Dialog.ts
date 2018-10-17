@@ -43,6 +43,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
      	this.img_dialog_outer.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.Close();
 		}, this)
+		/*
 		this.namegroup.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.Close();
 		}, this)
@@ -52,7 +53,7 @@ class Dialog extends eui.Component implements eui.UIComponent {
 		this.back_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 			this.Close();
 		}, this)
-
+		*/
 /*
 		this.ready_btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 		

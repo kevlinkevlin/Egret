@@ -54,6 +54,8 @@ class GameScene extends eui.Component {
     private Close() {
         //this.removeChildren();
 		//this.removeChild(this.slider)
+        if(this.message.parent)
+        {this.removeChild(this.message)}
         if (this.parent != null)
 			this.parent.removeChild(this);
         
@@ -151,7 +153,8 @@ class GameScene extends eui.Component {
                 if(window.parent.document)
                 { window.parent["finishGame"](true)}                //////////////產生序號                   
                 this.message.lb_dialog_text.text = "登登豋登登登登登登....................恭喜你抽到大獎!!!!!!!!!!";}
-                this.addChild(this.message);
+                this.addChildAt(this.message,1);
+                
                 },1000)
                 
              //  this.back_btn.visible = true;
